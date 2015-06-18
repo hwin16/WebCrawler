@@ -1,0 +1,462 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.sdml.info/srcML/src" xmlns:cpp="http://www.sdml.info/srcML/cpp" language="C" filename="/home/brodo/GitHub/WebCrawler/test.c"><comment type="block">/* -----------------------------------------------------------------------------
+ * Copyright (c) 2011 Ozmo Inc
+ * Released under the GNU General Public License Version 2 (GPLv2).
+ *
+ * This file implements the protocol specific parts of the USB service for a PD.
+ * -----------------------------------------------------------------------------
+ */</comment>
+<cpp:include>#<cpp:directive>include</cpp:directive> <cpp:file>&lt;linux/module.h&gt;</cpp:file></cpp:include>
+<cpp:include>#<cpp:directive>include</cpp:directive> <cpp:file>&lt;linux/timer.h&gt;</cpp:file></cpp:include>
+<cpp:include>#<cpp:directive>include</cpp:directive> <cpp:file>&lt;linux/sched.h&gt;</cpp:file></cpp:include>
+<cpp:include>#<cpp:directive>include</cpp:directive> <cpp:file>&lt;linux/netdevice.h&gt;</cpp:file></cpp:include>
+<cpp:include>#<cpp:directive>include</cpp:directive> <cpp:file>&lt;linux/errno.h&gt;</cpp:file></cpp:include>
+<cpp:include>#<cpp:directive>include</cpp:directive> <cpp:file>&lt;linux/input.h&gt;</cpp:file></cpp:include>
+<cpp:include>#<cpp:directive>include</cpp:directive> <cpp:file>&lt;asm/unaligned.h&gt;</cpp:file></cpp:include>
+<cpp:include>#<cpp:directive>include</cpp:directive> <cpp:file>"ozdbg.h"</cpp:file></cpp:include>
+<cpp:include>#<cpp:directive>include</cpp:directive> <cpp:file>"ozprotocol.h"</cpp:file></cpp:include>
+<cpp:include>#<cpp:directive>include</cpp:directive> <cpp:file>"ozeltbuf.h"</cpp:file></cpp:include>
+<cpp:include>#<cpp:directive>include</cpp:directive> <cpp:file>"ozpd.h"</cpp:file></cpp:include>
+<cpp:include>#<cpp:directive>include</cpp:directive> <cpp:file>"ozproto.h"</cpp:file></cpp:include>
+<cpp:include>#<cpp:directive>include</cpp:directive> <cpp:file>"ozusbif.h"</cpp:file></cpp:include>
+<cpp:include>#<cpp:directive>include</cpp:directive> <cpp:file>"ozhcd.h"</cpp:file></cpp:include>
+<cpp:include>#<cpp:directive>include</cpp:directive> <cpp:file>"ozusbsvc.h"</cpp:file></cpp:include>
+
+<cpp:define>#<cpp:directive>define</cpp:directive> <cpp:macro><name>MAX_ISOC_FIXED_DATA</name></cpp:macro>	<cpp:value>(253-sizeof(struct oz_isoc_fixed))</cpp:value></cpp:define>
+
+<comment type="block">/*
+ * Context: softirq
+ */</comment>
+<function><type><specifier>static</specifier> <name>int</name></type> <name>oz_usb_submit_elt</name><parameter_list>(<param><decl><type>struct <name>oz_elt_buf</name> *</type><name>eb</name></decl></param>, <param><decl><type>struct <name>oz_elt_info</name> *</type><name>ei</name></decl></param>,
+	<param><decl><type>struct <name>oz_usb_ctx</name> *</type><name>usb_ctx</name></decl></param>, <param><decl><type><name>u8</name></type> <name>strid</name></decl></param>, <param><decl><type><name>u8</name></type> <name>isoc</name></decl></param>)</parameter_list>
+<block>{
+	<decl_stmt><decl><type><name>int</name></type> <name>ret</name></decl>;</decl_stmt>
+	<decl_stmt><decl><type>struct <name>oz_elt</name> *</type><name>elt</name> <init>= <expr>(struct <name>oz_elt</name> *)<name><name>ei</name>-&gt;<name>data</name></name></expr></init></decl>;</decl_stmt>
+	<decl_stmt><decl><type>struct <name>oz_app_hdr</name> *</type><name>app_hdr</name> <init>= <expr>(struct <name>oz_app_hdr</name> *)(<name>elt</name>+1)</expr></init></decl>;</decl_stmt>
+
+	<expr_stmt><expr><name><name>elt</name>-&gt;<name>type</name></name> = <name>OZ_ELT_APP_DATA</name></expr>;</expr_stmt>
+	<expr_stmt><expr><name><name>ei</name>-&gt;<name>app_id</name></name> = <name>OZ_APPID_USB</name></expr>;</expr_stmt>
+	<expr_stmt><expr><name><name>ei</name>-&gt;<name>length</name></name> = <name><name>elt</name>-&gt;<name>length</name></name> + <sizeof>sizeof<argument_list>(<argument>struct <expr><name>oz_elt</name></expr></argument>)</argument_list></sizeof></expr>;</expr_stmt>
+	<expr_stmt><expr><name><name>app_hdr</name>-&gt;<name>app_id</name></name> = <name>OZ_APPID_USB</name></expr>;</expr_stmt>
+	<expr_stmt><expr><call><name>spin_lock_bh</name><argument_list>(<argument><expr>&amp;<name><name>eb</name>-&gt;<name>lock</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+	<if>if <condition>(<expr><name>isoc</name> == 0</expr>)</condition><then> <block>{
+		<expr_stmt><expr><name><name>app_hdr</name>-&gt;<name>elt_seq_num</name></name> = <name><name>usb_ctx</name>-&gt;<name>tx_seq_num</name></name>++</expr>;</expr_stmt>
+		<if>if <condition>(<expr><name><name>usb_ctx</name>-&gt;<name>tx_seq_num</name></name> == 0</expr>)</condition><then>
+			<expr_stmt><expr><name><name>usb_ctx</name>-&gt;<name>tx_seq_num</name></name> = 1</expr>;</expr_stmt></then></if>
+	}</block></then></if>
+	<expr_stmt><expr><name>ret</name> = <call><name>oz_queue_elt_info</name><argument_list>(<argument><expr><name>eb</name></expr></argument>, <argument><expr><name>isoc</name></expr></argument>, <argument><expr><name>strid</name></expr></argument>, <argument><expr><name>ei</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+	<if>if <condition>(<expr><name>ret</name></expr>)</condition><then>
+		<expr_stmt><expr><call><name>oz_elt_info_free</name><argument_list>(<argument><expr><name>eb</name></expr></argument>, <argument><expr><name>ei</name></expr></argument>)</argument_list></call></expr>;</expr_stmt></then></if>
+	<expr_stmt><expr><call><name>spin_unlock_bh</name><argument_list>(<argument><expr>&amp;<name><name>eb</name>-&gt;<name>lock</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+	<return>return <expr><name>ret</name></expr>;</return>
+}</block></function>
+
+<comment type="block">/*
+ * Context: softirq
+ */</comment>
+<function><type><name>int</name></type> <name>oz_usb_get_desc_req</name><parameter_list>(<param><decl><type><name>void</name> *</type><name>hpd</name></decl></param>, <param><decl><type><name>u8</name></type> <name>req_id</name></decl></param>, <param><decl><type><name>u8</name></type> <name>req_type</name></decl></param>, <param><decl><type><name>u8</name></type> <name>desc_type</name></decl></param>,
+	<param><decl><type><name>u8</name></type> <name>index</name></decl></param>, <param><decl><type><name>__le16</name></type> <name>windex</name></decl></param>, <param><decl><type><name>int</name></type> <name>offset</name></decl></param>, <param><decl><type><name>int</name></type> <name>len</name></decl></param>)</parameter_list>
+<block>{
+	<decl_stmt><decl><type>struct <name>oz_usb_ctx</name> *</type><name>usb_ctx</name> <init>= <expr><name>hpd</name></expr></init></decl>;</decl_stmt>
+	<decl_stmt><decl><type>struct <name>oz_pd</name> *</type><name>pd</name> <init>= <expr><name><name>usb_ctx</name>-&gt;<name>pd</name></name></expr></init></decl>;</decl_stmt>
+	<decl_stmt><decl><type>struct <name>oz_elt</name> *</type><name>elt</name></decl>;</decl_stmt>
+	<decl_stmt><decl><type>struct <name>oz_get_desc_req</name> *</type><name>body</name></decl>;</decl_stmt>
+	<decl_stmt><decl><type>struct <name>oz_elt_buf</name> *</type><name>eb</name> <init>= <expr>&amp;<name><name>pd</name>-&gt;<name>elt_buff</name></name></expr></init></decl>;</decl_stmt>
+	<decl_stmt><decl><type>struct <name>oz_elt_info</name> *</type><name>ei</name> <init>= <expr><call><name>oz_elt_info_alloc</name><argument_list>(<argument><expr>&amp;<name><name>pd</name>-&gt;<name>elt_buff</name></name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+
+	<expr_stmt><expr><call><name>oz_dbg</name><argument_list>(<argument><expr><name>ON</name></expr></argument>, <argument><expr>"    req_type = 0x%x\n"</expr></argument>, <argument><expr><name>req_type</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+	<expr_stmt><expr><call><name>oz_dbg</name><argument_list>(<argument><expr><name>ON</name></expr></argument>, <argument><expr>"    desc_type = 0x%x\n"</expr></argument>, <argument><expr><name>desc_type</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+	<expr_stmt><expr><call><name>oz_dbg</name><argument_list>(<argument><expr><name>ON</name></expr></argument>, <argument><expr>"    index = 0x%x\n"</expr></argument>, <argument><expr><name>index</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+	<expr_stmt><expr><call><name>oz_dbg</name><argument_list>(<argument><expr><name>ON</name></expr></argument>, <argument><expr>"    windex = 0x%x\n"</expr></argument>, <argument><expr><name>windex</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+	<expr_stmt><expr><call><name>oz_dbg</name><argument_list>(<argument><expr><name>ON</name></expr></argument>, <argument><expr>"    offset = 0x%x\n"</expr></argument>, <argument><expr><name>offset</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+	<expr_stmt><expr><call><name>oz_dbg</name><argument_list>(<argument><expr><name>ON</name></expr></argument>, <argument><expr>"    len = 0x%x\n"</expr></argument>, <argument><expr><name>len</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+	<if>if <condition>(<expr><name>len</name> &gt; 200</expr>)</condition><then>
+		<expr_stmt><expr><name>len</name> = 200</expr>;</expr_stmt></then></if>
+	<if>if <condition>(<expr><name>ei</name> == <name>NULL</name></expr>)</condition><then>
+		<return>return <expr>-1</expr>;</return></then></if>
+	<expr_stmt><expr><name>elt</name> = (struct <name>oz_elt</name> *)<name><name>ei</name>-&gt;<name>data</name></name></expr>;</expr_stmt>
+	<expr_stmt><expr><name><name>elt</name>-&gt;<name>length</name></name> = <sizeof>sizeof<argument_list>(<argument>struct <expr><name>oz_get_desc_req</name></expr></argument>)</argument_list></sizeof></expr>;</expr_stmt>
+	<expr_stmt><expr><name>body</name> = (struct <name>oz_get_desc_req</name> *)(<name>elt</name>+1)</expr>;</expr_stmt>
+	<expr_stmt><expr><name><name>body</name>-&gt;<name>type</name></name> = <name>OZ_GET_DESC_REQ</name></expr>;</expr_stmt>
+	<expr_stmt><expr><name><name>body</name>-&gt;<name>req_id</name></name> = <name>req_id</name></expr>;</expr_stmt>
+	<expr_stmt><expr><call><name>put_unaligned</name><argument_list>(<argument><expr><call><name>cpu_to_le16</name><argument_list>(<argument><expr><name>offset</name></expr></argument>)</argument_list></call></expr></argument>, <argument><expr>&amp;<name><name>body</name>-&gt;<name>offset</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+	<expr_stmt><expr><call><name>put_unaligned</name><argument_list>(<argument><expr><call><name>cpu_to_le16</name><argument_list>(<argument><expr><name>len</name></expr></argument>)</argument_list></call></expr></argument>, <argument><expr>&amp;<name><name>body</name>-&gt;<name>size</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+	<expr_stmt><expr><name><name>body</name>-&gt;<name>req_type</name></name> = <name>req_type</name></expr>;</expr_stmt>
+	<expr_stmt><expr><name><name>body</name>-&gt;<name>desc_type</name></name> = <name>desc_type</name></expr>;</expr_stmt>
+	<expr_stmt><expr><name><name>body</name>-&gt;<name>w_index</name></name> = <name>windex</name></expr>;</expr_stmt>
+	<expr_stmt><expr><name><name>body</name>-&gt;<name>index</name></name> = <name>index</name></expr>;</expr_stmt>
+	<return>return <expr><call><name>oz_usb_submit_elt</name><argument_list>(<argument><expr><name>eb</name></expr></argument>, <argument><expr><name>ei</name></expr></argument>, <argument><expr><name>usb_ctx</name></expr></argument>, <argument><expr>0</expr></argument>, <argument><expr>0</expr></argument>)</argument_list></call></expr>;</return>
+}</block></function>
+
+<comment type="block">/*
+ * Context: tasklet
+ */</comment>
+<function><type><specifier>static</specifier> <name>int</name></type> <name>oz_usb_set_config_req</name><parameter_list>(<param><decl><type><name>void</name> *</type><name>hpd</name></decl></param>, <param><decl><type><name>u8</name></type> <name>req_id</name></decl></param>, <param><decl><type><name>u8</name></type> <name>index</name></decl></param>)</parameter_list>
+<block>{
+	<decl_stmt><decl><type>struct <name>oz_usb_ctx</name> *</type><name>usb_ctx</name> <init>= <expr><name>hpd</name></expr></init></decl>;</decl_stmt>
+	<decl_stmt><decl><type>struct <name>oz_pd</name> *</type><name>pd</name> <init>= <expr><name><name>usb_ctx</name>-&gt;<name>pd</name></name></expr></init></decl>;</decl_stmt>
+	<decl_stmt><decl><type>struct <name>oz_elt</name> *</type><name>elt</name></decl>;</decl_stmt>
+	<decl_stmt><decl><type>struct <name>oz_elt_buf</name> *</type><name>eb</name> <init>= <expr>&amp;<name><name>pd</name>-&gt;<name>elt_buff</name></name></expr></init></decl>;</decl_stmt>
+	<decl_stmt><decl><type>struct <name>oz_elt_info</name> *</type><name>ei</name> <init>= <expr><call><name>oz_elt_info_alloc</name><argument_list>(<argument><expr>&amp;<name><name>pd</name>-&gt;<name>elt_buff</name></name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+	<decl_stmt><decl><type>struct <name>oz_set_config_req</name> *</type><name>body</name></decl>;</decl_stmt>
+
+	<if>if <condition>(<expr><name>ei</name> == <name>NULL</name></expr>)</condition><then>
+		<return>return <expr>-1</expr>;</return></then></if>
+	<expr_stmt><expr><name>elt</name> = (struct <name>oz_elt</name> *)<name><name>ei</name>-&gt;<name>data</name></name></expr>;</expr_stmt>
+	<expr_stmt><expr><name><name>elt</name>-&gt;<name>length</name></name> = <sizeof>sizeof<argument_list>(<argument>struct <expr><name>oz_set_config_req</name></expr></argument>)</argument_list></sizeof></expr>;</expr_stmt>
+	<expr_stmt><expr><name>body</name> = (struct <name>oz_set_config_req</name> *)(<name>elt</name>+1)</expr>;</expr_stmt>
+	<expr_stmt><expr><name><name>body</name>-&gt;<name>type</name></name> = <name>OZ_SET_CONFIG_REQ</name></expr>;</expr_stmt>
+	<expr_stmt><expr><name><name>body</name>-&gt;<name>req_id</name></name> = <name>req_id</name></expr>;</expr_stmt>
+	<expr_stmt><expr><name><name>body</name>-&gt;<name>index</name></name> = <name>index</name></expr>;</expr_stmt>
+	<return>return <expr><call><name>oz_usb_submit_elt</name><argument_list>(<argument><expr><name>eb</name></expr></argument>, <argument><expr><name>ei</name></expr></argument>, <argument><expr><name>usb_ctx</name></expr></argument>, <argument><expr>0</expr></argument>, <argument><expr>0</expr></argument>)</argument_list></call></expr>;</return>
+}</block></function>
+
+<comment type="block">/*
+ * Context: tasklet
+ */</comment>
+<function><type><specifier>static</specifier> <name>int</name></type> <name>oz_usb_set_interface_req</name><parameter_list>(<param><decl><type><name>void</name> *</type><name>hpd</name></decl></param>, <param><decl><type><name>u8</name></type> <name>req_id</name></decl></param>, <param><decl><type><name>u8</name></type> <name>index</name></decl></param>, <param><decl><type><name>u8</name></type> <name>alt</name></decl></param>)</parameter_list>
+<block>{
+	<decl_stmt><decl><type>struct <name>oz_usb_ctx</name> *</type><name>usb_ctx</name> <init>= <expr><name>hpd</name></expr></init></decl>;</decl_stmt>
+	<decl_stmt><decl><type>struct <name>oz_pd</name> *</type><name>pd</name> <init>= <expr><name><name>usb_ctx</name>-&gt;<name>pd</name></name></expr></init></decl>;</decl_stmt>
+	<decl_stmt><decl><type>struct <name>oz_elt</name> *</type><name>elt</name></decl>;</decl_stmt>
+	<decl_stmt><decl><type>struct <name>oz_elt_buf</name> *</type><name>eb</name> <init>= <expr>&amp;<name><name>pd</name>-&gt;<name>elt_buff</name></name></expr></init></decl>;</decl_stmt>
+	<decl_stmt><decl><type>struct <name>oz_elt_info</name> *</type><name>ei</name> <init>= <expr><call><name>oz_elt_info_alloc</name><argument_list>(<argument><expr>&amp;<name><name>pd</name>-&gt;<name>elt_buff</name></name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+	<decl_stmt><decl><type>struct <name>oz_set_interface_req</name> *</type><name>body</name></decl>;</decl_stmt>
+
+	<if>if <condition>(<expr><name>ei</name> == <name>NULL</name></expr>)</condition><then>
+		<return>return <expr>-1</expr>;</return></then></if>
+	<expr_stmt><expr><name>elt</name> = (struct <name>oz_elt</name> *)<name><name>ei</name>-&gt;<name>data</name></name></expr>;</expr_stmt>
+	<expr_stmt><expr><name><name>elt</name>-&gt;<name>length</name></name> = <sizeof>sizeof<argument_list>(<argument>struct <expr><name>oz_set_interface_req</name></expr></argument>)</argument_list></sizeof></expr>;</expr_stmt>
+	<expr_stmt><expr><name>body</name> = (struct <name>oz_set_interface_req</name> *)(<name>elt</name>+1)</expr>;</expr_stmt>
+	<expr_stmt><expr><name><name>body</name>-&gt;<name>type</name></name> = <name>OZ_SET_INTERFACE_REQ</name></expr>;</expr_stmt>
+	<expr_stmt><expr><name><name>body</name>-&gt;<name>req_id</name></name> = <name>req_id</name></expr>;</expr_stmt>
+	<expr_stmt><expr><name><name>body</name>-&gt;<name>index</name></name> = <name>index</name></expr>;</expr_stmt>
+	<expr_stmt><expr><name><name>body</name>-&gt;<name>alternative</name></name> = <name>alt</name></expr>;</expr_stmt>
+	<return>return <expr><call><name>oz_usb_submit_elt</name><argument_list>(<argument><expr><name>eb</name></expr></argument>, <argument><expr><name>ei</name></expr></argument>, <argument><expr><name>usb_ctx</name></expr></argument>, <argument><expr>0</expr></argument>, <argument><expr>0</expr></argument>)</argument_list></call></expr>;</return>
+}</block></function>
+
+<comment type="block">/*
+ * Context: tasklet
+ */</comment>
+<function><type><specifier>static</specifier> <name>int</name></type> <name>oz_usb_set_clear_feature_req</name><parameter_list>(<param><decl><type><name>void</name> *</type><name>hpd</name></decl></param>, <param><decl><type><name>u8</name></type> <name>req_id</name></decl></param>, <param><decl><type><name>u8</name></type> <name>type</name></decl></param>,
+			<param><decl><type><name>u8</name></type> <name>recipient</name></decl></param>, <param><decl><type><name>u8</name></type> <name>index</name></decl></param>, <param><decl><type><name>__le16</name></type> <name>feature</name></decl></param>)</parameter_list>
+<block>{
+	<decl_stmt><decl><type>struct <name>oz_usb_ctx</name> *</type><name>usb_ctx</name> <init>= <expr><name>hpd</name></expr></init></decl>;</decl_stmt>
+	<decl_stmt><decl><type>struct <name>oz_pd</name> *</type><name>pd</name> <init>= <expr><name><name>usb_ctx</name>-&gt;<name>pd</name></name></expr></init></decl>;</decl_stmt>
+	<decl_stmt><decl><type>struct <name>oz_elt</name> *</type><name>elt</name></decl>;</decl_stmt>
+	<decl_stmt><decl><type>struct <name>oz_elt_buf</name> *</type><name>eb</name> <init>= <expr>&amp;<name><name>pd</name>-&gt;<name>elt_buff</name></name></expr></init></decl>;</decl_stmt>
+	<decl_stmt><decl><type>struct <name>oz_elt_info</name> *</type><name>ei</name> <init>= <expr><call><name>oz_elt_info_alloc</name><argument_list>(<argument><expr>&amp;<name><name>pd</name>-&gt;<name>elt_buff</name></name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+	<decl_stmt><decl><type>struct <name>oz_feature_req</name> *</type><name>body</name></decl>;</decl_stmt>
+
+	<if>if <condition>(<expr><name>ei</name> == <name>NULL</name></expr>)</condition><then>
+		<return>return <expr>-1</expr>;</return></then></if>
+	<expr_stmt><expr><name>elt</name> = (struct <name>oz_elt</name> *)<name><name>ei</name>-&gt;<name>data</name></name></expr>;</expr_stmt>
+	<expr_stmt><expr><name><name>elt</name>-&gt;<name>length</name></name> = <sizeof>sizeof<argument_list>(<argument>struct <expr><name>oz_feature_req</name></expr></argument>)</argument_list></sizeof></expr>;</expr_stmt>
+	<expr_stmt><expr><name>body</name> = (struct <name>oz_feature_req</name> *)(<name>elt</name>+1)</expr>;</expr_stmt>
+	<expr_stmt><expr><name><name>body</name>-&gt;<name>type</name></name> = <name>type</name></expr>;</expr_stmt>
+	<expr_stmt><expr><name><name>body</name>-&gt;<name>req_id</name></name> = <name>req_id</name></expr>;</expr_stmt>
+	<expr_stmt><expr><name><name>body</name>-&gt;<name>recipient</name></name> = <name>recipient</name></expr>;</expr_stmt>
+	<expr_stmt><expr><name><name>body</name>-&gt;<name>index</name></name> = <name>index</name></expr>;</expr_stmt>
+	<expr_stmt><expr><call><name>put_unaligned</name><argument_list>(<argument><expr><name>feature</name></expr></argument>, <argument><expr>&amp;<name><name>body</name>-&gt;<name>feature</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+	<return>return <expr><call><name>oz_usb_submit_elt</name><argument_list>(<argument><expr><name>eb</name></expr></argument>, <argument><expr><name>ei</name></expr></argument>, <argument><expr><name>usb_ctx</name></expr></argument>, <argument><expr>0</expr></argument>, <argument><expr>0</expr></argument>)</argument_list></call></expr>;</return>
+}</block></function>
+
+<comment type="block">/*
+ * Context: tasklet
+ */</comment>
+<function><type><specifier>static</specifier> <name>int</name></type> <name>oz_usb_vendor_class_req</name><parameter_list>(<param><decl><type><name>void</name> *</type><name>hpd</name></decl></param>, <param><decl><type><name>u8</name></type> <name>req_id</name></decl></param>, <param><decl><type><name>u8</name></type> <name>req_type</name></decl></param>,
+	<param><decl><type><name>u8</name></type> <name>request</name></decl></param>, <param><decl><type><name>__le16</name></type> <name>value</name></decl></param>, <param><decl><type><name>__le16</name></type> <name>index</name></decl></param>, <param><decl><type><specifier>const</specifier> <name>u8</name> *</type><name>data</name></decl></param>, <param><decl><type><name>int</name></type> <name>data_len</name></decl></param>)</parameter_list>
+<block>{
+	<decl_stmt><decl><type>struct <name>oz_usb_ctx</name> *</type><name>usb_ctx</name> <init>= <expr><name>hpd</name></expr></init></decl>;</decl_stmt>
+	<decl_stmt><decl><type>struct <name>oz_pd</name> *</type><name>pd</name> <init>= <expr><name><name>usb_ctx</name>-&gt;<name>pd</name></name></expr></init></decl>;</decl_stmt>
+	<decl_stmt><decl><type>struct <name>oz_elt</name> *</type><name>elt</name></decl>;</decl_stmt>
+	<decl_stmt><decl><type>struct <name>oz_elt_buf</name> *</type><name>eb</name> <init>= <expr>&amp;<name><name>pd</name>-&gt;<name>elt_buff</name></name></expr></init></decl>;</decl_stmt>
+	<decl_stmt><decl><type>struct <name>oz_elt_info</name> *</type><name>ei</name> <init>= <expr><call><name>oz_elt_info_alloc</name><argument_list>(<argument><expr>&amp;<name><name>pd</name>-&gt;<name>elt_buff</name></name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+	<decl_stmt><decl><type>struct <name>oz_vendor_class_req</name> *</type><name>body</name></decl>;</decl_stmt>
+
+	<if>if <condition>(<expr><name>ei</name> == <name>NULL</name></expr>)</condition><then>
+		<return>return <expr>-1</expr>;</return></then></if>
+	<expr_stmt><expr><name>elt</name> = (struct <name>oz_elt</name> *)<name><name>ei</name>-&gt;<name>data</name></name></expr>;</expr_stmt>
+	<expr_stmt><expr><name><name>elt</name>-&gt;<name>length</name></name> = <sizeof>sizeof<argument_list>(<argument>struct <expr><name>oz_vendor_class_req</name></expr></argument>)</argument_list></sizeof> - 1 + <name>data_len</name></expr>;</expr_stmt>
+	<expr_stmt><expr><name>body</name> = (struct <name>oz_vendor_class_req</name> *)(<name>elt</name>+1)</expr>;</expr_stmt>
+	<expr_stmt><expr><name><name>body</name>-&gt;<name>type</name></name> = <name>OZ_VENDOR_CLASS_REQ</name></expr>;</expr_stmt>
+	<expr_stmt><expr><name><name>body</name>-&gt;<name>req_id</name></name> = <name>req_id</name></expr>;</expr_stmt>
+	<expr_stmt><expr><name><name>body</name>-&gt;<name>req_type</name></name> = <name>req_type</name></expr>;</expr_stmt>
+	<expr_stmt><expr><name><name>body</name>-&gt;<name>request</name></name> = <name>request</name></expr>;</expr_stmt>
+	<expr_stmt><expr><call><name>put_unaligned</name><argument_list>(<argument><expr><name>value</name></expr></argument>, <argument><expr>&amp;<name><name>body</name>-&gt;<name>value</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+	<expr_stmt><expr><call><name>put_unaligned</name><argument_list>(<argument><expr><name>index</name></expr></argument>, <argument><expr>&amp;<name><name>body</name>-&gt;<name>index</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+	<if>if <condition>(<expr><name>data_len</name></expr>)</condition><then>
+		<expr_stmt><expr><call><name>memcpy</name><argument_list>(<argument><expr><name><name>body</name>-&gt;<name>data</name></name></expr></argument>, <argument><expr><name>data</name></expr></argument>, <argument><expr><name>data_len</name></expr></argument>)</argument_list></call></expr>;</expr_stmt></then></if>
+	<return>return <expr><call><name>oz_usb_submit_elt</name><argument_list>(<argument><expr><name>eb</name></expr></argument>, <argument><expr><name>ei</name></expr></argument>, <argument><expr><name>usb_ctx</name></expr></argument>, <argument><expr>0</expr></argument>, <argument><expr>0</expr></argument>)</argument_list></call></expr>;</return>
+}</block></function>
+
+<comment type="block">/*
+ * Context: tasklet
+ */</comment>
+<function><type><name>int</name></type> <name>oz_usb_control_req</name><parameter_list>(<param><decl><type><name>void</name> *</type><name>hpd</name></decl></param>, <param><decl><type><name>u8</name></type> <name>req_id</name></decl></param>, <param><decl><type>struct <name>usb_ctrlrequest</name> *</type><name>setup</name></decl></param>,
+			<param><decl><type><specifier>const</specifier> <name>u8</name> *</type><name>data</name></decl></param>, <param><decl><type><name>int</name></type> <name>data_len</name></decl></param>)</parameter_list>
+<block>{
+	<decl_stmt><decl><type><name>unsigned</name></type> <name>wvalue</name> <init>= <expr><call><name>le16_to_cpu</name><argument_list>(<argument><expr><name><name>setup</name>-&gt;<name>wValue</name></name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+	<decl_stmt><decl><type><name>unsigned</name></type> <name>windex</name> <init>= <expr><call><name>le16_to_cpu</name><argument_list>(<argument><expr><name><name>setup</name>-&gt;<name>wIndex</name></name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+	<decl_stmt><decl><type><name>unsigned</name></type> <name>wlength</name> <init>= <expr><call><name>le16_to_cpu</name><argument_list>(<argument><expr><name><name>setup</name>-&gt;<name>wLength</name></name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+	<decl_stmt><decl><type><name>int</name></type> <name>rc</name> <init>= <expr>0</expr></init></decl>;</decl_stmt>
+
+	<if>if <condition>(<expr>(<name><name>setup</name>-&gt;<name>bRequestType</name></name> &amp; <name>USB_TYPE_MASK</name>) == <name>USB_TYPE_STANDARD</name></expr>)</condition><then> <block>{
+		<switch>switch <condition>(<expr><name><name>setup</name>-&gt;<name>bRequest</name></name></expr>)</condition> <block>{
+		<case>case <expr><name>USB_REQ_GET_DESCRIPTOR</name></expr>:
+			<expr_stmt><expr><name>rc</name> = <call><name>oz_usb_get_desc_req</name><argument_list>(<argument><expr><name>hpd</name></expr></argument>, <argument><expr><name>req_id</name></expr></argument>,
+				<argument><expr><name><name>setup</name>-&gt;<name>bRequestType</name></name></expr></argument>, <argument><expr><call>(<name>u8</name>)<argument_list>(<argument><expr><name>wvalue</name>&gt;&gt;8</expr></argument>)</argument_list></call></expr></argument>,
+				<argument><expr>(<name>u8</name>)<name>wvalue</name></expr></argument>, <argument><expr><name><name>setup</name>-&gt;<name>wIndex</name></name></expr></argument>, <argument><expr>0</expr></argument>, <argument><expr><name>wlength</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+			<break>break;</break>
+		</case><case>case <expr><name>USB_REQ_SET_CONFIGURATION</name></expr>:
+			<expr_stmt><expr><name>rc</name> = <call><name>oz_usb_set_config_req</name><argument_list>(<argument><expr><name>hpd</name></expr></argument>, <argument><expr><name>req_id</name></expr></argument>, <argument><expr>(<name>u8</name>)<name>wvalue</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+			<break>break;</break>
+		</case><case>case <expr><name>USB_REQ_SET_INTERFACE</name></expr>: <block>{
+				<decl_stmt><decl><type><name>u8</name></type> <name>if_num</name> <init>= <expr>(<name>u8</name>)<name>windex</name></expr></init></decl>;</decl_stmt>
+				<decl_stmt><decl><type><name>u8</name></type> <name>alt</name> <init>= <expr>(<name>u8</name>)<name>wvalue</name></expr></init></decl>;</decl_stmt>
+
+				<expr_stmt><expr><name>rc</name> = <call><name>oz_usb_set_interface_req</name><argument_list>(<argument><expr><name>hpd</name></expr></argument>, <argument><expr><name>req_id</name></expr></argument>,
+					<argument><expr><name>if_num</name></expr></argument>, <argument><expr><name>alt</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+			}</block>
+			<break>break;</break>
+		</case><case>case <expr><name>USB_REQ_SET_FEATURE</name></expr>:
+			<expr_stmt><expr><name>rc</name> = <call><name>oz_usb_set_clear_feature_req</name><argument_list>(<argument><expr><name>hpd</name></expr></argument>, <argument><expr><name>req_id</name></expr></argument>,
+				<argument><expr><name>OZ_SET_FEATURE_REQ</name></expr></argument>,
+				<argument><expr><name><name>setup</name>-&gt;<name>bRequestType</name></name> &amp; 0xf</expr></argument>, <argument><expr>(<name>u8</name>)<name>windex</name></expr></argument>,
+				<argument><expr><name><name>setup</name>-&gt;<name>wValue</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+			<break>break;</break>
+		</case><case>case <expr><name>USB_REQ_CLEAR_FEATURE</name></expr>:
+			<expr_stmt><expr><name>rc</name> = <call><name>oz_usb_set_clear_feature_req</name><argument_list>(<argument><expr><name>hpd</name></expr></argument>, <argument><expr><name>req_id</name></expr></argument>,
+				<argument><expr><name>OZ_CLEAR_FEATURE_REQ</name></expr></argument>,
+				<argument><expr><name><name>setup</name>-&gt;<name>bRequestType</name></name> &amp; 0xf</expr></argument>,
+				<argument><expr>(<name>u8</name>)<name>windex</name></expr></argument>, <argument><expr><name><name>setup</name>-&gt;<name>wValue</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+			<break>break;</break>
+		</case>}</block></switch>
+	}</block></then> <else>else <block>{
+		<expr_stmt><expr><name>rc</name> = <call><name>oz_usb_vendor_class_req</name><argument_list>(<argument><expr><name>hpd</name></expr></argument>, <argument><expr><name>req_id</name></expr></argument>, <argument><expr><name><name>setup</name>-&gt;<name>bRequestType</name></name></expr></argument>,
+			<argument><expr><name><name>setup</name>-&gt;<name>bRequest</name></name></expr></argument>, <argument><expr><name><name>setup</name>-&gt;<name>wValue</name></name></expr></argument>, <argument><expr><name><name>setup</name>-&gt;<name>wIndex</name></name></expr></argument>,
+			<argument><expr><name>data</name></expr></argument>, <argument><expr><name>data_len</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+	}</block></else></if>
+	<return>return <expr><name>rc</name></expr>;</return>
+}</block></function>
+
+<comment type="block">/*
+ * Context: softirq
+ */</comment>
+<function><type><name>int</name></type> <name>oz_usb_send_isoc</name><parameter_list>(<param><decl><type><name>void</name> *</type><name>hpd</name></decl></param>, <param><decl><type><name>u8</name></type> <name>ep_num</name></decl></param>, <param><decl><type>struct <name>urb</name> *</type><name>urb</name></decl></param>)</parameter_list>
+<block>{
+	<decl_stmt><decl><type>struct <name>oz_usb_ctx</name> *</type><name>usb_ctx</name> <init>= <expr><name>hpd</name></expr></init></decl>;</decl_stmt>
+	<decl_stmt><decl><type>struct <name>oz_pd</name> *</type><name>pd</name> <init>= <expr><name><name>usb_ctx</name>-&gt;<name>pd</name></name></expr></init></decl>;</decl_stmt>
+	<decl_stmt><decl><type>struct <name>oz_elt_buf</name> *</type><name>eb</name></decl>;</decl_stmt>
+	<decl_stmt><decl><type><name>int</name></type> <name>i</name></decl>;</decl_stmt>
+	<decl_stmt><decl><type><name>int</name></type> <name>hdr_size</name></decl>;</decl_stmt>
+	<decl_stmt><decl><type><name>u8</name> *</type><name>data</name></decl>;</decl_stmt>
+	<decl_stmt><decl><type>struct <name>usb_iso_packet_descriptor</name> *</type><name>desc</name></decl>;</decl_stmt>
+
+	<if>if <condition>(<expr><name><name>pd</name>-&gt;<name>mode</name></name> &amp; <name>OZ_F_ISOC_NO_ELTS</name></expr>)</condition><then> <block>{
+		<for>for (<init><expr><name>i</name> = 0</expr>;</init> <condition><expr><name>i</name> &lt; <name><name>urb</name>-&gt;<name>number_of_packets</name></name></expr>;</condition> <incr><expr><name>i</name>++</expr></incr>) <block>{
+			<decl_stmt><decl><type><name>u8</name> *</type><name>data</name></decl>;</decl_stmt>
+
+			<expr_stmt><expr><name>desc</name> = &amp;<name><name>urb</name>-&gt;<name>iso_frame_desc</name><index>[<expr><name>i</name></expr>]</index></name></expr>;</expr_stmt>
+			<expr_stmt><expr><name>data</name> = ((<name>u8</name> *)<name><name>urb</name>-&gt;<name>transfer_buffer</name></name>)+<name><name>desc</name>-&gt;<name>offset</name></name></expr>;</expr_stmt>
+			<expr_stmt><expr><call><name>oz_send_isoc_unit</name><argument_list>(<argument><expr><name>pd</name></expr></argument>, <argument><expr><name>ep_num</name></expr></argument>, <argument><expr><name>data</name></expr></argument>, <argument><expr><name><name>desc</name>-&gt;<name>length</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+		}</block></for>
+		<return>return <expr>0</expr>;</return>
+	}</block></then></if>
+
+	<expr_stmt><expr><name>hdr_size</name> = <sizeof>sizeof<argument_list>(<argument>struct <expr><name>oz_isoc_fixed</name></expr></argument>)</argument_list></sizeof> - 1</expr>;</expr_stmt>
+	<expr_stmt><expr><name>eb</name> = &amp;<name><name>pd</name>-&gt;<name>elt_buff</name></name></expr>;</expr_stmt>
+	<expr_stmt><expr><name>i</name> = 0</expr>;</expr_stmt>
+	<while>while <condition>(<expr><name>i</name> &lt; <name><name>urb</name>-&gt;<name>number_of_packets</name></name></expr>)</condition> <block>{
+		<decl_stmt><decl><type>struct <name>oz_elt_info</name> *</type><name>ei</name> <init>= <expr><call><name>oz_elt_info_alloc</name><argument_list>(<argument><expr><name>eb</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+		<decl_stmt><decl><type>struct <name>oz_elt</name> *</type><name>elt</name></decl>;</decl_stmt>
+		<decl_stmt><decl><type>struct <name>oz_isoc_fixed</name> *</type><name>body</name></decl>;</decl_stmt>
+		<decl_stmt><decl><type><name>int</name></type> <name>unit_count</name></decl>;</decl_stmt>
+		<decl_stmt><decl><type><name>int</name></type> <name>unit_size</name></decl>;</decl_stmt>
+		<decl_stmt><decl><type><name>int</name></type> <name>rem</name></decl>;</decl_stmt>
+
+		<if>if <condition>(<expr><name>ei</name> == <name>NULL</name></expr>)</condition><then>
+			<return>return <expr>-1</expr>;</return></then></if>
+		<expr_stmt><expr><name>rem</name> = <name>MAX_ISOC_FIXED_DATA</name></expr>;</expr_stmt>
+		<expr_stmt><expr><name>elt</name> = (struct <name>oz_elt</name> *)<name><name>ei</name>-&gt;<name>data</name></name></expr>;</expr_stmt>
+		<expr_stmt><expr><name>body</name> = (struct <name>oz_isoc_fixed</name> *)(<name>elt</name> + 1)</expr>;</expr_stmt>
+		<expr_stmt><expr><name><name>body</name>-&gt;<name>type</name></name> = <name>OZ_USB_ENDPOINT_DATA</name></expr>;</expr_stmt>
+		<expr_stmt><expr><name><name>body</name>-&gt;<name>endpoint</name></name> = <name>ep_num</name></expr>;</expr_stmt>
+		<expr_stmt><expr><name><name>body</name>-&gt;<name>format</name></name> = <name>OZ_DATA_F_ISOC_FIXED</name></expr>;</expr_stmt>
+		<expr_stmt><expr><name>unit_size</name> = <name><name>urb</name>-&gt;<name>iso_frame_desc</name><index>[<expr><name>i</name></expr>]</index></name>.<name>length</name></expr>;</expr_stmt>
+		<expr_stmt><expr><name><name>body</name>-&gt;<name>unit_size</name></name> = (<name>u8</name>)<name>unit_size</name></expr>;</expr_stmt>
+		<expr_stmt><expr><name>data</name> = (<call>(<name>u8</name> *)<argument_list>(<argument><expr><name>elt</name>+1</expr></argument>)</argument_list></call>) + <name>hdr_size</name></expr>;</expr_stmt>
+		<expr_stmt><expr><name>unit_count</name> = 0</expr>;</expr_stmt>
+		<while>while <condition>(<expr><name>i</name> &lt; <name><name>urb</name>-&gt;<name>number_of_packets</name></name></expr>)</condition> <block>{
+			<expr_stmt><expr><name>desc</name> = &amp;<name><name>urb</name>-&gt;<name>iso_frame_desc</name><index>[<expr><name>i</name></expr>]</index></name></expr>;</expr_stmt>
+			<if>if <condition>(<expr>(<name>unit_size</name> == <name><name>desc</name>-&gt;<name>length</name></name>) &amp;&amp;
+				(<name><name>desc</name>-&gt;<name>length</name></name> &lt;= <name>rem</name>)</expr>)</condition><then> <block>{
+				<expr_stmt><expr><call><name>memcpy</name><argument_list>(<argument><expr><name>data</name></expr></argument>, <argument><expr>((<name>u8</name> *)<name><name>urb</name>-&gt;<name>transfer_buffer</name></name>) +
+					<name><name>desc</name>-&gt;<name>offset</name></name></expr></argument>, <argument><expr><name>unit_size</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+				<expr_stmt><expr><name>data</name> += <name>unit_size</name></expr>;</expr_stmt>
+				<expr_stmt><expr><name>rem</name> -= <name>unit_size</name></expr>;</expr_stmt>
+				<expr_stmt><expr><name>unit_count</name>++</expr>;</expr_stmt>
+				<expr_stmt><expr><name><name>desc</name>-&gt;<name>status</name></name> = 0</expr>;</expr_stmt>
+				<expr_stmt><expr><name><name>desc</name>-&gt;<name>actual_length</name></name> = <name><name>desc</name>-&gt;<name>length</name></name></expr>;</expr_stmt>
+				<expr_stmt><expr><name>i</name>++</expr>;</expr_stmt>
+			}</block></then> <else>else <block>{
+				<break>break;</break>
+			}</block></else></if>
+		}</block></while>
+		<expr_stmt><expr><name><name>elt</name>-&gt;<name>length</name></name> = <name>hdr_size</name> + <name>MAX_ISOC_FIXED_DATA</name> - <name>rem</name></expr>;</expr_stmt>
+		<comment type="block">/* Store the number of units in body-&gt;frame_number for the
+		 * moment. This field will be correctly determined before
+		 * the element is sent. */</comment>
+		<expr_stmt><expr><name><name>body</name>-&gt;<name>frame_number</name></name> = (<name>u8</name>)<name>unit_count</name></expr>;</expr_stmt>
+		<expr_stmt><expr><call><name>oz_usb_submit_elt</name><argument_list>(<argument><expr><name>eb</name></expr></argument>, <argument><expr><name>ei</name></expr></argument>, <argument><expr><name>usb_ctx</name></expr></argument>, <argument><expr><name>ep_num</name></expr></argument>,
+			<argument><expr><name><name>pd</name>-&gt;<name>mode</name></name> &amp; <name>OZ_F_ISOC_ANYTIME</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+	}</block></while>
+	<return>return <expr>0</expr>;</return>
+}</block></function>
+
+<comment type="block">/*
+ * Context: softirq-serialized
+ */</comment>
+<function><type><specifier>static</specifier> <name>void</name></type> <name>oz_usb_handle_ep_data</name><parameter_list>(<param><decl><type>struct <name>oz_usb_ctx</name> *</type><name>usb_ctx</name></decl></param>,
+	<param><decl><type>struct <name>oz_usb_hdr</name> *</type><name>usb_hdr</name></decl></param>, <param><decl><type><name>int</name></type> <name>len</name></decl></param>)</parameter_list>
+<block>{
+	<decl_stmt><decl><type>struct <name>oz_data</name> *</type><name>data_hdr</name> <init>= <expr>(struct <name>oz_data</name> *)<name>usb_hdr</name></expr></init></decl>;</decl_stmt>
+
+	<switch>switch <condition>(<expr><name><name>data_hdr</name>-&gt;<name>format</name></name></expr>)</condition> <block>{
+	<case>case <expr><name>OZ_DATA_F_MULTIPLE_FIXED</name></expr>: <block>{
+			<decl_stmt><decl><type>struct <name>oz_multiple_fixed</name> *</type><name>body</name> <init>=
+				<expr>(struct <name>oz_multiple_fixed</name> *)<name>data_hdr</name></expr></init></decl>;</decl_stmt>
+			<decl_stmt><decl><type><name>u8</name> *</type><name>data</name> <init>= <expr><name><name>body</name>-&gt;<name>data</name></name></expr></init></decl>;</decl_stmt>
+			<decl_stmt><decl><type><name>int</name></type> <name>n</name></decl>;</decl_stmt>
+			<if>if <condition>(<expr>!<name><name>body</name>-&gt;<name>unit_size</name></name></expr>)</condition><then>
+				<break>break;</break></then></if>
+			<expr_stmt><expr><name>n</name> = (<name>len</name> - <sizeof>sizeof<argument_list>(<argument>struct <expr><name>oz_multiple_fixed</name></expr></argument>)</argument_list></sizeof>+1)
+				/ <name><name>body</name>-&gt;<name>unit_size</name></name></expr>;</expr_stmt>
+			<while>while <condition>(<expr><name>n</name>--</expr>)</condition> <block>{
+				<expr_stmt><expr><call><name>oz_hcd_data_ind</name><argument_list>(<argument><expr><name><name>usb_ctx</name>-&gt;<name>hport</name></name></expr></argument>, <argument><expr><name><name>body</name>-&gt;<name>endpoint</name></name></expr></argument>,
+					<argument><expr><name>data</name></expr></argument>, <argument><expr><name><name>body</name>-&gt;<name>unit_size</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+				<expr_stmt><expr><name>data</name> += <name><name>body</name>-&gt;<name>unit_size</name></name></expr>;</expr_stmt>
+			}</block></while>
+		}</block>
+		<break>break;</break>
+	</case><case>case <expr><name>OZ_DATA_F_ISOC_FIXED</name></expr>: <block>{
+			<decl_stmt><decl><type>struct <name>oz_isoc_fixed</name> *</type><name>body</name> <init>=
+				<expr>(struct <name>oz_isoc_fixed</name> *)<name>data_hdr</name></expr></init></decl>;</decl_stmt>
+			<decl_stmt><decl><type><name>int</name></type> <name>data_len</name> <init>= <expr><name>len</name>-<sizeof>sizeof<argument_list>(<argument>struct <expr><name>oz_isoc_fixed</name></expr></argument>)</argument_list></sizeof>+1</expr></init></decl>;</decl_stmt>
+			<decl_stmt><decl><type><name>int</name></type> <name>unit_size</name> <init>= <expr><name><name>body</name>-&gt;<name>unit_size</name></name></expr></init></decl>;</decl_stmt>
+			<decl_stmt><decl><type><name>u8</name> *</type><name>data</name> <init>= <expr><name><name>body</name>-&gt;<name>data</name></name></expr></init></decl>;</decl_stmt>
+			<decl_stmt><decl><type><name>int</name></type> <name>count</name></decl>;</decl_stmt>
+			<decl_stmt><decl><type><name>int</name></type> <name>i</name></decl>;</decl_stmt>
+
+			<if>if <condition>(<expr>!<name>unit_size</name></expr>)</condition><then>
+				<break>break;</break></then></if>
+			<expr_stmt><expr><name>count</name> = <name>data_len</name>/<name>unit_size</name></expr>;</expr_stmt>
+			<for>for (<init><expr><name>i</name> = 0</expr>;</init> <condition><expr><name>i</name> &lt; <name>count</name></expr>;</condition> <incr><expr><name>i</name>++</expr></incr>) <block>{
+				<expr_stmt><expr><call><name>oz_hcd_data_ind</name><argument_list>(<argument><expr><name><name>usb_ctx</name>-&gt;<name>hport</name></name></expr></argument>,
+					<argument><expr><name><name>body</name>-&gt;<name>endpoint</name></name></expr></argument>, <argument><expr><name>data</name></expr></argument>, <argument><expr><name>unit_size</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+				<expr_stmt><expr><name>data</name> += <name>unit_size</name></expr>;</expr_stmt>
+			}</block></for>
+		}</block>
+		<break>break;</break>
+	</case>}</block></switch>
+
+}</block></function>
+
+<comment type="block">/*
+ * This is called when the PD has received a USB element. The type of element
+ * is determined and is then passed to an appropriate handler function.
+ * Context: softirq-serialized
+ */</comment>
+<function><type><name>void</name></type> <name>oz_usb_rx</name><parameter_list>(<param><decl><type>struct <name>oz_pd</name> *</type><name>pd</name></decl></param>, <param><decl><type>struct <name>oz_elt</name> *</type><name>elt</name></decl></param>)</parameter_list>
+<block>{
+	<decl_stmt><decl><type>struct <name>oz_usb_hdr</name> *</type><name>usb_hdr</name> <init>= <expr>(struct <name>oz_usb_hdr</name> *)(<name>elt</name> + 1)</expr></init></decl>;</decl_stmt>
+	<decl_stmt><decl><type>struct <name>oz_usb_ctx</name> *</type><name>usb_ctx</name></decl>;</decl_stmt>
+
+	<expr_stmt><expr><call><name>spin_lock_bh</name><argument_list>(<argument><expr>&amp;<name><name>pd</name>-&gt;<name>app_lock</name><index>[<expr><name>OZ_APPID_USB</name></expr>]</index></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+	<expr_stmt><expr><name>usb_ctx</name> = (struct <name>oz_usb_ctx</name> *)<name><name>pd</name>-&gt;<name>app_ctx</name><index>[<expr><name>OZ_APPID_USB</name></expr>]</index></name></expr>;</expr_stmt>
+	<if>if <condition>(<expr><name>usb_ctx</name></expr>)</condition><then>
+		<expr_stmt><expr><call><name>oz_usb_get</name><argument_list>(<argument><expr><name>usb_ctx</name></expr></argument>)</argument_list></call></expr>;</expr_stmt></then></if>
+	<expr_stmt><expr><call><name>spin_unlock_bh</name><argument_list>(<argument><expr>&amp;<name><name>pd</name>-&gt;<name>app_lock</name><index>[<expr><name>OZ_APPID_USB</name></expr>]</index></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+	<if>if <condition>(<expr><name>usb_ctx</name> == <name>NULL</name></expr>)</condition><then>
+		<return>return;</return></then></if> <comment type="block">/* Context has gone so nothing to do. */</comment>
+	<if>if <condition>(<expr><name><name>usb_ctx</name>-&gt;<name>stopped</name></name></expr>)</condition><then>
+		<goto>goto <name>done</name>;</goto></then></if>
+	<comment type="block">/* If sequence number is non-zero then check it is not a duplicate.
+	 * Zero sequence numbers are always accepted.
+	 */</comment>
+	<if>if <condition>(<expr><name><name>usb_hdr</name>-&gt;<name>elt_seq_num</name></name> != 0</expr>)</condition><then> <block>{
+		<if>if <condition>(<expr>((<name><name>usb_ctx</name>-&gt;<name>rx_seq_num</name></name> - <name><name>usb_hdr</name>-&gt;<name>elt_seq_num</name></name>) &amp; 0x80) == 0</expr>)</condition><then>
+			<comment type="block">/* Reject duplicate element. */</comment>
+			<goto>goto <name>done</name>;</goto></then></if>
+	}</block></then></if>
+	<expr_stmt><expr><name><name>usb_ctx</name>-&gt;<name>rx_seq_num</name></name> = <name><name>usb_hdr</name>-&gt;<name>elt_seq_num</name></name></expr>;</expr_stmt>
+	<switch>switch <condition>(<expr><name><name>usb_hdr</name>-&gt;<name>type</name></name></expr>)</condition> <block>{
+	<case>case <expr><name>OZ_GET_DESC_RSP</name></expr>: <block>{
+			<decl_stmt><decl><type>struct <name>oz_get_desc_rsp</name> *</type><name>body</name> <init>=
+				<expr>(struct <name>oz_get_desc_rsp</name> *)<name>usb_hdr</name></expr></init></decl>;</decl_stmt>
+			<decl_stmt><decl><type><name>u16</name></type> <name>offs</name></decl>, <decl><type ref="prev"/><name>total_size</name></decl>;</decl_stmt>
+			<decl_stmt><decl><type><name>u8</name></type> <name>data_len</name></decl>;</decl_stmt>
+
+			<if>if <condition>(<expr><name><name>elt</name>-&gt;<name>length</name></name> &lt; <sizeof>sizeof<argument_list>(<argument>struct <expr><name>oz_get_desc_rsp</name></expr></argument>)</argument_list></sizeof> - 1</expr>)</condition><then>
+				<break>break;</break></then></if>
+			<expr_stmt><expr><name>data_len</name> = <name><name>elt</name>-&gt;<name>length</name></name> -
+					(<sizeof>sizeof<argument_list>(<argument>struct <expr><name>oz_get_desc_rsp</name></expr></argument>)</argument_list></sizeof> - 1)</expr>;</expr_stmt>
+			<expr_stmt><expr><name>offs</name> = <call><name>le16_to_cpu</name><argument_list>(<argument><expr><call><name>get_unaligned</name><argument_list>(<argument><expr>&amp;<name><name>body</name>-&gt;<name>offset</name></name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+			<expr_stmt><expr><name>total_size</name> =
+				<call><name>le16_to_cpu</name><argument_list>(<argument><expr><call><name>get_unaligned</name><argument_list>(<argument><expr>&amp;<name><name>body</name>-&gt;<name>total_size</name></name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+			<expr_stmt><expr><call><name>oz_dbg</name><argument_list>(<argument><expr><name>ON</name></expr></argument>, <argument><expr>"USB_REQ_GET_DESCRIPTOR - cnf\n"</expr></argument>)</argument_list></call></expr>;</expr_stmt>
+			<expr_stmt><expr><call><name>oz_hcd_get_desc_cnf</name><argument_list>(<argument><expr><name><name>usb_ctx</name>-&gt;<name>hport</name></name></expr></argument>, <argument><expr><name><name>body</name>-&gt;<name>req_id</name></name></expr></argument>,
+					<argument><expr><name><name>body</name>-&gt;<name>rcode</name></name></expr></argument>, <argument><expr><name><name>body</name>-&gt;<name>data</name></name></expr></argument>,
+					<argument><expr><name>data_len</name></expr></argument>, <argument><expr><name>offs</name></expr></argument>, <argument><expr><name>total_size</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+		}</block>
+		<break>break;</break>
+	</case><case>case <expr><name>OZ_SET_CONFIG_RSP</name></expr>: <block>{
+			<decl_stmt><decl><type>struct <name>oz_set_config_rsp</name> *</type><name>body</name> <init>=
+				<expr>(struct <name>oz_set_config_rsp</name> *)<name>usb_hdr</name></expr></init></decl>;</decl_stmt>
+			<expr_stmt><expr><call><name>oz_hcd_control_cnf</name><argument_list>(<argument><expr><name><name>usb_ctx</name>-&gt;<name>hport</name></name></expr></argument>, <argument><expr><name><name>body</name>-&gt;<name>req_id</name></name></expr></argument>,
+				<argument><expr><name><name>body</name>-&gt;<name>rcode</name></name></expr></argument>, <argument><expr><name>NULL</name></expr></argument>, <argument><expr>0</expr></argument>)</argument_list></call></expr>;</expr_stmt>
+		}</block>
+		<break>break;</break>
+	</case><case>case <expr><name>OZ_SET_INTERFACE_RSP</name></expr>: <block>{
+			<decl_stmt><decl><type>struct <name>oz_set_interface_rsp</name> *</type><name>body</name> <init>=
+				<expr>(struct <name>oz_set_interface_rsp</name> *)<name>usb_hdr</name></expr></init></decl>;</decl_stmt>
+			<expr_stmt><expr><call><name>oz_hcd_control_cnf</name><argument_list>(<argument><expr><name><name>usb_ctx</name>-&gt;<name>hport</name></name></expr></argument>,
+				<argument><expr><name><name>body</name>-&gt;<name>req_id</name></name></expr></argument>, <argument><expr><name><name>body</name>-&gt;<name>rcode</name></name></expr></argument>, <argument><expr><name>NULL</name></expr></argument>, <argument><expr>0</expr></argument>)</argument_list></call></expr>;</expr_stmt>
+		}</block>
+		<break>break;</break>
+	</case><case>case <expr><name>OZ_VENDOR_CLASS_RSP</name></expr>: <block>{
+			<decl_stmt><decl><type>struct <name>oz_vendor_class_rsp</name> *</type><name>body</name> <init>=
+				<expr>(struct <name>oz_vendor_class_rsp</name> *)<name>usb_hdr</name></expr></init></decl>;</decl_stmt>
+			<expr_stmt><expr><call><name>oz_hcd_control_cnf</name><argument_list>(<argument><expr><name><name>usb_ctx</name>-&gt;<name>hport</name></name></expr></argument>, <argument><expr><name><name>body</name>-&gt;<name>req_id</name></name></expr></argument>,
+				<argument><expr><name><name>body</name>-&gt;<name>rcode</name></name></expr></argument>, <argument><expr><name><name>body</name>-&gt;<name>data</name></name></expr></argument>, <argument><expr><name><name>elt</name>-&gt;<name>length</name></name>-
+				<sizeof>sizeof<argument_list>(<argument>struct <expr><name>oz_vendor_class_rsp</name></expr></argument>)</argument_list></sizeof>+1</expr></argument>)</argument_list></call></expr>;</expr_stmt>
+		}</block>
+		<break>break;</break>
+	</case><case>case <expr><name>OZ_USB_ENDPOINT_DATA</name></expr>:
+		<expr_stmt><expr><call><name>oz_usb_handle_ep_data</name><argument_list>(<argument><expr><name>usb_ctx</name></expr></argument>, <argument><expr><name>usb_hdr</name></expr></argument>, <argument><expr><name><name>elt</name>-&gt;<name>length</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+		<break>break;</break>
+	</case>}</block></switch>
+<label><name>done</name>:</label>
+	<expr_stmt><expr><call><name>oz_usb_put</name><argument_list>(<argument><expr><name>usb_ctx</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+}</block></function>
+
+<comment type="block">/*
+ * Context: softirq, process
+ */</comment>
+<function><type><name>void</name></type> <name>oz_usb_farewell</name><parameter_list>(<param><decl><type>struct <name>oz_pd</name> *</type><name>pd</name></decl></param>, <param><decl><type><name>u8</name></type> <name>ep_num</name></decl></param>, <param><decl><type><name>u8</name> *</type><name>data</name></decl></param>, <param><decl><type><name>u8</name></type> <name>len</name></decl></param>)</parameter_list>
+<block>{
+	<decl_stmt><decl><type>struct <name>oz_usb_ctx</name> *</type><name>usb_ctx</name></decl>;</decl_stmt>
+
+	<expr_stmt><expr><call><name>spin_lock_bh</name><argument_list>(<argument><expr>&amp;<name><name>pd</name>-&gt;<name>app_lock</name><index>[<expr><name>OZ_APPID_USB</name></expr>]</index></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+	<expr_stmt><expr><name>usb_ctx</name> = (struct <name>oz_usb_ctx</name> *)<name><name>pd</name>-&gt;<name>app_ctx</name><index>[<expr><name>OZ_APPID_USB</name></expr>]</index></name></expr>;</expr_stmt>
+	<if>if <condition>(<expr><name>usb_ctx</name></expr>)</condition><then>
+		<expr_stmt><expr><call><name>oz_usb_get</name><argument_list>(<argument><expr><name>usb_ctx</name></expr></argument>)</argument_list></call></expr>;</expr_stmt></then></if>
+	<expr_stmt><expr><call><name>spin_unlock_bh</name><argument_list>(<argument><expr>&amp;<name><name>pd</name>-&gt;<name>app_lock</name><index>[<expr><name>OZ_APPID_USB</name></expr>]</index></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+	<if>if <condition>(<expr><name>usb_ctx</name> == <name>NULL</name></expr>)</condition><then>
+		<return>return;</return></then></if> <comment type="block">/* Context has gone so nothing to do. */</comment>
+	<if>if <condition>(<expr>!<name><name>usb_ctx</name>-&gt;<name>stopped</name></name></expr>)</condition><then> <block>{
+		<expr_stmt><expr><call><name>oz_dbg</name><argument_list>(<argument><expr><name>ON</name></expr></argument>, <argument><expr>"Farewell indicated ep = 0x%x\n"</expr></argument>, <argument><expr><name>ep_num</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+		<expr_stmt><expr><call><name>oz_hcd_data_ind</name><argument_list>(<argument><expr><name><name>usb_ctx</name>-&gt;<name>hport</name></name></expr></argument>, <argument><expr><name>ep_num</name></expr></argument>, <argument><expr><name>data</name></expr></argument>, <argument><expr><name>len</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+	}</block></then></if>
+	<expr_stmt><expr><call><name>oz_usb_put</name><argument_list>(<argument><expr><name>usb_ctx</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+}</block></function></unit>
