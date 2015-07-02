@@ -7,43 +7,52 @@ import scala.collection.mutable
 import scala.collection.mutable.{ArrayBuffer, ListBuffer}
 import scala.util.control.Breaks
 
-object GitScraper extends App{
-//  val CVEID = id
-//  val CVEURL = url
-  val CVEID = "CVE-2015-1593"
-  val cveURL = "http://www.cvedetails.com/cve/CVE-2015-1593/"
-  val lineList = new mutable.Queue[String]()
+class GitScraper(id:String, url:String){
+  val CVEID = id
+  val CVEURL = url
+  var kernelcount = 0
 
-  val doc = Jsoup.connect(cveURL).get()
-  val listtable = doc.select("table.listtable#vulnrefstable")
-  val tag = listtable.select("td a[href~=.*git.*")
-  val github = listtable.select("td a[href^=https://github.com")
-  val gitkernel = listtable.select("td a[href^=http://git.kernel.org")
-  if (tag == null || tag.isEmpty()){
-    println("noFuncFound")
+  def gitFuncGrabber(): Set[String] = {
+    val doc = Jsoup.connect(CVEURL).get()
+    val listtable = doc.select("table.listtable#vulnrefstable")
+    val tag = listtable.select("td a[href~=.*git.*")
+    val github = listtable.select("td a[href^=https://github.com")
+    val gitkernel = listtable.select("td a[href^=http://git.kernel.org")
+
+    var funcSet = Set[String]()
+    if (tag == null || tag.isEmpty()) {
+      funcSet += "NA"
+    }
+    else if (github != null || !github.isEmpty) {
+      funcSet = funcSet ++ githubSet(github.attr("abs:href"))
+    }
+    else if (github == null || github.isEmpty && gitkernel != null || !gitkernel.isEmpty) {
+      funcSet = funcSet ++ gitkernelSet(gitkernel.attr("abs:href"))
+    }
+    funcSet
   }
-  else if (github != null || !github.isEmpty){
-    val gitlink = github.attr("abs:href")
-    val gitDoc = Jsoup.connect(gitlink).get()
+  def githubSet(url:String):Set[String] = {
+    var gitSet = Set[String]()
+    val lineList = new mutable.Queue[String]()
+    val gitDoc = Jsoup.connect(url).get()
 
     //populate Queue
     val linegroup = gitDoc.select("tr td.blob-num.blob-num-addition.js-linkable-line-number").toArray
-    for (td <- linegroup){
+    for (td <- linegroup) {
       val splitid = td.toString.split(" ")
       val id = splitid(1)
-      val diff = id.substring(id.indexOf("\"")+1, id.lastIndexOf("\""))
+      val diff = id.substring(id.indexOf("\"") + 1, id.lastIndexOf("\""))
       lineList.enqueue(diff)
     }
 
     val fileref = gitDoc.select("div.file-header a").toString.split("\n")
 
-    var funcSet = Set[String]()
-    for(e <- fileref){
+    for (e <- fileref) {
       val splitspace = e.split(" ")
       val href = splitspace(1)
-      val link = href.substring(href.indexOf("\"")+1, href.size-1)
+      val link = href.substring(href.indexOf("\"") + 1, href.size - 1)
       val absLink = "https://github.com" + link
-      val filename = absLink.substring(absLink.lastIndexOf("/")+1)
+      val filename = absLink.substring(absLink.lastIndexOf("/") + 1)
 
       val randombreak = new Breaks
       var lineNum = Seq[String]()
@@ -62,10 +71,17 @@ object GitScraper extends App{
 
       val findFunc = new funcFinder()
       val funcNames = findFunc.funcName(filename, lineNumbers)
-      funcSet = funcSet ++ funcNames
-      val cmd = Seq("rm", filename, filename+".xml").!!
+      gitSet = gitSet ++ funcNames
+      val cmd = Seq("rm", filename, filename + ".xml").!!
     }
-    println(funcSet)
+    gitSet
+  }
+
+  def gitkernelSet(url:String): Set[String] = {
+    var kernelSet = Set[String]()
+    kernelSet += "KernelOnly" + "," + url
+    kernelcount = kernelcount + 1
+    kernelSet
   }
 
   def downloadFile(url:String, filename:String) = {

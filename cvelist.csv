@@ -2,11 +2,11 @@ CVE-2015-4004,119,,DoS Overflow +Info,2015-06-07,2015-06-08,8.5,None,Remote,Low,
 CVE-2015-4003,189,,DoS,2015-06-07,2015-06-08,7.8,None,Remote,Low,Not required,None,None,Complete
 CVE-2015-4002,119,,DoS Exec Code Overflow,2015-06-07,2015-06-08,9.0,None,Remote,Low,Not required,Partial,Partial,Complete
 CVE-2015-4001,189,,DoS Exec Code,2015-06-07,2015-06-08,9.0,None,Remote,Low,Not required,Partial,Partial,Complete
-CVE-2015-3339,362,,+Priv,2015-05-27,2015-06-03,6.2,None,Local,High,Not required,Complete,Complete,Complete
+CVE-2015-3339,362,,+Priv,2015-05-27,2015-06-30,6.2,None,Local,High,Not required,Complete,Complete,Complete
 CVE-2015-3332,399,,DoS,2015-05-27,2015-06-03,4.9,None,Local,Low,Not required,None,None,Complete
 CVE-2015-3331,119,,DoS Exec Code Overflow,2015-05-27,2015-06-03,9.3,None,Remote,Medium,Not required,Complete,Complete,Complete
-CVE-2015-2922,17,,,2015-05-27,2015-06-03,3.3,None,Local Network,Low,Not required,None,None,Partial
-CVE-2015-2830,264,,Bypass,2015-05-27,2015-06-03,1.9,None,Local,Medium,Not required,None,Partial,None
+CVE-2015-2922,17,,,2015-05-27,2015-06-30,3.3,None,Local Network,Low,Not required,None,None,Partial
+CVE-2015-2830,264,,Bypass,2015-05-27,2015-06-30,1.9,None,Local,Medium,Not required,None,Partial,None
 CVE-2015-2666,119,,Overflow +Priv,2015-05-27,2015-05-27,6.9,None,Local,Medium,Not required,Complete,Complete,Complete
 CVE-2015-2042,17,,+Info,2015-04-21,2015-06-03,4.6,None,Local,Low,Not required,Partial,Partial,Partial
 CVE-2015-2041,17,,+Info,2015-04-21,2015-06-03,4.6,None,Local,Low,Not required,Partial,Partial,Partial
