@@ -8,11 +8,8 @@ import scala.collection.mutable.{ArrayBuffer, ListBuffer}
 import scala.util.control.Breaks
 
 class GitScraper(id:String, url:String){
-//object GitScraper extends App{
   val CVEID = id
   val CVEURL = url
-//  val CVEID = "CVE-2009-1046"
-//  val CVEURL = "http://www.cvedetails.com/cve/CVE-2009-1046/"
   var kernelcount = 0
 
   def gitFuncGrabber(): Set[String] = {
@@ -32,7 +29,6 @@ class GitScraper(id:String, url:String){
       funcSet += "NA"
     }
     funcSet
-//  println(funcSet)
   }
 
   def githubSet(url:String):Set[String] = {
