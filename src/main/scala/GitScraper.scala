@@ -8,34 +8,37 @@ import scala.collection.mutable.{ArrayBuffer, ListBuffer}
 import scala.util.control.Breaks
 
 class GitScraper(id:String, url:String){
+//object GitScraper extends App{
   val CVEID = id
   val CVEURL = url
+//  val CVEID = "CVE-2009-1046"
+//  val CVEURL = "http://www.cvedetails.com/cve/CVE-2009-1046/"
   var kernelcount = 0
 
   def gitFuncGrabber(): Set[String] = {
-    val doc = Jsoup.connect(CVEURL).get()
+    val doc = Jsoup.connect(CVEURL).timeout(0).get()
     val listtable = doc.select("table.listtable#vulnrefstable")
-    val tag = listtable.select("td a[href~=.*git.*")
-    val github = listtable.select("td a[href^=https://github.com")
+    val github = listtable.select("td a[href^=https://github.com/torvalds/linux")
     val gitkernel = listtable.select("td a[href^=http://git.kernel.org")
 
     var funcSet = Set[String]()
-    if (tag == null || tag.isEmpty()) {
-      funcSet += "NA"
-    }
-    else if (github != null || !github.isEmpty) {
+    if (github != null && !github.isEmpty && github != "") {
       funcSet = funcSet ++ githubSet(github.attr("abs:href"))
     }
-    else if (github == null || github.isEmpty && gitkernel != null || !gitkernel.isEmpty) {
+    else if (github == null && github.isEmpty && github == "" || gitkernel != null && !gitkernel.isEmpty && gitkernel != "") {
       funcSet = funcSet ++ gitkernelSet(gitkernel.attr("abs:href"))
     }
+    else {
+      funcSet += "NA"
+    }
     funcSet
+//  println(funcSet)
   }
+
   def githubSet(url:String):Set[String] = {
     var gitSet = Set[String]()
     val lineList = new mutable.Queue[String]()
-    val gitDoc = Jsoup.connect(url).get()
-
+    val gitDoc = Jsoup.connect(url).timeout(0).get()
     //populate Queue
     val linegroup = gitDoc.select("tr td.blob-num.blob-num-addition.js-linkable-line-number").toArray
     for (td <- linegroup) {
@@ -67,7 +70,6 @@ class GitScraper(id:String, url:String){
 
       downloadFile(absLink, filename)
       val lineNumbers = getLineNumbers(lineNum)
-      println(lineNumbers)
 
       val findFunc = new funcFinder()
       val funcNames = findFunc.funcName(filename, lineNumbers)
@@ -79,13 +81,13 @@ class GitScraper(id:String, url:String){
 
   def gitkernelSet(url:String): Set[String] = {
     var kernelSet = Set[String]()
-    kernelSet += "KernelOnly" + "," + url
+    kernelSet += "KernelOnly"
     kernelcount = kernelcount + 1
     kernelSet
   }
 
   def downloadFile(url:String, filename:String) = {
-    val parser = Jsoup.connect(url).get()
+    val parser = Jsoup.connect(url).timeout(0).get()
     val header = parser.select("div.file-header a")
     val container = header.select("a:contains(Raw)").attr("abs:href")
     val weblink = new URL(container)

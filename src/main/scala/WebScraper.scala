@@ -40,7 +40,7 @@ object WebScraper extends App {
   }
 
   def parseURL(url: String):Document ={
-    val doc = Jsoup.connect(url).get()
+    val doc = Jsoup.connect(url).timeout(0).get()
     doc
   }
 
@@ -51,8 +51,9 @@ object WebScraper extends App {
     for (id <- CVEID){
       var list = List[String]()
       val trclass = v.select("tr.srrowns:contains("+ id + ")")
-      val parseList = tdParser(trclass)
+      val parseList = tdParser(id,trclass)
       combinedList = combinedList :+ parseList
+      println(id + " done.")
     }
     combinedList
   }
@@ -70,8 +71,11 @@ object WebScraper extends App {
     pageList
   }
 
-  private def tdParser(element: Elements) : String = {
+  private def tdParser(id:String, element: Elements) : String = {
     val html = element.html()
+    var gitList = List[String]()
+    val gitScraper = new GitScraper(id, "http://www.cvedetails.com/cve/" + id)
+    gitList = gitScraper.gitFuncGrabber().toList
     val splitByTd = html.split("</td>")
     var returnList = List[String]()
     for (n <- splitByTd) {
@@ -80,12 +84,14 @@ object WebScraper extends App {
       val replace = value.replaceAll("<(.*?)>", "").trim()
       returnList = returnList :+ replace.trim()
     }
+    returnList = returnList ++ gitList
     val combine = returnList.mkString("/")
     combine
   }
 
   def composeCSV(cvelist: List[String]){
     println("size " + cvelist.size)
+    println("writing complete.")
     val writer = new BufferedWriter(new FileWriter("cvelist.csv"))
     for (e <- cvelist){
       val changeTComma = e.replaceAll("/", ",")
