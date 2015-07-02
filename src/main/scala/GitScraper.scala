@@ -8,8 +8,11 @@ import scala.collection.mutable.{ArrayBuffer, ListBuffer}
 import scala.util.control.Breaks
 
 class GitScraper(id:String, url:String){
+//object GitScraper extends App{
   val CVEID = id
   val CVEURL = url
+//  val CVEID = "CVE-2010-4655"
+//  val CVEURL = "http://www.cvedetails.com/cve/" + CVEID
   var kernelcount = 0
 
   def gitFuncGrabber(): Set[String] = {
@@ -77,7 +80,49 @@ class GitScraper(id:String, url:String){
 
   def gitkernelSet(url:String): Set[String] = {
     var kernelSet = Set[String]()
-    kernelSet += "KernelOnly"
+    val doc = Jsoup.connect(url).timeout(0).get()
+    val hunk = doc.select("div.hunk").toArray()
+    for (e <- hunk){
+      val removeTag = e.toString
+      val line = removeTag.substring(removeTag.indexOf(">")+1, removeTag.lastIndexOf("<"))
+      val funcLine = line.substring(line.lastIndexOf("@")+1).trim()
+      if (funcLine.endsWith(":")){
+        kernelSet += funcLine
+      }
+      else if (funcLine.contains(")")){
+        val beforeBracket = funcLine.substring(0, funcLine.lastIndexOf("(")-1)
+        val func = beforeBracket.substring(beforeBracket.lastIndexOf(" ")+1)
+        kernelSet += func
+      }
+      else if (funcLine.contains("(") && !funcLine.contains(")")) {
+        val strip = funcLine
+        val string = strip.substring(0, strip.lastIndexOf("("))
+        println(string + " " + string.lastIndexOf(" "))
+        if (string.lastIndexOf(" ") == -1){
+          val func = string
+          kernelSet += func
+        }
+        else {
+          val func = string.substring(string.lastIndexOf(" "))
+          kernelSet += func
+
+        }
+      }
+      else if (funcLine.contains("{")){
+        val strip = funcLine
+        val string = strip.substring(0, strip.lastIndexOf("{"))
+        println(string + " " + string.lastIndexOf(" "))
+        if (string.lastIndexOf(" ") == -1){
+          val func = string
+          kernelSet += func
+        }
+        else {
+          val func = string.substring(string.lastIndexOf(" "))
+          kernelSet += func
+
+        }
+      }
+    }
     kernelcount = kernelcount + 1
     kernelSet
   }
