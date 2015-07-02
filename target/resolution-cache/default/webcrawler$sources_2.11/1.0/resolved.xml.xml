@@ -4,7 +4,7 @@
 		module="webcrawler$sources_2.11"
 		revision="1.0"
 		status="integration"
-		publication="20150618162717"
+		publication="20150701065240"
 	/>
 	<configurations>
 		<conf name="default" visibility="public" description=""/>
