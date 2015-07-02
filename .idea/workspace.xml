@@ -2,15 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="acb773f9-efdf-4ecf-8db7-f541f6c1ca6a" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/scala-2.11/classes/GitScraper$$anonfun$getLineNumbers$1.class" afterPath="$PROJECT_DIR$/target/scala-2.11/classes/GitScraper$$anonfun$getLineNumbers$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/scala-2.11/classes/GitScraper$$anonfun$githubSet$1.class" afterPath="$PROJECT_DIR$/target/scala-2.11/classes/GitScraper$$anonfun$githubSet$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/scala-2.11/classes/GitScraper$$anonfun$githubSet$2$$anonfun$apply$1$$anonfun$apply$mcV$sp$1.class" afterPath="$PROJECT_DIR$/target/scala-2.11/classes/GitScraper$$anonfun$githubSet$2$$anonfun$apply$1$$anonfun$apply$mcV$sp$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/scala-2.11/classes/GitScraper$$anonfun$githubSet$2$$anonfun$apply$1.class" afterPath="$PROJECT_DIR$/target/scala-2.11/classes/GitScraper$$anonfun$githubSet$2$$anonfun$apply$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/scala-2.11/classes/GitScraper$$anonfun$githubSet$2.class" afterPath="$PROJECT_DIR$/target/scala-2.11/classes/GitScraper$$anonfun$githubSet$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/scala-2.11/classes/GitScraper.class" afterPath="$PROJECT_DIR$/target/scala-2.11/classes/GitScraper.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/GitScraper.scala" afterPath="$PROJECT_DIR$/src/main/scala/GitScraper.scala" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cvelist.csv" afterPath="$PROJECT_DIR$/cvelist.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="WebCrawler.iws" />
     <ignored path=".idea/workspace.xml" />
