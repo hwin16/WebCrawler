@@ -500,14 +500,14 @@ CVE-2010-4175,189,,DoS Overflow Mem. Corr.,2011-01-10,2012-03-19,4.9,None,Local,
 CVE-2010-4164,189,,DoS,2011-01-03,2012-03-19,7.8,None,Remote,Low,Not required,None,None,Complete, x25_parse_facilities
 CVE-2010-4163,399,,DoS,2011-01-03,2012-03-19,4.7,None,Local,Medium,Not required,None,None,Complete, blk_rq_map_user_iov
 CVE-2010-4162,189,,DoS Overflow,2011-01-03,2012-03-19,4.7,None,Local,Medium,Not required,None,None,Complete, *bio_copy_user_iov, *__bio_map_user_iov
-CVE-2010-4160,189,,DoS Overflow +Priv Mem. Corr.,2011-01-07,2013-01-21,6.9,None,Local,Medium,Not required,Complete,Complete,Complete, csum_partial_copy_fromiovecend, iov_from_user_compat_to_kern, verify_iovec
+CVE-2010-4160,189,,DoS Overflow +Priv Mem. Corr.,2011-01-07,2013-01-21,6.9,None,Local,Medium,Not required,Complete,Complete,Complete, csum_partial_copy_fromiovecend, iov_from_user_compat_to_kern,NA, verify_iovec
 CVE-2010-3877,200,,+Info,2011-01-03,2012-03-19,1.9,None,Local,Medium,Not required,Partial,None,None, get_name
 CVE-2010-3876,200,,+Info,2011-01-03,2012-03-19,1.9,None,Local,Medium,Not required,Partial,None,None, packet_getname_spkt, packet_getname
 CVE-2010-3875,200,,+Info,2011-01-03,2012-03-19,1.9,None,Local,Medium,Not required,Partial,None,None, ax25_getname
 CVE-2010-3873,399,,DoS Mem. Corr.,2011-01-03,2013-06-20,7.8,None,Remote,Low,Not required,None,None,Complete, x25_parse_facilities, x25_state1_machine
 CVE-2010-3865,189,,DoS Exec Code Overflow,2011-01-10,2011-10-25,7.2,None,Local,Low,Not required,Complete,Complete,Complete,NA
-CVE-2010-3448,264,,DoS,2011-01-03,2012-03-19,4.0,None,Local,High,Not required,None,None,Complete,LCD, CRT or DVI (if available). The following commands are available:,video_rea,video_writ, ,ibm_ini
-CVE-2010-3086,,,DoS,2011-01-14,2012-03-19,4.9,None,Local,Low,Not required,None,None,Complete,futex_atomic_op_inuse,futex_atomic_cmpxchg_inatomi
+CVE-2010-3448,264,,DoS,2011-01-03,2012-03-19,4.0,None,Local,High,Not required,None,None,Complete,LCD, CRT or DVI (if available). The following commands are available:,video_rea,NA,video_writ, ,ibm_ini
+CVE-2010-3086,,,DoS,2011-01-14,2012-03-19,4.9,None,Local,Low,Not required,None,None,Complete,NA,futex_atomic_op_inuse,futex_atomic_cmpxchg_inatomi
 CVE-2011-2928,20,,DoS,2011-08-29,2012-03-22,4.9,None,Local,Low,Not required,None,None,Complete,befs_follow_lin
 CVE-2011-2723,399,,DoS,2011-09-06,2012-03-19,5.7,None,Local Network,Medium,Not required,None,None,Complete,skb_gro_header_har
 CVE-2011-2700,119,,DoS Overflow,2011-09-06,2012-03-19,2.1,None,Local,Low,Not required,None,None,Partial, si4713_write_econtrol_string
@@ -541,16 +541,16 @@ CVE-2011-1172,200,,+Info,2011-06-22,2015-05-05,2.1,None,Local,Low,Not required,P
 CVE-2011-1171,200,,+Info,2011-06-22,2015-05-05,2.1,None,Local,Low,Not required,Partial,None,None,do_replac,compat_do_replac,do_ipt_get_ct
 CVE-2011-1170,200,,+Info,2011-06-22,2015-05-05,2.1,None,Local,Low,Not required,Partial,None,None, do_replace, compat_do_replace, do_arpt_get_ctl
 CVE-2011-1169,20,,DoS +Priv Mem. Corr.,2011-05-03,2012-04-27,6.9,None,Local,Medium,Not required,Complete,Complete,Complete
-CVE-2011-1163,20,,+Info,2011-04-09,2015-05-11,2.1,None,Local,Low,Not required,Partial,None,None,osf_partitio
+CVE-2011-1163,20,,+Info,2011-04-09,2015-05-11,2.1,None,Local,Low,Not required,Partial,None,None,NA,osf_partitio
 CVE-2011-1093,,,DoS,2011-07-18,2015-05-05,7.8,None,Remote,Low,Not required,None,None,Complete, dccp_rcv_state_process
-CVE-2011-1090,399,,DoS,2011-05-09,2015-05-11,4.9,None,Local,Low,Not required,None,None,Complete, buf_to_pages, __nfs4_proc_set_acl
+CVE-2011-1090,399,,DoS,2011-05-09,2015-05-11,4.9,None,Local,Low,Not required,None,None,Complete,NA, buf_to_pages, __nfs4_proc_set_acl
 CVE-2011-1083,399,,DoS,2011-04-04,2013-02-14,4.9,None,Local,Low,Not required,None,None,Complete,NA
-CVE-2011-1082,399,,DoS,2011-04-04,2012-03-19,4.9,None,Local,Low,Not required,None,None,Complete,retry:,SYSCALL_DEFINE4,eventpoll_ini
-CVE-2011-1076,,,DoS,2011-10-04,2012-05-14,7.8,None,Remote,Low,Not required,None,None,Complete,implemented in the module can be called after doing:,dns_resolver_instantiat,dns_resolver_describ, 
+CVE-2011-1082,399,,DoS,2011-04-04,2012-03-19,4.9,None,Local,Low,Not required,None,None,Complete,NA,retry:,SYSCALL_DEFINE4,eventpoll_ini
+CVE-2011-1076,,,DoS,2011-10-04,2012-05-14,7.8,None,Remote,Low,Not required,None,None,Complete,implemented in the module can be called after doing:,NA, ,dns_resolver_describ,dns_resolver_instantiat
 CVE-2011-1044,119,,Overflow +Info,2011-02-18,2014-01-13,1.9,None,Local,Medium,Not required,Partial,None,None,out:
 CVE-2011-1020,264,,DoS +Info,2011-02-28,2012-03-19,2.1,None,Local,Low,Not required,Partial,None,None,NA
 CVE-2011-1017,119,,Overflow +Priv +Info,2011-03-01,2012-03-19,7.2,None,Local,Low,Not required,Complete,Complete,Complete,NA
-CVE-2011-1016,20,,,2011-02-28,2012-03-19,6.9,None,Local,Medium,Not required,Complete,Complete,Complete,r100_cs_track_chec, r100_cs_track_clear, , r300_packet0_check
+CVE-2011-1016,20,,,2011-02-28,2012-03-19,6.9,None,Local,Medium,Not required,Complete,Complete,Complete,NA, r300_packet0_check, , r100_cs_track_clear,r100_cs_track_chec
 CVE-2011-1013,189,,DoS,2011-05-09,2012-03-19,7.2,None,Local,Low,Not required,Complete,Complete,Complete, drm_modeset_ctl, 
 CVE-2011-1012,20,,DoS,2011-03-01,2012-03-19,4.9,None,Local,Low,Not required,None,None,Complete,ldm_parse_vmdb
 CVE-2011-1010,119,,DoS Overflow,2011-03-01,2013-01-21,4.9,None,Local,Low,Not required,None,None,Complete,mac_fix_strin,mac_partitio
@@ -563,11 +563,11 @@ CVE-2010-0623,20,,DoS,2010-02-15,2012-03-19,4.9,None,Local,Low,Not required,None
 CVE-2010-0622,,,DoS,2010-02-15,2012-03-19,2.1,None,Local,Low,Not required,None,None,Partial,wake_futex_p
 CVE-2010-0437,,,DoS,2010-03-24,2012-03-19,7.8,None,Remote,Low,Not required,None,None,Complete, ip6_dst_lookup_tail
 CVE-2010-0415,,,DoS,2010-02-17,2012-03-19,4.6,None,Local,Low,Not required,Partial,Partial,Partial, do_pages_move
-CVE-2010-0410,399,,DoS,2010-02-22,2012-03-19,4.9,None,Local,Low,Not required,None,None,Complete,cn_rx_sk, cn_add_callback,cn_fin, ,MODULE_LICENS,cn_del_callbac,cn_ini
+CVE-2010-0410,399,,DoS,2010-02-22,2012-03-19,4.9,None,Local,Low,Not required,None,None,Complete,cn_rx_sk,NA, cn_add_callback,cn_fin, ,MODULE_LICENS,cn_del_callbac,cn_ini
 CVE-2010-0307,,,DoS,2010-02-17,2012-03-19,4.7,None,Local,Medium,Not required,None,None,Complete, load_flat_file,load_elf_binar,exit_threa,load_som_binar, ,flush_old_exe, load_elf_fdpic_binary,load_aout_binar,set_task_com,prepare_binpr
 CVE-2010-0298,264,,DoS +Priv,2010-02-12,2012-03-19,6.5,None,Remote,Low,Single system,Partial,Partial,Partial,NA
-CVE-2010-0291,264,,DoS +Priv,2010-02-15,2012-03-19,4.6,None,Local,Low,Not required,Partial,Partial,Partial, arch_get_unmapped_area,arch_pick_mmap_layou,sys_call_table:,sys_call_table32:
-CVE-2010-0008,399,,DoS,2010-03-19,2012-03-19,7.8,None,Remote,Low,Not required,None,None,Complete, sctp_sf_violation_ctsn, sctp_sf_abort_violation, sctp_sf_discard_chunk, sctp_sf_do_5_1C_ack, , sctp_stop_t1_and_abort, sctp_sf_violation_chunklen, sctp_sf_do_4_C, sctp_sf_ootb, sctp_sf_violation, sctp_sf_eat_sack_6_2, sctp_sf_shut_8_4_5, *sctp_sm_lookup_event, sctp_sf_do_5_1D_ce, sctp_sf_do_8_5_1_E_sa, sctp_sf_do_9_2_reshutack
+CVE-2010-0291,264,,DoS +Priv,2010-02-15,2012-03-19,4.6,None,Local,Low,Not required,Partial,Partial,Partial,NA,sys_call_table:,sys_call_table32:, arch_get_unmapped_area,arch_pick_mmap_layou
+CVE-2010-0008,399,,DoS,2010-03-19,2012-03-19,7.8,None,Remote,Low,Not required,None,None,Complete, sctp_sf_violation_ctsn,NA, sctp_sf_abort_violation, sctp_sf_discard_chunk, sctp_sf_do_5_1C_ack, , sctp_stop_t1_and_abort, sctp_sf_violation_chunklen, sctp_sf_do_4_C, sctp_sf_ootb, sctp_sf_violation, sctp_sf_eat_sack_6_2, sctp_sf_shut_8_4_5, *sctp_sm_lookup_event, sctp_sf_do_5_1D_ce, sctp_sf_do_8_5_1_E_sa, sctp_sf_do_9_2_reshutack
 CVE-2010-0007,264,,Bypass,2010-01-19,2012-03-19,2.1,None,Local,Low,Not required,None,Partial,None, do_ebt_set_ctl,do_ebt_get_ct
 CVE-2010-0006,20,,DoS,2010-01-26,2012-03-19,7.1,None,Remote,Medium,Not required,None,None,Complete,*ipv6_skb_ide,ipv6_hop_r
 CVE-2010-0003,200,,DoS +Info,2010-01-26,2012-03-19,5.4,None,Local,Medium,Not required,Partial,None,Complete,print_fatal_signa
@@ -589,7 +589,7 @@ CVE-2010-3015,189,,DoS Overflow,2010-08-20,2012-03-19,4.7,None,Local,Medium,Not 
 CVE-2010-2963,20,,+Priv,2010-11-26,2012-03-19,6.2,None,Local,High,Not required,Complete,Complete,Complete, put_video_window32, do_video_ioctl
 CVE-2010-2962,20,,+Priv,2010-11-26,2012-03-19,7.2,None,Local,Low,Not required,Complete,Complete,Complete,i915_gem_pread_ioctl,i915_gem_gtt_pwrite_fast,i915_gem_pwrite_ioctl
 CVE-2010-2960,,,DoS,2010-09-08,2012-03-19,7.2,None,Local,Low,Not required,Complete,Complete,Complete,NA
-CVE-2010-2959,189,,DoS Exec Code Overflow,2010-09-08,2012-03-19,7.2,None,Local,Low,Not required,Complete,Complete,Complete, bcm_send_to_user, bcm_tx_setup,bcm_proc_sho,bcm_rx_handle, , bcm_rx_setup,bcm_rx_thr_flus,bcm_rx_timeout_handle,rx_changed_settime:
+CVE-2010-2959,189,,DoS Exec Code Overflow,2010-09-08,2012-03-19,7.2,None,Local,Low,Not required,Complete,Complete,Complete, bcm_send_to_user, bcm_tx_setup,bcm_proc_sho,NA,bcm_rx_handle, , bcm_rx_setup,bcm_rx_thr_flus,bcm_rx_timeout_handle,rx_changed_settime:
 CVE-2010-2955,189,,+Info,2010-09-08,2012-03-19,3.3,None,Local Network,Low,Not required,Partial,None,None
 CVE-2010-2954,399,,DoS,2010-09-03,2012-03-19,4.9,None,Local,Low,Not required,None,None,Complete
 CVE-2010-2946,20,,Bypass,2010-09-29,2012-03-19,2.1,None,Local,Low,Not required,None,Partial,None, , can_set_xattr, __jfs_getxattr, jfs_getxattr
@@ -601,10 +601,10 @@ CVE-2010-2798,189,,DoS,2010-09-08,2012-03-19,7.2,None,Local,Low,Not required,Com
 CVE-2010-2653,362,,DoS,2010-10-05,2012-03-19,6.9,None,Local,Medium,Not required,Complete,Complete,Complete,hvc_clos
 CVE-2010-2538,189,,Overflow +Info,2010-09-30,2012-03-19,4.7,None,Local,Medium,Not required,Complete,None,None, btrfs_ioctl_clone
 CVE-2010-2537,264,,,2010-09-30,2012-03-19,6.3,None,Local,Medium,Not required,None,Complete,Complete, btrfs_ioctl_clone
-CVE-2010-2524,,,,2010-09-08,2012-03-19,4.4,None,Local,Medium,Not required,Partial,Partial,Partial,dns_resolve_server_name_to_i, ,out:,exit_cif,init_cif
+CVE-2010-2524,,,,2010-09-08,2012-03-19,4.4,None,Local,Medium,Not required,Partial,Partial,Partial,dns_resolve_server_name_to_i,NA, ,out:,exit_cif,init_cif
 CVE-2010-2521,119,,DoS Exec Code Overflow,2010-09-07,2012-03-19,10.0,None,Remote,Low,Not required,Complete,Complete,Complete,*read_bu,nfsd4_decode_compoun
 CVE-2010-2495,20,,DoS,2010-09-08,2012-03-19,10.0,None,Remote,Low,Not required,Complete,Complete,Complete,pppol2tp_xmi
-CVE-2010-2492,119,,DoS Overflow +Priv,2010-09-08,2012-03-19,7.2,None,Local,Low,Not required,Complete,Complete,Complete,ecryptfs_init_messagin,ecryptfs_release_messagin
+CVE-2010-2492,119,,DoS Overflow +Priv,2010-09-08,2012-03-19,7.2,None,Local,Low,Not required,Complete,Complete,Complete,NA,ecryptfs_init_messagin,ecryptfs_release_messagin
 CVE-2010-2478,189,,DoS Overflow,2010-09-29,2012-03-19,7.2,None,Local,Low,Not required,Complete,Complete,Complete, ethtool_get_rxnfc
 CVE-2010-2248,20,,DoS,2010-09-07,2012-03-19,7.8,None,Remote,Low,Not required,None,None,Complete,CIFSSMBWrite,CIFSSMBWrite2
 CVE-2010-2240,94,,Exec Code,2010-09-03,2012-03-19,7.2,Admin,Local,Low,Not required,Complete,Complete,Complete,out_release:, do_anonymous_page
@@ -651,9 +651,9 @@ CVE-2010-4081,200,,+Info,2010-11-30,2013-08-06,1.9,None,Local,Medium,Not require
 CVE-2010-4080,200,,+Info,2010-11-30,2012-03-19,1.9,None,Local,Medium,Not required,Partial,None,None, snd_hdsp_hwdep_ioctl, snd_hdspm_hwdep_ioctl
 CVE-2010-4079,200,,+Info,2010-11-29,2012-03-19,1.9,None,Local,Medium,Not required,Partial,None,None, ivtvfb_ioctl
 CVE-2010-4078,200,,+Info,2010-11-29,2012-03-19,1.9,None,Local,Medium,Not required,Partial,None,None, sisfb_ioctl
-CVE-2010-4077,200,,+Info,2010-11-29,2012-03-19,1.9,None,Local,Medium,Not required,Partial,None,None, uart_get_count,uart_wait_modem_statu, tty_tiocmset, serial_tiocmset,tty_ioct, ,uart_ioctl
-CVE-2010-4076,200,,+Info,2010-11-29,2012-03-19,1.9,None,Local,Medium,Not required,Partial,None,None, uart_get_count,uart_wait_modem_statu, tty_tiocmset, serial_tiocmset,tty_ioct, ,uart_ioctl
-CVE-2010-4075,200,,+Info,2010-11-29,2012-03-19,1.9,None,Local,Medium,Not required,Partial,None,None, uart_get_count,uart_wait_modem_statu, tty_tiocmset, serial_tiocmset,tty_ioct, ,uart_ioctl
+CVE-2010-4077,200,,+Info,2010-11-29,2012-03-19,1.9,None,Local,Medium,Not required,Partial,None,None, uart_get_count,uart_wait_modem_statu,NA, tty_tiocmset, serial_tiocmset,tty_ioct, ,uart_ioctl
+CVE-2010-4076,200,,+Info,2010-11-29,2012-03-19,1.9,None,Local,Medium,Not required,Partial,None,None, uart_get_count,uart_wait_modem_statu,NA, tty_tiocmset, serial_tiocmset,tty_ioct, ,uart_ioctl
+CVE-2010-4075,200,,+Info,2010-11-29,2012-03-19,1.9,None,Local,Medium,Not required,Partial,None,None, uart_get_count,uart_wait_modem_statu,NA, tty_tiocmset, serial_tiocmset,tty_ioct, ,uart_ioctl
 CVE-2010-4074,200,,+Info,2010-11-29,2012-03-19,1.9,None,Local,Medium,Not required,Partial,None,None, mos7720_ioctl, mos7840_ioctl
 CVE-2010-4073,200,,+Info,2010-11-29,2012-03-19,1.9,None,Local,Medium,Not required,Partial,None,None, compat_sys_mq_getsetattr, compat_sys_mq_open,compat_sys_msgct,compat_sys_semct,compat_sys_shmct
 CVE-2010-4072,200,,+Info,2010-11-29,2012-03-19,1.9,None,Local,Medium,Not required,Partial,None,None, copy_shmid_to_user
@@ -662,11 +662,11 @@ CVE-2010-3881,200,,+Info,2010-12-23,2012-03-19,1.9,None,Local,Medium,Not require
 CVE-2010-3880,399,,DoS,2010-12-10,2012-03-19,4.9,None,Local,Low,Not required,None,None,Complete, inet_csk_diag_dump, inet_twsk_diag_dump, inet_diag_dump_reqs
 CVE-2010-3874,119,,DoS Overflow Mem. Corr.,2010-12-29,2012-03-19,4.0,None,Local,High,Not required,None,None,Complete, 
 CVE-2010-3861,200,,+Info,2010-12-10,2012-03-19,2.1,None,Local,Low,Not required,Partial,None,None, ethtool_get_rxnfc
-CVE-2010-3859,189,,Overflow +Priv,2010-12-29,2013-08-21,6.9,None,Local,Medium,Not required,Complete,Complete,Complete, csum_partial_copy_fromiovecend, iov_from_user_compat_to_kern, verify_iovec
+CVE-2010-3859,189,,Overflow +Priv,2010-12-29,2013-08-21,6.9,None,Local,Medium,Not required,Complete,Complete,Complete, csum_partial_copy_fromiovecend, iov_from_user_compat_to_kern,NA, verify_iovec
 CVE-2010-3858,399,1,DoS,2010-11-30,2012-03-19,4.9,None,Local,Low,Not required,None,None,Complete, setup_arg_pages
 CVE-2010-3850,264,,Bypass,2010-12-30,2012-03-19,4.9,None,Local,Low,Not required,None,Complete,None,ec_dev_ioct
 CVE-2010-3849,399,,DoS,2010-12-30,2012-03-19,4.7,None,Local,Medium,Not required,None,None,Complete, econet_sendmsg
-CVE-2010-3848,119,,Overflow +Priv,2010-12-30,2012-03-19,6.9,None,Local,Medium,Not required,Complete,Complete,Complete, econet_sendmsg
+CVE-2010-3848,119,,Overflow +Priv,2010-12-30,2012-03-19,6.9,None,Local,Medium,Not required,Complete,Complete,Complete,NA, econet_sendmsg
 CVE-2010-3705,20,,DoS Mem. Corr.,2010-11-26,2012-03-19,8.3,None,Local Network,Low,Not required,Complete,Complete,Complete
 CVE-2010-3698,399,,DoS,2010-11-26,2012-03-19,4.6,None,Local,Low,Single system,None,None,Complete,vmx_vcpu_setu,vmx_save_host_stat,kvm_read_ld,svm_vcpu_ru,*page_heade
 CVE-2010-3477,399,,+Info,2010-09-21,2012-03-19,2.1,None,Local,Low,Not required,Partial,None,None
@@ -674,7 +674,7 @@ CVE-2010-3442,189,,DoS Overflow Mem. Corr.,2010-10-04,2012-03-19,4.7,None,Local,
 CVE-2010-3437,189,1,DoS +Info,2010-10-04,2012-03-19,6.6,None,Local,Low,Not required,Complete,None,Complete,pkt_release_de
 CVE-2010-3432,,,DoS,2010-11-22,2012-03-19,7.8,None,Remote,Low,Not required,None,None,Complete, *sctp_packet_config
 CVE-2010-3310,189,,DoS Mem. Corr.,2010-09-29,2012-03-19,1.9,None,Local,Medium,Not required,None,None,Partial
-CVE-2010-3301,,,+Priv,2010-09-22,2012-03-19,7.2,None,Local,Low,Not required,Complete,Complete,Complete
+CVE-2010-3301,,,+Priv,2010-09-22,2012-03-19,7.2,None,Local,Low,Not required,Complete,Complete,Complete,NA
 CVE-2010-3298,200,,+Info,2010-09-30,2012-03-19,4.9,None,Local,Low,Not required,Complete,None,None
 CVE-2010-3297,200,,+Info,2010-09-30,2012-03-19,2.1,None,Local,Low,Not required,Partial,None,None
 CVE-2010-3296,200,,+Info,2010-09-30,2012-03-19,4.9,None,Local,Low,Not required,Complete,None,None
@@ -704,7 +704,7 @@ CVE-2009-1633,119,,DoS Overflow Mem. Corr.,2009-05-28,2012-03-23,7.1,None,Remote
 CVE-2009-1630,264,,Bypass,2009-05-14,2012-04-12,4.4,None,Local,Medium,Not required,Partial,Partial,Partial,NA
 CVE-2009-1527,362,,+Priv,2009-05-05,2012-03-19,6.9,None,Local,Medium,Not required,Complete,Complete,Complete,ptrace_attac,repeat:
 CVE-2009-1439,119,,DoS Overflow,2009-04-27,2012-03-19,7.8,None,Remote,Low,Not required,None,None,Complete,the,CIFSTCon
-CVE-2009-1389,119,,DoS Overflow Mem. Corr.,2009-06-16,2012-03-19,7.8,None,Remote,Low,Not required,None,None,Complete,rtl_rw_cpluscm,rtl_hw_start_816,rtl_hw_start_810
+CVE-2009-1389,119,,DoS Overflow Mem. Corr.,2009-06-16,2012-03-19,7.8,None,Remote,Low,Not required,None,None,Complete,NA,rtl_rw_cpluscm,rtl_hw_start_816,rtl_hw_start_810
 CVE-2009-1388,362,,DoS,2009-07-05,2012-03-19,4.9,None,Local,Low,Not required,None,None,Complete,NA
 CVE-2009-1385,189,,DoS,2009-06-04,2012-03-19,7.8,None,Remote,Low,Not required,None,None,Complete, e1000_clean_rx_irq
 CVE-2009-1360,,,DoS,2009-04-22,2012-03-19,7.1,None,Remote,Medium,Not required,None,None,Complete,unique:
@@ -765,9 +765,9 @@ CVE-2009-3620,20,,DoS +Priv,2009-10-22,2012-03-19,4.9,None,Local,Low,Not require
 CVE-2009-3613,399,,DoS,2009-10-19,2012-03-19,7.8,None,Remote,Low,Not required,None,None,Complete,rtl8169_start_xmi,out:
 CVE-2009-3612,200,,+Info,2009-10-19,2012-03-19,4.9,None,Local,Low,Not required,Complete,None,None, tcf_fill_node
 CVE-2009-3547,362,,DoS +Priv,2009-11-04,2013-08-20,6.9,None,Local,Medium,Not required,Complete,Complete,Complete,pipe_rdwr_releas
-CVE-2009-3290,399,,DoS,2009-09-22,2012-03-19,7.2,None,Local,Low,Not required,Complete,Complete,Complete,kvm_emulate_hypercal
+CVE-2009-3290,399,,DoS,2009-09-22,2012-03-19,7.2,None,Local,Low,Not required,Complete,Complete,Complete,kvm_emulate_hypercal,NA
 CVE-2009-3288,119,,DoS Overflow,2009-09-22,2011-09-14,4.9,None,Local,Low,Not required,None,None,Complete,NA
-CVE-2009-3286,264,,+Priv,2009-09-22,2012-03-19,4.6,None,Local,Low,Not required,Partial,Partial,Partial,nfsd3_proc_create,do_open_lookup,nfsd_create_v3,nfsd_acces
+CVE-2009-3286,264,,+Priv,2009-09-22,2012-03-19,4.6,None,Local,Low,Not required,Partial,Partial,Partial,NA,nfsd_create_v3,nfsd3_proc_create,nfsd_acces,do_open_lookup
 CVE-2009-3280,119,,DoS Overflow,2009-09-21,2012-03-19,7.8,None,Remote,Low,Not required,None,None,Complete,cfg80211_bss_expir
 CVE-2009-3238,310,,,2009-09-18,2012-03-19,7.8,None,Remote,Low,Not required,Complete,None,None,EXPORT_SYMBO
 CVE-2009-3234,119,,DoS Exec Code Overflow,2009-09-17,2012-03-19,4.9,None,Local,Low,Not required,None,None,Complete,NA
@@ -792,7 +792,7 @@ CVE-2008-2136,399,,DoS,2008-05-16,2012-03-19,7.8,None,Remote,Low,Not required,No
 CVE-2008-1675,399,,,2008-05-02,2012-03-26,7.2,None,Local,Low,Not required,Complete,Complete,Complete,NA
 CVE-2008-1673,119,,DoS Exec Code Overflow,2008-06-09,2012-11-26,10.0,None,Remote,Low,Not required,Complete,Complete,Complete, asn1_length_decode,asn1_length_decod,asn1_oid_decode, asn1_header_decode, asn1_oid_decode,asn1_header_decode
 CVE-2008-1669,94,,Exec Code,2008-05-07,2012-11-26,6.9,Admin,Local,Medium,Not required,Complete,Complete,Complete,NA
-CVE-2008-1514,399,,DoS,2008-03-25,2012-10-29,4.9,None,Local,Low,Not required,None,None,Complete,__peek_use,__poke_use,__peek_user_compa, __poke_user_compat
+CVE-2008-1514,399,,DoS,2008-03-25,2012-10-29,4.9,None,Local,Low,Not required,None,None,Complete,NA, __poke_user_compat,__peek_use,__poke_use,__peek_user_compa
 CVE-2008-1375,362,,DoS +Priv,2008-05-02,2012-03-19,6.9,Admin,Local,Medium,Not required,Complete,Complete,Complete,NA
 CVE-2008-1294,399,,Bypass,2008-05-02,2010-08-21,2.1,None,Local,Low,Not required,None,None,Partial,sys_setrlimi
 CVE-2008-0600,94,1,+Priv,2008-02-12,2012-03-19,7.2,Admin,Local,Low,Not required,Complete,Complete,Complete,NA
@@ -883,12 +883,12 @@ CVE-2007-5093,399,,DoS,2007-09-26,2010-08-21,4.0,None,Local,High,Not required,No
 CVE-2007-5087,264,,DoS,2007-09-26,2008-11-15,4.9,None,Local,Low,Not required,None,None,Complete
 CVE-2007-4997,189,,DoS,2007-11-06,2010-08-21,7.1,None,Remote,Medium,Not required,None,None,Complete, ieee80211_rx
 CVE-2007-4573,264,,+Priv,2007-09-24,2010-08-21,7.2,Admin,Local,Low,Not required,Complete,Complete,Complete,NA
-CVE-2007-4571,,,+Info,2007-09-26,2010-08-21,2.1,None,Local,Low,Not required,Partial,None,None,free_all_reserved_page, snd_mem_proc_write,snd_mem_ini
+CVE-2007-4571,,,+Info,2007-09-26,2010-08-21,2.1,None,Local,Low,Not required,Partial,None,None,NA,free_all_reserved_page, snd_mem_proc_write,snd_mem_ini
 CVE-2007-4567,20,,DoS,2007-12-20,2012-03-19,7.8,None,Remote,Low,Not required,None,None,Complete,EXPORT_SYMBOL_GP,ipv6_hop_jumb
 CVE-2007-4311,310,,,2007-08-13,2011-05-25,6.8,None,Remote,Medium,Not required,Partial,Partial,Partial
 CVE-2007-4133,,,DoS,2007-10-04,2010-08-21,4.7,None,Local,Medium,Not required,None,None,Complete,NA
 CVE-2007-3851,399,,+Priv,2007-08-13,2013-07-13,6.0,None,Local,High,Single system,Complete,Complete,Complete,NA
-CVE-2007-3850,200,,+Info,2007-10-23,2010-08-21,1.9,None,Local,Medium,Not required,Partial,None,None,END_FTR_SECTIO,hash_page_do_lazy_icach,hash_pag, hash_preload
+CVE-2007-3850,200,,+Info,2007-10-23,2010-08-21,1.9,None,Local,Medium,Not required,Partial,None,None,NA, hash_preload,hash_pag,hash_page_do_lazy_icach,END_FTR_SECTIO
 CVE-2007-3848,,,,2007-08-14,2010-08-21,1.9,None,Local,Medium,Not required,None,None,Partial,NA
 CVE-2007-3843,,,,2007-08-09,2010-08-21,4.3,None,Remote,Medium,Not required,None,Partial,None,NA
 CVE-2007-3740,264,,+Priv,2007-09-13,2012-03-19,4.4,None,Local,Medium,Not required,Partial,Partial,Partial,NA
@@ -973,7 +973,7 @@ CVE-2006-6053,,,DoS,2006-11-21,2010-09-15,4.9,None,Local,Low,Not required,None,N
 CVE-2006-5871,,,,2006-12-11,2010-08-21,4.1,None,Local,Medium,Single system,Partial,Partial,Partial,NA
 CVE-2006-5823,,,DoS Mem. Corr.,2006-11-09,2010-09-15,4.0,None,Local,High,Not required,None,None,Complete,NA
 CVE-2006-5757,,,DoS,2006-11-06,2010-09-15,1.2,None,Local,High,Not required,None,None,Partial,NA
-CVE-2006-5755,,,DoS,2006-12-31,2010-08-21,4.9,None,Local,Low,Not required,None,None,Complete,check_efe,cpu_init
+CVE-2006-5755,,,DoS,2006-12-31,2010-08-21,4.9,None,Local,Low,Not required,None,None,Complete,NA,check_efe,cpu_init
 CVE-2006-5751,,,Exec Code Overflow,2006-12-01,2010-09-15,7.2,Admin,Local,Low,Not required,Complete,Complete,Complete,NA
 CVE-2006-5749,,,,2006-12-31,2010-09-15,1.7,None,Local,Low,Single system,None,None,Partial,NA
 CVE-2006-5701,,,DoS,2006-11-03,2010-09-15,4.9,None,Local,Low,Not required,None,None,Complete,NA

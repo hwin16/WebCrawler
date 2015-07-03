@@ -97,7 +97,6 @@ class GitScraper(id:String, url:String){
       else if (funcLine.contains("(") && !funcLine.contains(")")) {
         val strip = funcLine
         val string = strip.substring(0, strip.lastIndexOf("("))
-        println(string + " " + string.lastIndexOf(" "))
         if (string.lastIndexOf(" ") == -1){
           val func = string
           kernelSet += func
@@ -111,7 +110,6 @@ class GitScraper(id:String, url:String){
       else if (funcLine.contains("{")){
         val strip = funcLine
         val string = strip.substring(0, strip.lastIndexOf("{"))
-        println(string + " " + string.lastIndexOf(" "))
         if (string.lastIndexOf(" ") == -1){
           val func = string
           kernelSet += func
@@ -121,6 +119,9 @@ class GitScraper(id:String, url:String){
           kernelSet += func
 
         }
+      }
+      else{
+        kernelSet += "NA"
       }
     }
     kernelcount = kernelcount + 1
