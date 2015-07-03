@@ -72,7 +72,12 @@ class GitScraper(id:String, url:String){
 
       val findFunc = new funcFinder()
       val funcNames = findFunc.funcName(filename, lineNumbers)
-      gitSet = gitSet ++ funcNames
+      if (!funcNames.isEmpty) {
+        gitSet = gitSet ++ funcNames
+      }
+      else {
+        gitSet = gitSet ++ Set("NA")
+      }
       val cmd = Seq("rm", filename, filename + ".xml").!!
     }
     gitSet

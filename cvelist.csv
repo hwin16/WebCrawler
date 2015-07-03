@@ -1,18 +1,18 @@
 CVE-2015-4004,119,,DoS Overflow +Info,2015-06-07,2015-06-08,8.5,None,Remote,Low,Not required,Partial,None,Complete,NA
 CVE-2015-4003,189,,DoS,2015-06-07,2015-06-08,7.8,None,Remote,Low,Not required,None,None,Complete,oz_usb_handle_ep_data
 CVE-2015-4002,119,,DoS Exec Code Overflow,2015-06-07,2015-06-08,9.0,None,Remote,Low,Not required,Partial,Partial,Complete,oz_usb_rx
-CVE-2015-4001,189,,DoS Exec Code,2015-06-07,2015-06-08,9.0,None,Remote,Low,Not required,Partial,Partial,Complete,oz_hcd_get_desc_cnf
+CVE-2015-4001,189,,DoS Exec Code,2015-06-07,2015-06-08,9.0,None,Remote,Low,Not required,Partial,Partial,Complete,oz_hcd_get_desc_cnf,NA
 CVE-2015-3339,362,,+Priv,2015-05-27,2015-06-30,6.2,None,Local,High,Not required,Complete,Complete,Complete,bprm_fill_uid,prepare_binprm
 CVE-2015-3332,399,,DoS,2015-05-27,2015-06-03,4.9,None,Local,Low,Not required,None,None,Complete,NA
 CVE-2015-3331,119,,DoS Exec Code Overflow,2015-05-27,2015-06-03,9.3,None,Remote,Medium,Not required,Complete,Complete,Complete,__driver_rfc4106_decrypt
 CVE-2015-2922,17,,,2015-05-27,2015-06-30,3.3,None,Local Network,Low,Not required,None,None,Partial,ndisc_router_discovery
-CVE-2015-2830,264,,Bypass,2015-05-27,2015-06-30,1.9,None,Local,Medium,Not required,None,Partial,None
-CVE-2015-2666,119,,Overflow +Priv,2015-05-27,2015-05-27,6.9,None,Local,Medium,Not required,Complete,Complete,Complete
-CVE-2015-2042,17,,+Info,2015-04-21,2015-06-03,4.6,None,Local,Low,Not required,Partial,Partial,Partial
-CVE-2015-2041,17,,+Info,2015-04-21,2015-06-03,4.6,None,Local,Low,Not required,Partial,Partial,Partial
+CVE-2015-2830,264,,Bypass,2015-05-27,2015-06-30,1.9,None,Local,Medium,Not required,None,Partial,None,NA
+CVE-2015-2666,119,,Overflow +Priv,2015-05-27,2015-05-27,6.9,None,Local,Medium,Not required,Complete,Complete,Complete,NA
+CVE-2015-2042,17,,+Info,2015-04-21,2015-06-03,4.6,None,Local,Low,Not required,Partial,Partial,Partial,NA
+CVE-2015-2041,17,,+Info,2015-04-21,2015-06-03,4.6,None,Local,Low,Not required,Partial,Partial,Partial,NA
 CVE-2015-1593,264,,Bypass,2015-03-16,2015-06-03,5.0,None,Remote,Low,Not required,Partial,None,None,stack_maxrandom_size,randomize_stack_top
-CVE-2015-1465,17,,DoS,2015-04-05,2015-04-09,7.8,None,Remote,Low,Not required,None,None,Complete,ip_forward,__mkroute_input,rt_fill_info
-CVE-2015-1421,,,DoS,2015-03-16,2015-05-13,10.0,None,Remote,Low,Not required,Complete,Complete,Complete
+CVE-2015-1465,17,,DoS,2015-04-05,2015-04-09,7.8,None,Remote,Low,Not required,None,None,Complete,NA,ip_forward,__mkroute_input,rt_fill_info
+CVE-2015-1421,,,DoS,2015-03-16,2015-05-13,10.0,None,Remote,Low,Not required,Complete,Complete,Complete,NA
 CVE-2015-1420,362,,Bypass,2015-03-16,2015-03-18,2.1,None,Local,Low,Not required,Partial,None,None,NA
 CVE-2015-1212,,,DoS,2015-02-06,2015-03-11,7.5,None,Remote,Low,Not required,Partial,Partial,Partial,NA
 CVE-2015-1211,264,,+Priv,2015-02-06,2015-03-11,7.5,None,Remote,Low,Not required,Partial,Partial,Partial,NA
@@ -20,28 +20,28 @@ CVE-2015-1210,264,,Bypass,2015-02-06,2015-03-11,5.0,None,Remote,Low,Not required
 CVE-2015-1209,,,DoS,2015-02-06,2015-03-11,7.5,None,Remote,Low,Not required,Partial,Partial,Partial,NA
 CVE-2015-0797,119,,DoS Exec Code Overflow,2015-05-14,2015-06-03,6.8,None,Remote,Medium,Not required,Partial,Partial,Partial,NA
 CVE-2015-0312,,,Exec Code,2015-01-28,2015-02-18,10.0,None,Remote,Low,Not required,Complete,Complete,Complete,NA
-CVE-2015-0274,19,,DoS +Priv,2015-03-16,2015-03-26,7.2,None,Local,Low,Not required,Complete,Complete,Complete,xfs_attr3_leaf_getvalue,xfs_attr3_leaf_list_int,xfs_attr_leaf_addname,xfs_attr_calc_size,xfs_attr3_leaf_add_work,xfs_attr_rmtval_set,xfs_attr3_leaf_flipflags,xfs_attr3_leaf_lookup_int,xfs_attr_rmtval_get,xfs_attr_node_addname,xfs_attr3_leaf_clearflag
+CVE-2015-0274,19,,DoS +Priv,2015-03-16,2015-03-26,7.2,None,Local,Low,Not required,Complete,Complete,Complete,xfs_attr3_leaf_getvalue,xfs_attr3_leaf_list_int,xfs_attr_leaf_addname,xfs_attr_calc_size,NA,xfs_attr3_leaf_add_work,xfs_attr_rmtval_set,xfs_attr3_leaf_flipflags,xfs_attr3_leaf_lookup_int,xfs_attr_rmtval_get,xfs_attr_node_addname,xfs_attr3_leaf_clearflag
 CVE-2015-0239,362,,DoS +Priv,2015-03-02,2015-03-25,4.7,None,Local,High,Not required,None,Partial,Complete,em_sysenter
-CVE-2014-9715,,,DoS,2015-05-27,2015-06-03,4.9,None,Local,Low,Not required,None,None,Complete
-CVE-2014-9710,362,,+Priv Bypass,2015-05-27,2015-05-27,6.9,None,Local,Medium,Not required,Complete,Complete,Complete,btrfs_search_slot,btrfs_match_dir_item_name,do_setxattr
-CVE-2014-9683,189,,DoS Overflow +Priv,2015-03-03,2015-03-26,3.6,None,Local,Low,Not required,None,Partial,Partial
-CVE-2014-9644,264,,,2015-03-02,2015-04-09,2.1,None,Local,Low,Not required,None,Partial,None,crypto_lookup_template
+CVE-2014-9715,,,DoS,2015-05-27,2015-06-03,4.9,None,Local,Low,Not required,None,None,Complete,NA
+CVE-2014-9710,362,,+Priv Bypass,2015-05-27,2015-05-27,6.9,None,Local,Medium,Not required,Complete,Complete,Complete,btrfs_search_slot,NA,btrfs_match_dir_item_name,do_setxattr
+CVE-2014-9683,189,,DoS Overflow +Priv,2015-03-03,2015-03-26,3.6,None,Local,Low,Not required,None,Partial,Partial,NA
+CVE-2014-9644,264,,,2015-03-02,2015-04-09,2.1,None,Local,Low,Not required,None,Partial,None,NA,crypto_lookup_template
 CVE-2014-9585,264,,Bypass,2015-01-09,2015-06-03,2.1,None,Local,Low,Not required,None,Partial,None
 CVE-2014-9584,20,,+Info,2015-01-09,2015-06-03,2.1,None,Local,Low,Not required,Partial,None,None,parse_rock_ridge_inode_internal
 CVE-2014-9529,362,,DoS Mem. Corr.,2015-01-09,2015-04-17,7.2,None,Local,Low,Not required,Complete,Complete,Complete,key_gc_unused_keys
 CVE-2014-9428,399,,DoS,2015-01-02,2015-04-17,7.8,None,Remote,Low,Not required,None,None,Complete,batadv_frag_merge_packets
 CVE-2014-8173,,,DoS,2015-03-16,2015-03-23,7.2,None,Local,Low,Not required,Complete,Complete,Complete,pmd_none_or_trans_huge_or_clear_bad
-CVE-2014-8172,17,,DoS,2015-03-16,2015-03-23,4.9,None,Local,Low,Not required,None,None,Complete
+CVE-2014-8172,17,,DoS,2015-03-16,2015-03-23,4.9,None,Local,Low,Not required,None,None,Complete,NA
 CVE-2014-8160,254,,Bypass,2015-03-02,2015-06-03,5.0,None,Remote,Low,Not required,None,Partial,None,nf_generic_should_process,generic_new
 CVE-2014-8159,264,,DoS +Priv,2015-03-16,2015-06-03,6.9,None,Local,Medium,Not required,Complete,Complete,Complete,NA
-CVE-2014-7822,264,,DoS,2015-03-16,2015-06-03,7.2,None,Local,Low,Not required,Complete,Complete,Complete,iter_file_splice_write
+CVE-2014-7822,264,,DoS,2015-03-16,2015-06-03,7.2,None,Local,Low,Not required,Complete,Complete,Complete,NA,iter_file_splice_write
 CVE-2014-6184,119,,Overflow +Priv,2015-02-21,2015-02-23,7.2,None,Local,Low,Not required,Complete,Complete,Complete,NA
 CVE-2014-5332,362,,+Priv,2015-02-06,2015-02-06,6.9,None,Local,Medium,Not required,Complete,Complete,Complete,NA
-CVE-2013-7421,264,,,2015-03-02,2015-04-09,2.1,None,Local,Low,Not required,None,Partial,None,ccm_init_mac,chksum_init,deflate_decompress,cbc_decrypt,ctr_crypt,lrw_twofish_setkey,fallback_blk_dec,ghash_flush,lrw_decrypt,crypto_ccm_encrypt_done,arc4_exit,crypto_gcm_init_crypt,fcrypt_setkey,__sha512_ssse3_update,key_schedule,blowfish_mod_init,__crc32c_intel_finup,nx842_mod_init,cast5_init,sha256_ssse3_final,ccm_setkey,crypto_is_test_larval,crypto_rfc3686_exit_tfm,__cbc_decrypt,cast6_fpu_end,crypto_find_alg
+CVE-2013-7421,264,,,2015-03-02,2015-04-09,2.1,None,Local,Low,Not required,None,Partial,None,ccm_init_mac,chksum_init,deflate_decompress,cbc_decrypt,ctr_crypt,lrw_twofish_setkey,NA,fallback_blk_dec,ghash_flush,lrw_decrypt,crypto_ccm_encrypt_done,arc4_exit,crypto_gcm_init_crypt,fcrypt_setkey,__sha512_ssse3_update,key_schedule,blowfish_mod_init,__crc32c_intel_finup,nx842_mod_init,cast5_init,sha256_ssse3_final,ccm_setkey,crypto_is_test_larval,crypto_rfc3686_exit_tfm,__cbc_decrypt,cast6_fpu_end,crypto_find_alg
 CVE-2014-1438,264,,DoS +Priv,2014-01-18,2014-03-16,4.7,None,Local,Medium,Not required,None,None,Complete,restore_fpu_checking
 CVE-2014-0206,,,+Info,2014-06-25,2014-08-01,2.1,None,Local,Low,Not required,Partial,None,None,aio_read_events_ring
 CVE-2014-0205,119,,DoS Overflow +Priv,2014-09-28,2014-11-18,6.9,None,Local,Medium,Not required,Complete,Complete,Complete,futex_wait,futex_wait_requeue_pi
-CVE-2014-0203,20,,DoS,2014-06-23,2014-07-24,4.9,None,Local,Low,Not required,None,None,Complete,__do_follow_link
+CVE-2014-0203,20,,DoS,2014-06-23,2014-07-24,4.9,None,Local,Low,Not required,None,None,Complete,__do_follow_link,NA
 CVE-2014-0196,362,,DoS +Priv Mem. Corr.,2014-05-07,2014-07-17,6.9,None,Local,Medium,Not required,Complete,Complete,Complete,n_tty_write
 CVE-2014-0181,264,,Bypass,2014-04-26,2015-06-03,2.1,None,Local,Low,Not required,None,Partial,None,NA
 CVE-2014-0155,20,,DoS,2014-04-14,2014-04-15,5.5,None,Local Network,Low,Single system,None,None,Complete,ioapic_servic
@@ -53,15 +53,15 @@ CVE-2014-0077,20,,DoS +Priv Mem. Corr.,2014-04-14,2014-07-17,5.5,None,Local Netw
 CVE-2014-0069,119,,DoS Overflow +Priv Mem. Corr. +Info,2014-02-28,2014-07-17,6.2,None,Local,High,Not required,Complete,Complete,Complete,cifs_iovec_write
 CVE-2014-0049,119,,Exec Code Overflow,2014-03-11,2014-03-11,7.4,None,Local Network,Medium,Single system,Complete,Complete,Complete,complete_emulated_mmio
 CVE-2014-0038,20,2,+Priv,2014-02-06,2014-03-05,6.9,None,Local,Medium,Not required,Complete,Complete,Complete,compat_sys_recvmmsg
-CVE-2013-7348,399,,DoS,2014-04-01,2014-04-01,4.6,None,Local,Low,Not required,Partial,Partial,Partial
+CVE-2013-7348,399,,DoS,2014-04-01,2014-04-01,4.6,None,Local,Low,Not required,Partial,Partial,Partial,NA
 CVE-2013-7339,399,,DoS,2014-03-24,2014-07-17,4.7,None,Local,Medium,Not required,None,None,Complete,rds_ib_laddr_check
 CVE-2013-7281,200,,+Info,2014-01-08,2014-03-16,4.9,None,Local,Low,Not required,Complete,None,None,udpv6_recvmsg,raw_recvmsg,pn_recvmsg,ping_recvmsg,rawv6_recvmsg,dgram_recvmsg,udp_recvmsg,l2tp_ip_recvmsg
-CVE-2013-7271,20,,+Info,2014-01-06,2014-03-16,4.9,None,Local,Low,Not required,Complete,None,None,hash_sendpage,vcc_insert_socket,atalk_search_socket,ax25_connect,rfcomm_sock_destruct,skcipher_wait_for_wmem,hash_recvmsg,rfcomm_get_sock_by_channel,ax25_ioctl
-CVE-2013-7270,20,,+Info,2014-01-06,2014-03-16,4.9,None,Local,Low,Not required,Complete,None,None,hash_sendpage,vcc_insert_socket,atalk_search_socket,ax25_connect,rfcomm_sock_destruct,skcipher_wait_for_wmem,hash_recvmsg,rfcomm_get_sock_by_channel,ax25_ioctl
-CVE-2013-7269,20,,+Info,2014-01-06,2014-03-16,4.9,None,Local,Low,Not required,Complete,None,None,hash_sendpage,vcc_insert_socket,atalk_search_socket,ax25_connect,rfcomm_sock_destruct,skcipher_wait_for_wmem,hash_recvmsg,rfcomm_get_sock_by_channel,ax25_ioctl
-CVE-2013-7268,20,,+Info,2014-01-06,2014-03-16,4.9,None,Local,Low,Not required,Complete,None,None,hash_sendpage,vcc_insert_socket,atalk_search_socket,ax25_connect,rfcomm_sock_destruct,skcipher_wait_for_wmem,hash_recvmsg,rfcomm_get_sock_by_channel,ax25_ioctl
-CVE-2013-7267,20,,+Info,2014-01-06,2014-03-16,4.9,None,Local,Low,Not required,Complete,None,None,hash_sendpage,vcc_insert_socket,atalk_search_socket,ax25_connect,rfcomm_sock_destruct,skcipher_wait_for_wmem,hash_recvmsg,rfcomm_get_sock_by_channel,ax25_ioctl
-CVE-2013-7266,20,,+Info,2014-01-06,2014-03-16,4.9,None,Local,Low,Not required,Complete,None,None,hash_sendpage,vcc_insert_socket,atalk_search_socket,ax25_connect,rfcomm_sock_destruct,skcipher_wait_for_wmem,hash_recvmsg,rfcomm_get_sock_by_channel,ax25_ioctl
+CVE-2013-7271,20,,+Info,2014-01-06,2014-03-16,4.9,None,Local,Low,Not required,Complete,None,None,hash_sendpage,NA,vcc_insert_socket,atalk_search_socket,ax25_connect,rfcomm_sock_destruct,skcipher_wait_for_wmem,hash_recvmsg,rfcomm_get_sock_by_channel,ax25_ioctl
+CVE-2013-7270,20,,+Info,2014-01-06,2014-03-16,4.9,None,Local,Low,Not required,Complete,None,None,hash_sendpage,NA,vcc_insert_socket,atalk_search_socket,ax25_connect,rfcomm_sock_destruct,skcipher_wait_for_wmem,hash_recvmsg,rfcomm_get_sock_by_channel,ax25_ioctl
+CVE-2013-7269,20,,+Info,2014-01-06,2014-03-16,4.9,None,Local,Low,Not required,Complete,None,None,hash_sendpage,NA,vcc_insert_socket,atalk_search_socket,ax25_connect,rfcomm_sock_destruct,skcipher_wait_for_wmem,hash_recvmsg,rfcomm_get_sock_by_channel,ax25_ioctl
+CVE-2013-7268,20,,+Info,2014-01-06,2014-03-16,4.9,None,Local,Low,Not required,Complete,None,None,hash_sendpage,NA,vcc_insert_socket,atalk_search_socket,ax25_connect,rfcomm_sock_destruct,skcipher_wait_for_wmem,hash_recvmsg,rfcomm_get_sock_by_channel,ax25_ioctl
+CVE-2013-7267,20,,+Info,2014-01-06,2014-03-16,4.9,None,Local,Low,Not required,Complete,None,None,hash_sendpage,NA,vcc_insert_socket,atalk_search_socket,ax25_connect,rfcomm_sock_destruct,skcipher_wait_for_wmem,hash_recvmsg,rfcomm_get_sock_by_channel,ax25_ioctl
+CVE-2013-7266,20,,+Info,2014-01-06,2014-03-16,4.9,None,Local,Low,Not required,Complete,None,None,hash_sendpage,NA,vcc_insert_socket,atalk_search_socket,ax25_connect,rfcomm_sock_destruct,skcipher_wait_for_wmem,hash_recvmsg,rfcomm_get_sock_by_channel,ax25_ioctl
 CVE-2013-7265,20,,+Info,2014-01-06,2014-03-16,4.9,None,Local,Low,Not required,Complete,None,None,udpv6_recvmsg,raw_recvmsg,pn_recvmsg,ping_recvmsg,rawv6_recvmsg,dgram_recvmsg,udp_recvmsg,l2tp_ip_recvmsg
 CVE-2013-7264,20,,+Info,2014-01-06,2014-03-16,4.9,None,Local,Low,Not required,Complete,None,None,udpv6_recvmsg,raw_recvmsg,pn_recvmsg,ping_recvmsg,rawv6_recvmsg,dgram_recvmsg,udp_recvmsg,l2tp_ip_recvmsg
 CVE-2013-7263,20,,+Info,2014-01-06,2015-06-03,4.9,None,Local,Low,Not required,Complete,None,None,udpv6_recvmsg,raw_recvmsg,pn_recvmsg,ping_recvmsg,rawv6_recvmsg,dgram_recvmsg,udp_recvmsg,l2tp_ip_recvmsg
@@ -72,22 +72,22 @@ CVE-2012-6638,399,,DoS,2014-02-15,2014-02-18,7.8,None,Remote,Low,Not required,No
 CVE-2011-2909,200,,+Info,2014-02-15,2014-02-18,4.9,None,Local,Low,Not required,Complete,None,None,do_devinfo_ioctl
 CVE-2010-5313,362,,DoS,2014-11-29,2015-04-06,4.9,None,Local,Low,Not required,None,None,Complete,handle_emulation_failure
 CVE-2014-4027,264,,+Info,2014-06-23,2014-12-06,2.3,None,Local Network,Medium,Single system,Partial,None,None,rd_release_sgl_table,rd_release_device_space,rd_allocate_sgl_table,rd_build_device_space
-CVE-2014-4014,264,,Bypass,2014-06-23,2014-07-11,6.2,None,Local,High,Not required,Complete,Complete,Complete,generic_permission,inode_change_ok,xfs_ioctl_setattr,check_sticky,capable_wrt_inode_uidgid,inode_owner_or_capable,setattr_copy
+CVE-2014-4014,264,,Bypass,2014-06-23,2014-07-11,6.2,None,Local,High,Not required,Complete,Complete,Complete,generic_permission,inode_change_ok,xfs_ioctl_setattr,NA,check_sticky,capable_wrt_inode_uidgid,inode_owner_or_capable,setattr_copy
 CVE-2014-3985,119,,DoS Overflow,2014-09-11,2015-05-13,5.0,None,Remote,Low,Not required,None,None,Partial,NA
 CVE-2014-3940,362,,DoS Mem. Corr.,2014-06-05,2015-03-18,4.0,None,Local,High,Not required,None,None,Complete,NA
 CVE-2014-3917,200,,DoS +Info,2014-06-05,2015-05-11,3.3,None,Local,Medium,Not required,Partial,None,Partial,NA
 CVE-2014-3690,399,,DoS,2014-11-10,2015-06-03,4.9,None,Local,Low,Not required,None,None,Complete,vmx_set_constant_host_state,vmx_vcpu_run
 CVE-2014-3688,399,,DoS,2014-11-29,2015-06-03,5.0,None,Remote,Low,Not required,None,None,Partial,sctp_inq_pop,sctp_chunk_length_valid
 CVE-2014-3687,399,,DoS,2014-11-10,2015-06-03,7.8,None,Remote,Low,Not required,None,None,Complete,sctp_chunk_pending,sctp_assoc_lookup_asconf_ack
-CVE-2014-3673,399,,DoS,2014-11-10,2015-05-11,7.8,None,Remote,Low,Not required,None,None,Complete,sctp_verify_asconf,sctp_process_asconf,sctp_sf_do_asconf_ack,sctp_sf_do_asconf
+CVE-2014-3673,399,,DoS,2014-11-10,2015-05-11,7.8,None,Remote,Low,Not required,None,None,Complete,sctp_process_asconf,sctp_verify_asconf,NA,sctp_sf_do_asconf,sctp_sf_do_asconf_ack
 CVE-2014-3647,264,,DoS,2014-11-10,2015-03-25,2.1,None,Local,Low,Not required,None,None,Partial,jmp_rel,em_call,em_ret_near_imm,em_jcxz,assign_eip_near,assign_eip_far,em_ret,em_sysexit,x86_emulate_insn,em_grp45,em_loop
-CVE-2014-3646,264,,DoS,2014-11-10,2015-03-25,2.1,None,Local,Low,Not required,None,None,Partial,handle_invvpid,nested_vmx_exit_handled
-CVE-2014-3645,20,,DoS,2014-11-10,2015-03-17,2.1,None,Local,Low,Not required,None,None,Partial,handle_invept,nested_vmx_exit_handled
+CVE-2014-3646,264,,DoS,2014-11-10,2015-03-25,2.1,None,Local,Low,Not required,None,None,Partial,NA,handle_invvpid,nested_vmx_exit_handled
+CVE-2014-3645,20,,DoS,2014-11-10,2015-03-17,2.1,None,Local,Low,Not required,None,None,Partial,NA,handle_invept,nested_vmx_exit_handled
 CVE-2014-3631,,1,DoS,2014-09-28,2015-03-17,7.2,None,Local,Low,Not required,Complete,Complete,Complete,assoc_array_gc
 CVE-2014-3611,362,,DoS,2014-11-10,2015-03-17,4.9,None,Local,Low,Not required,None,None,Complete,__kvm_migrate_pit_timer
 CVE-2014-3610,264,,DoS,2014-11-10,2015-03-25,4.9,None,Local,Low,Not required,None,None,Complete,wrmsr_interception,kvm_set_msr,handle_wrmsr,is_noncanonical_address,get_canonical
 CVE-2014-3601,189,,DoS Mem. Corr.,2014-08-31,2015-06-03,4.3,None,Local Network,High,Single system,None,None,Complete,kvm_unpin_pages,kvm_iommu_map_pages
-CVE-2014-3535,119,,DoS Overflow,2014-09-28,2014-11-13,7.8,None,Remote,Low,Not required,None,None,Complete,__netdev_printk,netdev_printk
+CVE-2014-3535,119,,DoS Overflow,2014-09-28,2014-11-13,7.8,None,Remote,Low,Not required,None,None,Complete,NA,__netdev_printk,netdev_printk
 CVE-2014-3534,264,,+Priv,2014-08-01,2014-10-17,7.2,None,Local,Low,Not required,Complete,Complete,Complete,__poke_user,__poke_user_compat
 CVE-2014-3186,119,,DoS Exec Code Overflow,2014-09-28,2015-05-13,6.9,None,Local,Medium,Not required,Complete,Complete,Complete,picolcd_raw_event
 CVE-2014-3185,119,,DoS Exec Code Overflow Mem. Corr.,2014-09-28,2015-05-11,6.9,None,Local,Medium,Not required,Complete,Complete,Complete,command_port_read_callback
@@ -101,8 +101,8 @@ CVE-2014-3144,189,,DoS,2014-05-11,2014-07-24,4.9,None,Local,Low,Not required,Non
 CVE-2014-3122,264,,DoS,2014-05-11,2014-07-17,4.9,None,Local,Low,Not required,None,None,Complete,munlock_vma_page,mlock_vma_page,try_to_unmap_cluster
 CVE-2014-2889,189,,DoS +Priv,2014-04-26,2014-04-28,4.6,None,Local,Low,Not required,Partial,Partial,Partial,bpf_jit_compile
 CVE-2014-2851,189,,DoS Overflow +Priv,2014-04-14,2014-07-17,6.9,None,Local,Medium,Not required,Complete,Complete,Complete,NA
-CVE-2014-2739,20,,DoS,2014-04-14,2014-04-24,4.6,None,Local Network,High,Not required,None,None,Complete
-CVE-2014-2706,362,,DoS,2014-04-14,2014-12-06,7.1,None,Remote,Medium,Not required,None,None,Complete,ieee80211_sta_ps_deliver_wakeup,sta_info_alloc,ieee80211_tx_h_unicast_ps_buf
+CVE-2014-2739,20,,DoS,2014-04-14,2014-04-24,4.6,None,Local Network,High,Not required,None,None,Complete,NA
+CVE-2014-2706,362,,DoS,2014-04-14,2014-12-06,7.1,None,Remote,Medium,Not required,None,None,Complete,ieee80211_sta_ps_deliver_wakeup,sta_info_alloc,NA,ieee80211_tx_h_unicast_ps_buf
 CVE-2014-2678,,,DoS,2014-04-01,2014-07-17,4.7,None,Local,Medium,Not required,None,None,Complete,NA
 CVE-2014-2673,20,,DoS,2014-04-01,2014-04-19,4.7,None,Local,Medium,Not required,None,None,Complete,arch_dup_task_struct
 CVE-2014-2672,362,,DoS,2014-04-01,2014-04-19,7.1,None,Remote,Medium,Not required,None,None,Complete,ath_tx_aggr_sleep
@@ -111,38 +111,38 @@ CVE-2014-2608,,,+Priv +Info,2014-12-10,2014-12-12,2.1,None,Local,Low,Not require
 CVE-2014-2568,399,,+Info,2014-03-24,2014-07-17,2.9,None,Local Network,Medium,Not required,Partial,None,None,NA
 CVE-2014-2523,20,,DoS Exec Code,2014-03-24,2014-04-01,10.0,None,Remote,Low,Not required,Complete,Complete,Complete,dccp_new
 CVE-2014-2309,189,,DoS,2014-03-11,2015-03-25,6.1,None,Local Network,Low,Not required,None,None,Complete,ip6_route_ad
-CVE-2014-2039,20,,DoS,2014-02-28,2014-07-17,4.9,None,Local,Low,Not required,None,None,Complete
+CVE-2014-2039,20,,DoS,2014-02-28,2014-07-17,4.9,None,Local,Low,Not required,None,None,Complete,NA
 CVE-2014-2038,20,,+Info,2014-02-28,2014-03-16,3.7,None,Local,High,Not required,Partial,Partial,Partial,nfs_can_extend_write
 CVE-2014-1874,20,,DoS,2014-02-28,2015-05-11,4.4,None,Local,Medium,Single system,None,None,Complete,security_context_to_sid_core
 CVE-2014-1739,200,,+Info,2014-06-23,2014-12-06,1.7,None,Local,Low,Single system,Partial,None,None,media_device_enum_entities
 CVE-2014-1738,264,,+Info,2014-05-11,2014-07-17,4.9,None,Local,Low,Not required,Complete,None,None,raw_cmd_copyout
 CVE-2014-1737,264,,+Priv,2014-05-11,2014-07-17,7.2,None,Local,Low,Not required,Complete,Complete,Complete,raw_cmd_copyin
-CVE-2014-1690,119,,Overflow +Info,2014-02-28,2014-04-19,2.6,None,Remote,High,Not required,Partial,None,None
+CVE-2014-1690,119,,Overflow +Info,2014-02-28,2014-04-19,2.6,None,Remote,High,Not required,Partial,None,None,NA
 CVE-2014-1446,399,,+Info,2014-01-18,2014-03-16,1.9,None,Local,Medium,Not required,Partial,None,None,yam_ioctl
 CVE-2014-1445,399,,+Info,2014-01-18,2014-03-16,2.1,None,Local,Low,Not required,Partial,None,None,wanxl_ioctl
 CVE-2014-1444,399,,+Info,2014-01-18,2014-03-16,1.7,None,Local,Low,Single system,Partial,None,None,fst_get_iface
 CVE-2014-9420,399,,DoS,2014-12-25,2015-06-03,4.9,None,Local,Low,Not required,None,None,Complete,rock_continue
-CVE-2014-9419,200,,Bypass +Info,2014-12-25,2015-06-03,2.1,None,Local,Low,Not required,Partial,None,None
-CVE-2014-9322,264,1,+Priv,2014-12-17,2015-06-03,7.2,User,Local,Low,Not required,Complete,Complete,Complete
-CVE-2014-9090,17,,DoS,2014-11-29,2015-06-03,4.9,None,Local,Low,Not required,None,None,Complete
+CVE-2014-9419,200,,Bypass +Info,2014-12-25,2015-06-03,2.1,None,Local,Low,Not required,Partial,None,None,NA
+CVE-2014-9322,264,1,+Priv,2014-12-17,2015-06-03,7.2,User,Local,Low,Not required,Complete,Complete,Complete,NA
+CVE-2014-9090,17,,DoS,2014-11-29,2015-06-03,4.9,None,Local,Low,Not required,None,None,Complete,NA
 CVE-2014-8989,264,,Bypass,2014-11-29,2015-04-17,4.6,User,Local,Low,Not required,Partial,Partial,Partial,NA
 CVE-2014-8884,119,,DoS Overflow +Priv,2014-11-29,2015-04-13,6.1,User,Local,Low,Not required,Partial,Partial,Complete,ttusbdecfe_dvbs_diseqc_send_master_cmd
 CVE-2014-8709,200,,+Info,2014-11-10,2015-04-06,5.0,None,Remote,Low,Not required,Partial,None,None,ieee80211_fragment
 CVE-2014-8559,399,,DoS,2014-11-10,2015-06-03,4.9,None,Local,Low,Not required,None,None,Complete,NA
 CVE-2014-8481,399,,DoS,2014-11-10,2014-11-20,4.9,None,Local,Low,Not required,None,None,Complete,x86_decode_insn
-CVE-2014-8480,399,,DoS,2014-11-10,2014-11-10,4.9,None,Local,Low,Not required,None,None,Complete
+CVE-2014-8480,399,,DoS,2014-11-10,2014-11-10,4.9,None,Local,Low,Not required,None,None,Complete,NA
 CVE-2014-8369,189,,DoS,2014-11-10,2015-06-03,4.6,None,Local,Low,Not required,Partial,Partial,Partial,kvm_pin_pages,kvm_iommu_map_pages
 CVE-2014-8134,264,,Bypass,2014-12-12,2015-06-03,2.1,None,Local,Low,Not required,Partial,None,None,NA
 CVE-2014-8133,264,,Bypass,2014-12-17,2015-06-03,2.1,None,Local,Low,Not required,None,Partial,None,tls_desc_okay,do_set_thread_area,regset_tls_set
 CVE-2014-8086,362,,DoS,2014-10-13,2015-03-23,4.9,None,Local,Low,Not required,None,None,Complete,NA
 CVE-2014-7975,264,,DoS,2014-10-13,2014-12-30,4.9,None,Local,Low,Not required,None,None,Complete,do_umoun
 CVE-2014-7970,399,,DoS,2014-10-13,2015-06-03,4.9,None,Local,Low,Not required,None,None,Complete,NA
-CVE-2014-7843,17,,DoS,2014-11-29,2015-01-22,4.9,None,Local,Low,Not required,None,None,Complete
+CVE-2014-7843,17,,DoS,2014-11-29,2015-01-22,4.9,None,Local,Low,Not required,None,None,Complete,NA
 CVE-2014-7842,362,,DoS,2014-11-29,2015-06-03,4.9,None,Local,Low,Not required,None,None,Complete,handle_emulation_failure
 CVE-2014-7841,399,,DoS,2014-11-29,2015-04-06,5.0,None,Remote,Low,Not required,None,None,Partial,sctp_process_param
 CVE-2014-7826,264,,DoS +Priv,2014-11-10,2015-03-25,4.6,User,Local,Low,Not required,Partial,Partial,Partial,ftrace_syscall_exit,perf_syscall_enter,perf_syscall_exit,ftrace_syscall_enter
 CVE-2014-7825,119,,DoS Overflow Bypass,2014-11-10,2015-03-18,4.9,None,Local,Low,Not required,None,None,Complete,ftrace_syscall_exit,perf_syscall_enter,perf_syscall_exit,ftrace_syscall_enter
-CVE-2014-7284,200,,+Info,2014-10-13,2014-10-15,6.4,None,Remote,Low,Not required,None,Partial,Partial,__net_random_once_deferred,__net_get_random_once
+CVE-2014-7284,200,,+Info,2014-10-13,2014-10-15,6.4,None,Remote,Low,Not required,None,Partial,Partial,NA,__net_random_once_deferred,__net_get_random_once
 CVE-2014-7283,399,,DoS,2014-10-13,2014-12-10,4.9,None,Local,Low,Not required,None,None,Complete,xfs_da3_fixhashpath
 CVE-2014-7207,,,DoS,2014-11-10,2014-12-23,4.9,None,Local,Low,Not required,Complete,None,None,NA
 CVE-2014-7145,399,,DoS,2014-09-28,2015-03-18,7.8,None,Remote,Low,Not required,None,None,Complete,SMB2_tcon
@@ -152,25 +152,25 @@ CVE-2014-6416,119,,DoS Overflow Mem. Corr.,2014-09-28,2015-04-29,7.8,None,Remote
 CVE-2014-6410,399,,DoS,2014-09-28,2014-12-06,4.7,None,Local,Medium,Not required,None,None,Complete,__udf_read_inode
 CVE-2014-5472,20,,DoS,2014-08-31,2015-05-11,4.0,None,Local,High,Not required,None,None,Complete,parse_rock_ridge_inode,isofs_iget,parse_rock_ridge_inode_internal,__isofs_iget,isofs_read_inode,isofs_iget_reloc
 CVE-2014-5471,399,,DoS,2014-08-31,2015-05-11,4.0,None,Local,High,Not required,None,None,Complete,parse_rock_ridge_inode,isofs_iget,parse_rock_ridge_inode_internal,__isofs_iget,isofs_read_inode,isofs_iget_reloc
-CVE-2014-5207,264,1,DoS +Priv,2014-08-18,2014-11-13,6.0,None,Local,High,Single system,Complete,Complete,Complete,clone_mnt,do_remount,do_new_mount
-CVE-2014-5206,264,,Bypass,2014-08-18,2014-11-13,7.2,None,Local,Low,Not required,Complete,Complete,Complete,do_remount
+CVE-2014-5207,264,1,DoS +Priv,2014-08-18,2014-11-13,6.0,None,Local,High,Single system,Complete,Complete,Complete,clone_mnt,do_remount,do_new_mount,NA
+CVE-2014-5206,264,,Bypass,2014-08-18,2014-11-13,7.2,None,Local,Low,Not required,Complete,Complete,Complete,do_remount,NA
 CVE-2014-5077,,,DoS,2014-08-01,2014-12-23,5.4,None,Remote,High,Not required,None,None,Complete,sctp_assoc_update
 CVE-2014-5045,59,,DoS,2014-08-01,2015-03-11,6.2,None,Local,High,Not required,Complete,Complete,Complete,mountpoint_last
 CVE-2014-4943,264,1,+Priv,2014-07-19,2015-03-25,6.9,None,Local,Medium,Not required,Complete,Complete,Complete,pppol2tp_getsockopt,pppol2tp_setsockopt
-CVE-2014-4699,362,1,DoS +Priv,2014-07-09,2014-08-01,6.9,None,Local,Medium,Not required,Complete,Complete,Complete
+CVE-2014-4699,362,1,DoS +Priv,2014-07-09,2014-08-01,6.9,None,Local,Medium,Not required,Complete,Complete,Complete,NA
 CVE-2014-4667,20,,DoS,2014-07-03,2015-05-11,5.0,None,Remote,Low,Not required,None,None,Partial,sctp_association_free
 CVE-2014-4656,189,,DoS Overflow,2014-07-03,2015-05-11,4.9,None,Local,Low,Not required,None,None,Complete,snd_ctl_add
 CVE-2014-4655,189,,DoS Overflow Bypass,2014-07-03,2015-05-11,4.9,None,Local,Low,Not required,None,None,Complete,snd_ctl_elem_add
 CVE-2014-4654,,,DoS,2014-07-03,2015-05-11,4.9,None,Local,Low,Not required,None,None,Complete,snd_ctl_elem_add
 CVE-2014-4653,,,DoS +Info,2014-07-03,2015-05-11,6.6,None,Local,Low,Not required,Complete,None,Complete,snd_ctl_add,snd_ctl_replace,snd_ctl_elem_write,snd_ctl_tlv_ioctl
-CVE-2014-4652,362,,+Info,2014-07-03,2015-05-11,4.7,None,Local,Medium,Not required,Complete,None,None,snd_ctl_elem_add,snd_ctl_elem_user_put,snd_ctl_elem_user_tlv,snd_card_new,snd_ctl_elem_user_get
+CVE-2014-4652,362,,+Info,2014-07-03,2015-05-11,4.7,None,Local,Medium,Not required,Complete,None,None,snd_ctl_elem_add,NA,snd_ctl_elem_user_put,snd_ctl_elem_user_tlv,snd_card_new,snd_ctl_elem_user_get
 CVE-2014-4611,20,,DoS Overflow Mem. Corr.,2014-07-03,2014-09-28,5.0,None,Remote,Low,Not required,None,None,Partial,lz4_uncompress
 CVE-2014-4608,119,,DoS Overflow Mem. Corr.,2014-07-03,2015-06-03,5.0,None,Remote,Low,Not required,None,None,Partial,lzo1x_decompress_safe
 CVE-2014-4508,189,,DoS,2014-06-23,2015-03-25,4.7,None,Local,Medium,Not required,None,None,Complete,NA
 CVE-2014-4323,264,,+Priv,2014-12-12,2014-12-12,7.5,User,Remote,Low,Not required,Partial,Partial,Partial,NA
 CVE-2014-4322,119,,DoS Overflow +Priv Mem. Corr.,2014-12-24,2014-12-24,7.2,User,Local,Low,Not required,Complete,Complete,Complete,NA
 CVE-2014-4171,,,DoS,2014-06-23,2015-03-18,4.7,None,Local,Medium,Not required,None,None,Complete,NA
-CVE-2014-4157,264,,Bypass,2014-06-23,2014-06-25,4.6,None,Local,Low,Not required,Partial,Partial,Partial
+CVE-2014-4157,264,,Bypass,2014-06-23,2014-06-25,4.6,None,Local,Low,Not required,Partial,Partial,Partial,NA
 CVE-2012-6546,200,,+Info,2013-03-15,2013-06-04,1.9,None,Local,Medium,Not required,Partial,None,None,pvc_getname
 CVE-2012-6545,200,,+Info,2013-03-15,2014-01-03,1.9,None,Local,Medium,Not required,Partial,None,None,rfcomm_get_dev_list
 CVE-2012-6544,200,,+Info,2013-03-15,2014-02-06,1.9,None,Local,Medium,Not required,Partial,None,None,hci_sock_getsockopt
@@ -181,11 +181,11 @@ CVE-2012-6540,200,,+Info,2013-03-15,2013-05-14,1.9,None,Local,Medium,Not require
 CVE-2012-6539,200,,+Info,2013-03-15,2013-05-14,1.9,None,Local,Medium,Not required,Partial,None,None,dev_ifconf
 CVE-2012-6538,200,,+Info,2013-03-15,2013-06-04,1.9,None,Local,Medium,Not required,Partial,None,None,copy_to_user_auth
 CVE-2012-6537,200,,+Info,2013-03-15,2013-06-04,1.9,None,Local,Medium,Not required,Partial,None,None,copy_to_user_policy
-CVE-2012-6536,200,,+Info,2013-03-15,2013-03-18,2.1,None,Local,Low,Not required,Partial,None,None,verify_replay,xfrm_replay_verify_len,xfrm_alloc_replay_state_esn
-CVE-2012-5375,310,,DoS,2013-02-18,2014-01-03,4.0,None,Local,High,Not required,None,None,Complete,btrfs_check_dir_item_collision,btrfs_add_link,create_pending_snapshot,btrfs_mksubvol,btrfs_rename
-CVE-2012-5374,310,,DoS,2013-02-18,2014-01-03,4.0,None,Local,High,Not required,None,None,Complete,btrfs_check_dir_item_collision,btrfs_add_link,create_pending_snapshot,btrfs_mksubvol,btrfs_rename
+CVE-2012-6536,200,,+Info,2013-03-15,2013-03-18,2.1,None,Local,Low,Not required,Partial,None,None,NA,verify_replay,xfrm_replay_verify_len,xfrm_alloc_replay_state_esn
+CVE-2012-5375,310,,DoS,2013-02-18,2014-01-03,4.0,None,Local,High,Not required,None,None,Complete,btrfs_check_dir_item_collision,NA,btrfs_add_link,create_pending_snapshot,btrfs_mksubvol,btrfs_rename
+CVE-2012-5374,310,,DoS,2013-02-18,2014-01-03,4.0,None,Local,High,Not required,None,None,Complete,btrfs_check_dir_item_collision,NA,btrfs_add_link,create_pending_snapshot,btrfs_mksubvol,btrfs_rename
 CVE-2012-4542,264,,Bypass,2013-02-28,2013-06-20,4.6,None,Local,Low,Not required,Partial,Partial,Partial,NA
-CVE-2012-4530,200,,+Info,2013-02-17,2013-06-04,2.1,None,Local,Low,Not required,Partial,None,None,load_misc_binary,load_script,free_bprm,bprm_change_interp
+CVE-2012-4530,200,,+Info,2013-02-17,2013-06-04,2.1,None,Local,Low,Not required,Partial,None,None,NA,load_script,load_misc_binary,free_bprm,bprm_change_interp
 CVE-2012-4461,,,DoS,2013-01-22,2013-06-20,1.9,None,Local,Medium,Not required,None,None,Partial,guest_cpuid_has_xsav, kvm_arch_vcpu_ioctl_set_sregs
 CVE-2012-4398,20,,DoS,2013-02-17,2015-03-25,4.9,None,Local,Low,Not required,None,None,Complete,NA
 CVE-2012-3364,119,,DoS Exec Code Overflow,2013-01-22,2013-01-29,5.0,None,Remote,Low,Not required,None,None,Partial,nci_extract_rf_params_nfcb_passive_poll,nci_extract_rf_params_nfcf_passive_poll,nci_extract_activation_params_iso_dep,nci_extract_rf_params_nfca_passive_poll
@@ -194,31 +194,31 @@ CVE-2012-2137,119,,DoS Exec Code Overflow,2013-01-22,2013-06-20,6.9,None,Local,M
 CVE-2012-2119,119,,DoS Overflow,2013-01-22,2013-06-20,5.2,None,Local Network,Medium,Single system,None,None,Complete,zerocopy_sg_from_iovec,macvtap_get_user
 CVE-2011-4604,119,,DoS Overflow Mem. Corr.,2013-06-07,2013-06-20,6.8,None,Remote,Medium,Not required,Partial,Partial,Partial,bat_socket_read
 CVE-2011-4348,362,,DoS,2013-06-08,2013-07-25,7.1,None,Remote,Medium,Not required,None,None,Complete,sctp_rcv
-CVE-2011-4347,264,,DoS,2013-06-08,2013-06-10,4.0,None,Local,High,Not required,None,None,Complete,probe_sysfs_permissions,kvm_vm_ioctl_assign_device
-CVE-2011-4098,119,,DoS Overflow,2013-06-08,2013-06-10,1.9,None,Local,Medium,Not required,None,None,Partial,gfs2_bmap_alloc,fallocate_chunk,gfs2_fallocate
+CVE-2011-4347,264,,DoS,2013-06-08,2013-06-10,4.0,None,Local,High,Not required,None,None,Complete,NA,probe_sysfs_permissions,kvm_vm_ioctl_assign_device
+CVE-2011-4098,119,,DoS Overflow,2013-06-08,2013-06-10,1.9,None,Local,Medium,Not required,None,None,Partial,gfs2_bmap_alloc,fallocate_chunk,gfs2_fallocate,NA
 CVE-2011-4087,399,,DoS,2013-06-08,2013-06-10,4.3,None,Remote,Medium,Not required,None,None,Partial,br_parse_ip_options
 CVE-2011-3638,,,DoS,2013-03-01,2013-03-04,4.0,None,Local,High,Not required,None,None,Complete,ext4_ext_convert_to_initialized,ext4_split_unwritten_extents
 CVE-2011-3619,20,,DoS,2013-06-08,2013-06-10,4.6,None,Local,Low,Not required,Partial,Partial,Partial,apparmor_setprocattr
 CVE-2011-3593,399,,DoS,2013-06-08,2013-06-10,5.7,None,Local Network,Medium,Not required,None,None,Complete,NA
 CVE-2011-2942,,,DoS,2013-06-08,2013-06-10,6.8,None,Remote,Medium,Not required,Partial,Partial,Partial,NA
-CVE-2011-2905,,,,2013-03-01,2013-03-04,6.2,None,Local,High,Not required,Complete,Complete,Complete
+CVE-2011-2905,,,,2013-03-01,2013-03-04,6.2,None,Local,High,Not required,Complete,Complete,Complete,NA
 CVE-2011-2519,,,DoS,2013-12-26,2013-12-27,5.2,None,Local Network,Medium,Single system,None,None,Complete,NA
-CVE-2011-2491,399,,DoS,2013-03-01,2013-12-30,4.9,None,Local,Low,Not required,None,None,Complete,nlmclnt_unlock_callback
+CVE-2011-2491,399,,DoS,2013-03-01,2013-12-30,4.9,None,Local,Low,Not required,None,None,Complete,nlmclnt_unlock_callback,NA
 CVE-2011-2482,,,DoS,2013-06-08,2013-12-30,7.8,None,Remote,Low,Not required,None,None,Complete,sctp_sock_rfree_frag,sctp_skb_set_owner_r_frag,sctp_sock_migrate
-CVE-2011-2479,399,,DoS,2013-03-01,2013-03-04,4.9,None,Local,Low,Not required,None,None,Complete,hugepage_madvise,khugepaged_enter_vma_merge,collapse_huge_page,khugepaged_scan_mm_slot
-CVE-2011-1585,264,,Bypass,2013-06-08,2015-05-11,3.3,None,Local,Medium,Not required,Partial,Partial,None,cifs_find_smb_ses,cifs_get_smb_ses
+CVE-2011-2479,399,,DoS,2013-03-01,2013-03-04,4.9,None,Local,Low,Not required,None,None,Complete,collapse_huge_page,NA,hugepage_madvise,khugepaged_enter_vma_merge,khugepaged_scan_mm_slot
+CVE-2011-1585,264,,Bypass,2013-06-08,2015-05-11,3.3,None,Local,Medium,Not required,Partial,Partial,None,NA,cifs_find_smb_ses,cifs_get_smb_ses
 CVE-2011-1182,,,,2013-03-01,2014-01-13,3.6,None,Local,Low,Not required,None,Partial,Partial,do_rt_tgsigqueueinfo
 CVE-2011-1180,119,,DoS Overflow Mem. Corr.,2013-06-08,2013-06-10,7.5,None,Remote,Low,Not required,Partial,Partial,Partial,iriap_getvaluebyclass_indication
-CVE-2011-1019,264,,Bypass,2013-03-01,2013-03-04,1.9,None,Local,Medium,Not required,None,Partial,None,dev_load
+CVE-2011-1019,264,,Bypass,2013-03-01,2013-03-04,1.9,None,Local,Medium,Not required,None,Partial,None,NA,dev_load
 CVE-2013-2094,189,,+Priv,2013-05-14,2013-09-11,7.2,None,Local,Low,Not required,Complete,Complete,Complete,perf_swevent_init
 CVE-2013-2058,119,,DoS Overflow,2013-11-04,2013-11-21,4.7,None,Local,Medium,Not required,None,None,Complete,host_start
-CVE-2013-2017,399,,DoS,2013-05-03,2013-05-03,7.8,None,Remote,Low,Not required,None,None,Complete
+CVE-2013-2017,399,,DoS,2013-05-03,2013-05-03,7.8,None,Remote,Low,Not required,None,None,Complete,NA
 CVE-2013-2015,399,,DoS,2013-04-29,2013-04-29,4.7,None,Local,Medium,Not required,None,None,Complete,ext4_orphan_del
 CVE-2013-1979,264,,+Priv,2013-05-03,2014-12-06,6.9,None,Local,Medium,Not required,Complete,Complete,Complete,scm_set_cred
 CVE-2013-1959,264,1,+Priv,2013-05-03,2013-11-30,3.7,None,Local,High,Not required,Partial,Partial,Partial,map_write,new_idmap_permitted
 CVE-2013-1958,264,,Bypass,2013-04-24,2013-05-01,1.9,None,Local,Medium,Not required,None,Partial,None,scm_check_creds
-CVE-2013-1957,264,,Bypass,2013-04-24,2013-04-25,4.7,None,Local,Medium,Not required,Complete,None,None,clone_mnt,dup_mnt_ns,propagate_mnt
-CVE-2013-1956,264,,Bypass,2013-04-24,2013-05-01,2.1,None,Local,Low,Not required,None,Partial,None,current_chrooted,create_user_ns
+CVE-2013-1957,264,,Bypass,2013-04-24,2013-04-25,4.7,None,Local,Medium,Not required,Complete,None,None,clone_mnt,dup_mnt_ns,propagate_mnt,NA
+CVE-2013-1956,264,,Bypass,2013-04-24,2013-05-01,2.1,None,Local,Low,Not required,None,Partial,None,current_chrooted,NA,create_user_ns
 CVE-2013-1943,20,,+Priv +Info,2013-07-16,2013-10-02,6.9,None,Local,Medium,Not required,Complete,Complete,Complete,walk_addr_generic,__kvm_set_memory_region,kvm_read_guest_page
 CVE-2013-1929,119,,DoS Exec Code Overflow,2013-06-07,2014-01-03,4.4,None,Local,Medium,Not required,Partial,Partial,Partial,tg3_read_vpd
 CVE-2013-1928,200,,+Info,2013-04-29,2014-01-03,4.7,None,Local,Medium,Not required,Complete,None,None,do_video_set_spu_palette
@@ -230,12 +230,12 @@ CVE-2013-1827,,,DoS +Priv,2013-03-22,2013-06-04,6.2,None,Local,High,Not required
 CVE-2013-1826,,,DoS +Priv,2013-03-22,2013-06-04,6.2,None,Local,High,Not required,Complete,Complete,Complete,xfrm_state_netlink
 CVE-2013-1819,20,,DoS,2013-03-06,2014-01-03,4.6,None,Local,Low,Not required,Partial,Partial,Partial,_xfs_buf_find
 CVE-2013-1798,20,,DoS +Info,2013-03-22,2014-01-27,6.2,None,Local Network,High,Not required,Complete,None,Complete,ioapic_read_indirect
-CVE-2013-1797,399,,DoS Mem. Corr.,2013-03-22,2014-01-27,6.8,None,Local Network,High,Not required,Complete,Complete,Complete,kvm_set_msr_common,kvmclock_reset,kvm_guest_time_update,kvm_arch_vcpu_init,kvm_set_guest_paused
+CVE-2013-1797,399,,DoS Mem. Corr.,2013-03-22,2014-01-27,6.8,None,Local Network,High,Not required,Complete,Complete,Complete,kvm_set_msr_common,NA,kvmclock_reset,kvm_guest_time_update,kvm_arch_vcpu_init,kvm_set_guest_paused
 CVE-2013-1796,119,,DoS Overflow Mem. Corr.,2013-03-22,2014-01-27,6.8,None,Local Network,High,Not required,Complete,Complete,Complete,kvm_set_msr_common
 CVE-2013-1792,362,,DoS,2013-03-22,2014-03-05,4.7,None,Local,Medium,Not required,None,None,Complete,install_user_keyrings
 CVE-2013-1774,264,,DoS,2013-02-28,2013-09-26,4.0,None,Local,High,Not required,None,None,Complete,chase_port
-CVE-2013-1773,119,1,DoS Overflow +Priv,2013-02-28,2014-01-27,6.2,None,Local,High,Not required,Complete,Complete,Complete,kvp_respond_to_host,xlate_to_uni
-CVE-2013-1772,119,,DoS Overflow,2013-02-28,2013-08-22,4.0,None,Local,High,Not required,None,None,Complete
+CVE-2013-1773,119,1,DoS Overflow +Priv,2013-02-28,2014-01-27,6.2,None,Local,High,Not required,Complete,Complete,Complete,kvp_respond_to_host,xlate_to_uni,NA
+CVE-2013-1772,119,,DoS Overflow,2013-02-28,2013-08-22,4.0,None,Local,High,Not required,None,None,Complete,NA
 CVE-2013-1767,399,,DoS +Priv,2013-02-28,2013-08-22,6.2,None,Local,High,Not required,Complete,Complete,Complete,shmem_remount_fs
 CVE-2013-1763,20,3,+Priv,2013-02-28,2014-05-16,7.2,None,Local,Low,Not required,Complete,Complete,Complete,__sock_diag_rcv_msg
 CVE-2013-1059,,,DoS,2013-07-08,2014-01-03,7.8,None,Remote,Low,Not required,None,None,Complete,NA
@@ -252,9 +252,9 @@ CVE-2013-0309,119,,DoS Overflow,2013-02-21,2013-02-22,4.7,None,Local,Medium,Not 
 CVE-2013-0290,20,,DoS,2013-02-19,2013-09-11,4.9,None,Local,Low,Not required,None,None,Complete,__skb_recv_datagram
 CVE-2013-0268,264,,Bypass,2013-02-17,2013-08-22,6.2,None,Local,High,Not required,Complete,Complete,Complete,msr_open
 CVE-2013-0231,119,,DoS Overflow,2013-02-12,2013-06-20,4.9,None,Local,Low,Not required,None,None,Complete,NA
-CVE-2013-0228,189,,+Priv,2013-03-01,2013-08-22,6.2,None,Local,High,Not required,Complete,Complete,Complete
+CVE-2013-0228,189,,+Priv,2013-03-01,2013-08-22,6.2,None,Local,High,Not required,Complete,Complete,Complete,NA
 CVE-2013-0217,399,,DoS,2013-02-17,2013-08-22,5.2,None,Local Network,Medium,Single system,None,None,Complete,xen_netbk_tx_check_gop,xen_netbk_fill_frags,xen_netbk_tx_submit,xen_netbk_idx_release
-CVE-2013-0216,20,,DoS,2013-02-17,2013-08-22,5.2,None,Local Network,Medium,Single system,None,None,Complete,xen_netbk_get_extras,netbk_fatal_tx_err,xenvif_disconnect,xenvif_carrier_off,netbk_set_skb_gso,netbk_count_requests,xen_netbk_tx_build_gops
+CVE-2013-0216,20,,DoS,2013-02-17,2013-08-22,5.2,None,Local Network,Medium,Single system,None,None,Complete,xen_netbk_get_extras,netbk_fatal_tx_err,NA,xenvif_disconnect,xenvif_carrier_off,netbk_set_skb_gso,netbk_count_requests,xen_netbk_tx_build_gops
 CVE-2013-0190,20,,DoS,2013-02-12,2013-02-13,4.9,None,Local,Low,Not required,None,None,Complete,NA
 CVE-2013-0160,200,,+Info,2013-02-17,2014-03-16,2.1,None,Local,Low,Not required,Partial,None,None,NA
 CVE-2012-6549,200,,+Info,2013-03-15,2013-08-22,1.9,None,Local,Medium,Not required,Partial,None,None,isofs_export_encode_fh
@@ -276,7 +276,7 @@ CVE-2013-3223,200,,+Info,2013-04-22,2014-01-03,4.9,None,Local,Low,Not required,C
 CVE-2013-3222,200,,+Info,2013-04-22,2014-02-06,4.9,None,Local,Low,Not required,Complete,None,None,vcc_recvmsg
 CVE-2013-3076,200,,+Info,2013-04-22,2013-11-30,4.9,None,Local,Low,Not required,Complete,None,None,hash_recvmsg,skcipher_recvmsg
 CVE-2013-2930,264,,,2013-12-09,2014-03-05,3.6,None,Local,Low,Not required,Partial,Partial,None,perf_trace_event_perm
-CVE-2013-2929,264,,Bypass +Info,2013-12-09,2015-03-25,3.3,None,Local,Medium,Not required,Partial,Partial,None
+CVE-2013-2929,264,,Bypass +Info,2013-12-09,2015-03-25,3.3,None,Local,Medium,Not required,Partial,Partial,None,NA
 CVE-2013-2899,119,,DoS Overflow,2013-09-16,2015-03-25,4.7,None,Local,Medium,Not required,None,None,Complete,NA
 CVE-2013-2898,20,,+Info,2013-09-16,2013-10-30,1.9,None,Local,Medium,Not required,Partial,None,None,NA
 CVE-2013-2897,20,,DoS Mem. Corr.,2013-09-16,2015-03-25,4.7,None,Local,Medium,Not required,None,None,Complete,NA
@@ -291,14 +291,14 @@ CVE-2013-2889,119,,DoS Overflow,2013-09-16,2014-01-03,4.7,None,Local,Medium,Not 
 CVE-2013-2888,20,,DoS Exec Code Mem. Corr.,2013-09-16,2014-01-03,6.2,None,Local,High,Not required,Complete,Complete,Complete,NA
 CVE-2013-2852,134,,+Priv,2013-06-07,2014-02-06,6.9,None,Local,Medium,Not required,Complete,Complete,Complete,b43_request_firmwar
 CVE-2013-2851,134,,+Priv,2013-06-07,2014-03-26,6.0,None,Local,High,Single system,Complete,Complete,Complete,NA
-CVE-2013-2850,119,,DoS Exec Code Overflow Mem. Corr.,2013-06-07,2013-12-05,7.9,None,Local Network,Medium,Not required,Complete,Complete,Complete,iscsi_add_notunderstood_response
+CVE-2013-2850,119,,DoS Exec Code Overflow Mem. Corr.,2013-06-07,2013-12-05,7.9,None,Local Network,Medium,Not required,Complete,Complete,Complete,iscsi_add_notunderstood_response,NA
 CVE-2013-2636,399,,+Info,2013-03-22,2013-04-05,1.9,None,Local,Medium,Not required,Partial,None,None,br_mdb_dump,nlmsg_populate_mdb_fill,br_mdb_notify,br_mdb_fill_info
 CVE-2013-2635,399,,+Info,2013-03-22,2014-02-06,1.9,None,Local,Medium,Not required,Partial,None,None,rtnl_fill_ifinfo
 CVE-2013-2634,399,,+Info,2013-03-22,2014-02-06,1.9,None,Local,Medium,Not required,Partial,None,None,dcbnl_ieee_fill,dcbnl_cee_fill,dcbnl_getperm_hwaddr
 CVE-2013-2596,189,,Overflow +Priv,2013-04-12,2015-04-22,6.9,Admin,Local,Medium,Not required,Complete,Complete,Complete,fb_mmap
-CVE-2013-2548,310,,+Info,2013-03-15,2014-01-03,2.1,None,Local,Low,Not required,Partial,None,None,crypto_report_comp,crypto_report_one,crypto_report_cipher
-CVE-2013-2547,310,,+Info,2013-03-15,2014-01-03,2.1,None,Local,Low,Not required,Partial,None,None,crypto_report_comp,crypto_report_one,crypto_report_cipher
-CVE-2013-2546,310,,+Info,2013-03-15,2014-01-03,2.1,None,Local,Low,Not required,Partial,None,None,crypto_report_comp,crypto_report_one,crypto_report_cipher
+CVE-2013-2548,310,,+Info,2013-03-15,2014-01-03,2.1,None,Local,Low,Not required,Partial,None,None,NA,crypto_report_comp,crypto_report_one,crypto_report_cipher
+CVE-2013-2547,310,,+Info,2013-03-15,2014-01-03,2.1,None,Local,Low,Not required,Partial,None,None,NA,crypto_report_comp,crypto_report_one,crypto_report_cipher
+CVE-2013-2546,310,,+Info,2013-03-15,2014-01-03,2.1,None,Local,Low,Not required,Partial,None,None,NA,crypto_report_comp,crypto_report_one,crypto_report_cipher
 CVE-2013-2237,119,,Overflow +Info,2013-07-04,2014-02-06,2.1,None,Local,Low,Not required,Partial,None,None,key_notify_policy_flush
 CVE-2013-2234,119,,Overflow +Info,2013-07-04,2014-01-30,2.1,None,Local,Low,Not required,Partial,None,None,key_notify_policy_flush,key_notify_sa_flush
 CVE-2013-2232,20,,DoS,2013-07-04,2014-02-06,4.9,None,Local,Low,Not required,None,None,Complete,ip6_sk_dst_check
@@ -321,9 +321,9 @@ CVE-2013-6381,119,,DoS Overflow,2013-11-26,2014-03-26,6.9,None,Local,Medium,Not 
 CVE-2013-6380,20,,DoS,2013-11-26,2014-03-16,4.7,None,Local,Medium,Not required,None,None,Complete,aac_send_raw_srb
 CVE-2013-6378,189,,DoS,2013-11-26,2014-07-17,4.4,None,Local,Medium,Single system,None,None,Complete,lbs_debugfs_write
 CVE-2013-6376,189,,DoS,2013-12-14,2014-03-16,5.2,None,Local Network,Medium,Single system,None,None,Complete,recalculate_apic_map
-CVE-2013-6368,20,,DoS +Priv,2013-12-14,2014-03-26,6.2,None,Local,High,Not required,Complete,Complete,Complete,kvm_lapic_sync_from_vapic,kvm_lapic_sync_to_vapic,kvm_lapic_set_vapic_addr,kvm_arch_vcpu_ioctl
+CVE-2013-6368,20,,DoS +Priv,2013-12-14,2014-03-26,6.2,None,Local,High,Not required,Complete,Complete,Complete,NA,kvm_lapic_sync_from_vapic,kvm_arch_vcpu_ioctl,kvm_lapic_sync_to_vapic,kvm_lapic_set_vapic_addr
 CVE-2013-6367,189,,DoS,2013-12-14,2014-03-26,5.7,None,Local Network,Medium,Not required,None,None,Complete,apic_get_tmcct
-CVE-2013-6282,20,,,2013-11-20,2014-01-07,7.2,None,Local,Low,Not required,Complete,Complete,Complete
+CVE-2013-6282,20,,,2013-11-20,2014-01-07,7.2,None,Local,Low,Not required,Complete,Complete,Complete,NA
 CVE-2013-5634,399,,DoS,2013-09-25,2013-10-15,4.3,None,Local Network,High,Single system,None,None,Complete,kvm_vcpu_initialized,kvm_arch_vcpu_ioctl_run,kvm_arch_vcpu_ioctl
 CVE-2013-4592,399,,DoS,2013-11-20,2014-03-05,4.0,None,Local,High,Not required,None,None,Complete,__kvm_set_memory_region
 CVE-2013-4591,119,,DoS Overflow Mem. Corr.,2013-11-20,2014-03-26,6.2,None,Local,High,Not required,Complete,Complete,Complete,__nfs4_get_acl_uncached
@@ -337,7 +337,7 @@ CVE-2013-4514,119,,DoS Overflow,2013-11-12,2014-03-05,4.7,None,Local,Medium,Not 
 CVE-2013-4513,119,,DoS Overflow,2013-11-12,2014-03-05,4.9,None,Local,Low,Not required,None,None,Complete,oz_cdev_write
 CVE-2013-4512,119,,DoS Overflow,2013-11-12,2013-11-14,4.7,None,Local,Medium,Not required,None,None,Complete,exitcode_proc_write
 CVE-2013-4511,189,,Overflow +Priv,2013-11-12,2014-03-05,6.9,None,Local,Medium,Not required,Complete,Complete,Complete,uio_mmap_physical,au1100fb_fb_mmap,au1200fb_fb_mmap
-CVE-2013-4483,189,,DoS,2013-11-04,2015-03-17,4.9,None,Local,Low,Not required,None,None,Complete,semctl_setval,sem_getref,ipc_rcu_alloc,sem_lock_and_putref,exit_sem,newary,semctl_main,do_msgsnd,semctl_down,sem_obtain_lock,sem_getref_and_unlock,sem_putref,ipc_rcu_getref,sem_unlock,find_alloc_undo,ipc_alloc,sem_lock,freeary,ipc_rcu_putref
+CVE-2013-4483,189,,DoS,2013-11-04,2015-03-17,4.9,None,Local,Low,Not required,None,None,Complete,semctl_setval,sem_getref,ipc_rcu_alloc,NA,sem_lock_and_putref,exit_sem,newary,semctl_main,do_msgsnd,semctl_down,sem_obtain_lock,sem_getref_and_unlock,sem_putref,ipc_rcu_getref,sem_unlock,find_alloc_undo,ipc_alloc,sem_lock,freeary,ipc_rcu_putref
 CVE-2013-4470,264,,DoS +Priv Mem. Corr.,2013-11-04,2014-03-26,6.9,None,Local,Medium,Not required,Complete,Complete,Complete,ip6_ufo_append_data
 CVE-2013-4387,119,,DoS Overflow Mem. Corr.,2013-10-10,2014-03-26,6.1,None,Local Network,Low,Not required,None,None,Complete,ip6_ufo_append_data,ip6_append_data
 CVE-2013-4350,310,,+Info,2013-09-25,2014-01-03,5.0,None,Remote,Low,Not required,Partial,None,None,sctp_v6_xmit,sctp_v6_get_dst
@@ -352,38 +352,38 @@ CVE-2013-4247,189,,DoS Mem. Corr.,2013-08-24,2013-08-27,7.8,None,Remote,Low,Not 
 CVE-2013-4220,,,DoS,2013-08-24,2013-08-26,4.9,None,Local,Low,Not required,None,None,Complete,bad_mode
 CVE-2013-4205,399,,DoS,2013-08-24,2013-10-02,4.7,None,Local,Medium,Not required,None,None,Complete,unshare_userns
 CVE-2013-4163,399,,DoS,2013-07-29,2013-10-02,4.7,None,Local,Medium,Not required,None,None,Complete,ip6_append_data_mtu,ip6_append_data
-CVE-2013-4162,399,,DoS,2013-07-29,2014-01-03,4.7,None,Local,Medium,Not required,None,None,Complete,udp_push_pending_frames,udp_v6_push_pending_frames
+CVE-2013-4162,399,,DoS,2013-07-29,2014-01-03,4.7,None,Local,Medium,Not required,None,None,Complete,NA,udp_push_pending_frames,udp_v6_push_pending_frames
 CVE-2013-4129,20,,DoS,2013-07-29,2013-08-22,4.7,None,Local,Medium,Not required,None,None,Complete,__br_mdb_del,br_multicast_del_pg
 CVE-2013-4127,399,,DoS,2013-07-29,2013-07-29,4.7,None,Local,Medium,Not required,None,None,Complete,vhost_net_ubuf_put_wait_and_free,vhost_net_set_backend,vhost_net_ubuf_put_and_wait
 CVE-2013-4125,399,,DoS,2013-07-15,2013-08-22,5.4,None,Remote,High,Not required,None,None,Complete,rt6_qualify_for_ecmp,fib6_add_rt2node
 CVE-2013-3302,362,,DoS,2013-04-29,2013-05-03,4.4,None,Local,Medium,Not required,Partial,Partial,Partial,smb_send_rqst
-CVE-2013-3301,,,DoS,2013-04-29,2014-02-06,7.2,None,Local,Low,Not required,Complete,Complete,Complete,ftrace_filter_lseek
+CVE-2013-3301,,,DoS,2013-04-29,2014-02-06,7.2,None,Local,Low,Not required,Complete,Complete,Complete,NA,ftrace_filter_lseek
 CVE-2013-3237,200,,+Info,2013-04-22,2013-04-22,4.9,None,Local,Low,Not required,Complete,None,None,vsock_stream_recvmsg
 CVE-2013-3236,200,,+Info,2013-04-22,2013-04-22,4.9,None,Local,Low,Not required,Complete,None,None,vmci_transport_dgram_dequeue
 CVE-2011-1477,,,DoS +Priv Mem. Corr.,2012-06-21,2015-05-11,4.6,None,Local,Low,Not required,Partial,Partial,Partial,opl3_panning,opl3_setup_voice
-CVE-2011-1476,189,,DoS Mem. Corr.,2012-06-21,2015-05-11,4.0,None,Local,High,Not required,None,None,Complete,midi_synth_load_patch,opl3_load_patch,sequencer_write
+CVE-2011-1476,189,,DoS Mem. Corr.,2012-06-21,2015-05-11,4.0,None,Local,High,Not required,None,None,Complete,NA,midi_synth_load_patch,opl3_load_patch,sequencer_write
 CVE-2011-1162,200,,+Info,2012-01-27,2012-03-19,2.1,None,Local,Low,Not required,Partial,None,None,NA
 CVE-2011-1160,200,,+Info,2012-06-21,2012-06-26,2.1,None,Local,Low,Not required,Partial,None,None,tpm_open
 CVE-2011-1080,20,,+Info,2012-06-21,2015-05-05,2.1,None,Local,Low,Not required,Partial,None,None,do_replace
 CVE-2011-1079,20,,DoS +Info,2012-06-21,2015-05-05,5.4,None,Local,Medium,Not required,Partial,None,Complete,bnep_sock_ioctl
 CVE-2011-1078,200,,+Info,2012-06-21,2015-05-05,1.9,None,Local,Medium,Not required,Partial,None,None,sco_sock_getsockopt_old
 CVE-2011-1023,,,DoS,2012-06-21,2012-06-22,4.9,None,Local,Low,Not required,None,None,Complete,rds_ib_xmit,rds_loop_xmit
-CVE-2011-1021,264,,,2012-06-21,2012-06-22,3.6,None,Local,Low,Not required,None,Partial,Partial,cm_write,acpi_custom_method_init,acpi_custom_method_exit
+CVE-2011-1021,264,,,2012-06-21,2012-06-22,3.6,None,Local,Low,Not required,None,Partial,Partial,NA,cm_write,acpi_custom_method_init,acpi_custom_method_exit
 CVE-2011-0716,16,,DoS Mem. Corr.,2012-06-21,2012-06-26,4.7,None,Local,Medium,Not required,None,None,Complete,br_multicast_add_group
 CVE-2011-0006,264,,Bypass,2012-06-21,2012-06-26,1.9,None,Local,Medium,Not required,None,Partial,None,ima_lsm_rule_init
 CVE-2010-4650,119,,DoS Overflow,2012-06-21,2012-06-22,4.6,None,Local,Low,Not required,Partial,Partial,Partial,fuse_verify_ioctl_iov,fuse_do_ioctl
 CVE-2010-4648,,,,2012-06-21,2012-06-26,3.3,None,Local Network,Low,Not required,Partial,None,None,orinoco_ioctl_set_auth
 CVE-2010-4563,200,,+Info,2012-02-02,2012-02-03,5.0,None,Remote,Low,Not required,Partial,None,None,NA
-CVE-2010-4250,399,,DoS,2012-06-21,2012-06-26,4.9,None,Local,Low,Not required,None,None,Complete
+CVE-2010-4250,399,,DoS,2012-06-21,2012-06-26,4.9,None,Local,Low,Not required,None,None,Complete,NA
 CVE-2011-4374,189,,Exec Code Overflow,2012-01-19,2013-11-15,7.5,None,Remote,Low,Not required,Partial,Partial,Partial,NA
 CVE-2011-4330,119,,DoS Exec Code Overflow,2012-01-27,2012-04-16,7.2,None,Local,Low,Not required,Complete,Complete,Complete,hfs_mac2as
 CVE-2011-4326,399,,DoS,2012-05-17,2015-05-05,7.1,None,Remote,Medium,Not required,None,None,Complete,udp6_ufo_fragment
 CVE-2011-4325,,,DoS,2012-01-27,2012-04-16,4.9,None,Local,Low,Not required,None,None,Complete, nfs_direct_read_schedule_segment,nfs_writepage,nfs_direct_commit_releas,nfs_have_writeback,nfs_direct_free_writedat,nfs_direct_commit_schedul,nfs_direct_read_releas,*nfs_writedata_allo,nfs_readpag, nfs_direct_write_schedule_segment,nfs_wb_page_cance,*nfs_readdata_allo, nfs_readpage_async
-CVE-2011-4324,,,DoS,2012-06-21,2012-06-22,4.9,None,Local,Low,Not required,None,None,Complete,nfs_sync_mapping,nfs4_proc_create,__nfs4_close,nfs4_do_open,nfs4_open_recover_helper,_nfs4_do_open_reclaim,nfs4_do_close,nfs4_state_set_mode_locked,nfs_set_open_stateid,__update_open_stateid,nfs4_atomic_open,nfs4_try_open_cached,encode_open_downgrade,nfs4_close_prepare,nfs4_intent_set_file,nfs4_opendata_to_nfs4_state,nfs4_open_revalidate,can_open_delegated,nfs4_return_incompatible_delegation,encode_openhdr,nfs4_open_prepare,nfs4_close_sync,can_open_cached,nfs4_open_confirm_release,nfs4_close_state,nfs_zap_acl_cache,nfs4_open_release,encode_share_access,update_open_stateid,_nfs4_do_open,nfs4_close_done,nfs_set_open_stateid_locked,nfs_find_open_context,nfs4_open_recoverdata_alloc,nfs4_opendata_alloc,update_open_stateflags
+CVE-2011-4324,,,DoS,2012-06-21,2012-06-22,4.9,None,Local,Low,Not required,None,None,Complete,nfs_sync_mapping,nfs4_proc_create,__nfs4_close,nfs4_do_open,nfs4_open_recover_helper,NA,_nfs4_do_open_reclaim,nfs4_do_close,nfs4_state_set_mode_locked,nfs_set_open_stateid,__update_open_stateid,nfs4_atomic_open,nfs4_try_open_cached,encode_open_downgrade,nfs4_close_prepare,nfs4_intent_set_file,nfs4_opendata_to_nfs4_state,nfs4_open_revalidate,can_open_delegated,nfs4_return_incompatible_delegation,encode_openhdr,nfs4_open_prepare,nfs4_close_sync,can_open_cached,nfs4_open_confirm_release,nfs4_close_state,nfs_zap_acl_cache,nfs4_open_release,encode_share_access,update_open_stateid,_nfs4_do_open,nfs4_close_done,nfs_set_open_stateid_locked,nfs_find_open_context,nfs4_open_recoverdata_alloc,nfs4_opendata_alloc,update_open_stateflags
 CVE-2011-4132,20,,DoS,2012-01-27,2015-05-11,2.1,None,Local,Low,Not required,None,None,Partial,journal_get_superbloc
-CVE-2011-4131,189,,DoS,2012-05-17,2013-06-20,4.6,None,Local Network,High,Not required,None,None,Complete,nfs4_xdr_dec_getacl,nfs4_proc_get_acl,decode_getacl,nfs4_xdr_enc_getacl,__nfs4_get_acl_uncached,_copy_from_pages
-CVE-2011-4127,264,,Bypass,2012-07-03,2015-05-11,4.6,None,Local,Low,Not required,Partial,Partial,Partial,scsi_verify_blk_ioctl,scsi_cmd_blk_ioctl,sd_ioctl,sd_compat_ioctl
-CVE-2011-4112,264,,DoS,2012-05-17,2015-05-05,4.9,None,Local,Low,Not required,None,None,Complete,_init_airo_card,ar6000_create_ap_interface,tun_net_init,isdn_net_device_stop_queue,bond_enslave,veth_setup,hostap_setup_dev,_isdn_setup,fr_add_pvc,bnep_net_setup,bond_setup,vlan_setup,macvlan_common_setup,ifb_setup
+CVE-2011-4131,189,,DoS,2012-05-17,2013-06-20,4.6,None,Local Network,High,Not required,None,None,Complete,nfs4_xdr_dec_getacl,NA,nfs4_proc_get_acl,decode_getacl,nfs4_xdr_enc_getacl,__nfs4_get_acl_uncached,_copy_from_pages
+CVE-2011-4127,264,,Bypass,2012-07-03,2015-05-11,4.6,None,Local,Low,Not required,Partial,Partial,Partial,sd_ioctl,scsi_verify_blk_ioctl,scsi_cmd_blk_ioctl,NA,sd_compat_ioctl
+CVE-2011-4112,264,,DoS,2012-05-17,2015-05-05,4.9,None,Local,Low,Not required,None,None,Complete,_init_airo_card,NA,ar6000_create_ap_interface,tun_net_init,isdn_net_device_stop_queue,bond_enslave,veth_setup,hostap_setup_dev,_isdn_setup,fr_add_pvc,bnep_net_setup,bond_setup,vlan_setup,macvlan_common_setup,ifb_setup
 CVE-2011-4110,264,,DoS,2012-01-27,2012-03-22,2.1,None,Local,Low,Not required,None,None,Partial,NA
 CVE-2011-4097,189,,DoS Overflow,2012-05-17,2012-05-17,4.9,None,Local,Low,Not required,None,None,Complete,oom_badness
 CVE-2011-4086,119,,DoS Overflow,2012-07-03,2013-02-14,4.9,None,Local,Low,Not required,None,None,Complete,journal_unmap_buffer
@@ -392,28 +392,28 @@ CVE-2011-4080,264,,Bypass,2012-05-24,2012-05-29,4.0,None,Local,High,Not required
 CVE-2011-4077,119,,DoS Exec Code Overflow Mem. Corr.,2012-01-27,2013-02-14,6.9,None,Local,Medium,Not required,Complete,Complete,Complete,NA
 CVE-2011-3637,20,,DoS,2012-05-17,2012-05-17,4.9,None,Local,Low,Not required,None,None,Complete,m_stop
 CVE-2011-3363,20,,DoS,2012-05-24,2012-05-29,5.4,None,Remote,High,Not required,None,None,Complete,cifs_mount
-CVE-2011-3359,119,,DoS Overflow,2012-05-24,2012-05-29,5.4,None,Remote,High,Not required,None,None,Complete,dma_rx
+CVE-2011-3359,119,,DoS Overflow,2012-05-24,2012-05-29,5.4,None,Remote,High,Not required,None,None,Complete,dma_rx,NA
 CVE-2011-3353,119,,DoS Overflow,2012-05-24,2012-05-25,4.9,None,Local,Low,Not required,None,None,Complete,fuse_notify_inval_entry
-CVE-2011-3209,189,,DoS,2012-10-03,2012-10-03,4.9,None,Local,Low,Not required,None,None,Complete,sgi_timer_set,jiffies_to_compat_timeval,sgi_clock_set,sgi_clock_get,cpu_clock_sample_group_locked,posix_cpu_timer_create,sgi_timer_get
+CVE-2011-3209,189,,DoS,2012-10-03,2012-10-03,4.9,None,Local,Low,Not required,None,None,Complete,NA,sgi_timer_set,jiffies_to_compat_timeval,sgi_clock_set,sgi_clock_get,cpu_clock_sample_group_locked,posix_cpu_timer_create,sgi_timer_get
 CVE-2011-3191,189,,DoS Mem. Corr.,2012-05-24,2012-05-25,10.0,None,Remote,Low,Not required,Complete,Complete,Complete,CIFSFindNext
-CVE-2011-3188,,,DoS,2012-05-24,2012-10-24,6.8,None,Remote,Medium,Not required,Partial,Partial,Partial,md5_transform
-CVE-2011-2918,399,,DoS Overflow,2012-05-24,2012-05-29,4.9,None,Local,Low,Not required,None,None,Complete,local_flush_tlb_one,arch_ptrace,ptrace_hbptriggered,x86_setup_perfctr,do_one_mathemu,sparc_perf_event_update,fmov_reg_idx,gpr_set,maybe_change_configuration,xscale1pmu_handle_irq,handle_unaligned_access,perf_callchain_kernel,do_divide_error,isBranchInstr,simulate_ll,show_raw_backtrace,kmmio_fault,do_sparc_fault,do_page_fault,get_user_msr,fmov_idx_reg,power_check_constraints,do_address_error,misaligned_fpu_load,compute_effective_address,power_pmu_enable,write_pmc,fpr_get,armv6pmu_handle_irq,xscale2pmu_handle_irq,armv7pmu_handle_irq,__fetch_reg_addr_user,swp_handler,dbg_set_reg,alpha_perf_event_irq_handler,emulate_load_store_insn,notify_page_fault,power_pmu_disable,alpha_perf_event_update,niagara2_event_map
+CVE-2011-3188,,,DoS,2012-05-24,2012-10-24,6.8,None,Remote,Medium,Not required,Partial,Partial,Partial,NA,md5_transform
+CVE-2011-2918,399,,DoS Overflow,2012-05-24,2012-05-29,4.9,None,Local,Low,Not required,None,None,Complete,local_flush_tlb_one,arch_ptrace,ptrace_hbptriggered,x86_setup_perfctr,do_one_mathemu,sparc_perf_event_update,fmov_reg_idx,gpr_set,maybe_change_configuration,xscale1pmu_handle_irq,NA,handle_unaligned_access,perf_callchain_kernel,do_divide_error,isBranchInstr,simulate_ll,show_raw_backtrace,kmmio_fault,do_sparc_fault,do_page_fault,get_user_msr,fmov_idx_reg,power_check_constraints,do_address_error,misaligned_fpu_load,compute_effective_address,power_pmu_enable,write_pmc,fpr_get,armv6pmu_handle_irq,xscale2pmu_handle_irq,armv7pmu_handle_irq,__fetch_reg_addr_user,swp_handler,dbg_set_reg,alpha_perf_event_irq_handler,emulate_load_store_insn,notify_page_fault,power_pmu_disable,alpha_perf_event_update,niagara2_event_map
 CVE-2011-2906,189,,DoS Mem. Corr.,2012-05-24,2012-05-29,4.9,None,Local,Low,Not required,None,None,Complete,pmcraid_ioctl_passthrough
-CVE-2011-2898,264,,+Info,2012-05-24,2012-05-29,4.9,None,Local,Low,Not required,Complete,None,None,packet_recvmsg,tpacket_rcv
+CVE-2011-2898,264,,+Info,2012-05-24,2012-05-29,4.9,None,Local,Low,Not required,Complete,None,None,NA,packet_recvmsg,tpacket_rcv
 CVE-2011-2707,20,,+Info,2012-05-24,2012-05-29,4.9,None,Local,Low,Not required,Complete,None,None,ptrace_setxregs
-CVE-2011-2699,,,DoS,2012-05-24,2013-10-10,7.8,None,Remote,Low,Not required,None,None,Complete,inet_getid,inet_getpeer,udp6_ufo_fragment,ip6_ufo_append_data,ipv6_select_ident,secure_ipv6_id,ip6_fragment,ip6_append_data
+CVE-2011-2699,,,DoS,2012-05-24,2013-10-10,7.8,None,Remote,Low,Not required,None,None,Complete,inet_getid,inet_getpeer,udp6_ufo_fragment,ip6_ufo_append_data,ipv6_select_ident,NA,secure_ipv6_id,ip6_fragment,ip6_append_data
 CVE-2011-2525,,,DoS,2012-02-01,2014-01-13,7.2,None,Local,Low,Not required,Complete,Complete,Complete,nla_put_failure:, qdisc_notify,err_out:
 CVE-2011-2521,189,,DoS,2012-05-24,2012-05-25,4.9,None,Local,Low,Not required,None,None,Complete,x86_assign_hw_event
 CVE-2011-2518,20,,DoS,2012-05-24,2012-05-25,4.9,None,Local,Low,Not required,None,None,Complete,tomoyo_mount_acl
 CVE-2011-2517,119,,Overflow +Priv,2012-05-24,2013-12-30,7.2,None,Local,Low,Not required,Complete,Complete,Complete,nl80211_start_sched_scan,nl80211_trigger_scan
 CVE-2011-2496,189,,DoS Overflow,2012-06-13,2012-06-28,4.9,None,Local,Low,Not required,None,None,Complete,vma_to_resize
 CVE-2011-2495,264,,,2012-06-13,2013-12-30,2.1,None,Local,Low,Not required,Partial,None,None,do_io_accounting
-CVE-2011-2494,200,,+Info,2012-06-13,2012-12-18,2.1,None,Local,Low,Not required,Partial,None,None
+CVE-2011-2494,200,,+Info,2012-06-13,2012-12-18,2.1,None,Local,Low,Not required,Partial,None,None,NA
 CVE-2011-2493,,,DoS,2012-06-13,2012-06-14,2.1,None,Local,Low,Not required,None,None,Partial,ext4_fill_super
-CVE-2011-2211,264,,+Priv,2012-06-13,2012-06-13,7.2,None,Local,Low,Not required,Complete,Complete,Complete
-CVE-2011-2210,264,,+Info,2012-06-13,2012-06-13,2.1,None,Local,Low,Not required,Partial,None,None
-CVE-2011-2209,189,,+Info,2012-06-13,2012-06-13,2.1,None,Local,Low,Not required,None,None,Partial
-CVE-2011-2208,189,,+Info,2012-06-13,2012-06-13,2.1,None,Local,Low,Not required,Partial,None,None
+CVE-2011-2211,264,,+Priv,2012-06-13,2012-06-13,7.2,None,Local,Low,Not required,Complete,Complete,Complete,NA
+CVE-2011-2210,264,,+Info,2012-06-13,2012-06-13,2.1,None,Local,Low,Not required,Partial,None,None,NA
+CVE-2011-2209,189,,+Info,2012-06-13,2012-06-13,2.1,None,Local,Low,Not required,None,None,Partial,NA
+CVE-2011-2208,189,,+Info,2012-06-13,2012-06-13,2.1,None,Local,Low,Not required,Partial,None,None,NA
 CVE-2011-2203,264,,DoS,2012-01-27,2012-03-19,2.1,None,Local,Low,Not required,None,None,Partial,NA
 CVE-2011-2183,362,,DoS,2012-06-13,2012-06-14,4.0,None,Local,High,Not required,None,None,Complete,scan_get_next_rmap_item
 CVE-2011-2182,119,,Overflow +Priv +Info,2012-06-13,2012-06-13,7.2,None,Local,Low,Not required,Complete,Complete,Complete,ldm_frag_add
@@ -431,14 +431,14 @@ CVE-2012-4565,189,,DoS,2012-12-21,2013-08-21,4.7,None,Local,Medium,Not required,
 CVE-2012-4508,362,,+Info,2012-12-21,2014-01-07,1.9,None,Local,Medium,Not required,Partial,None,None,ext4_split_extent_at,ext4_split_extent,ext4_ext_handle_uninitialized_extents,ext4_split_unwritten_extents,ext4_convert_unwritten_extents_endio
 CVE-2012-4467,399,,DoS +Info,2012-10-10,2013-01-29,6.6,None,Local,Low,Not required,Complete,None,Complete,do_siocgstampns,do_siocgstamp
 CVE-2012-4444,,,Bypass,2012-12-21,2013-06-14,5.0,None,Remote,Low,Not required,None,Partial,None,ip6_frag_queue
-CVE-2012-3552,362,,DoS,2012-10-03,2013-10-11,5.4,None,Remote,High,Not required,None,None,Complete,inet_csk_route_req,do_ip_getsockopt,opt_kfree_rcu,icmp_reply,raw_ioctl,cipso_v4_sock_setattr,ip_send_reply,cipso_v4_delopt,ip_build_and_send_pkt,do_ip_setsockopt,cipso_v4_sock_delattr,dccp_v4_request_recv_sock,ip_options_build,icmp_route_lookup,icmp_send,ip_options_get,inet_sk_reselect_saddr,cipso_v4_req_delattr,ip_options_echo,ip_setup_cork,inet_sock_destruct,raw_local_deliver,cipso_v4_sock_getattr,raw_v4_input,tcp_v4_syn_recv_sock,raw_err,ip_queue_xmit,dccp_v4_connect,ip_options_get_from_user,__udp4_lib_lookup,cipso_v4_req_setattr,inet_sk_rebuild_header,ip_options_get_finish,dccp_v6_request_recv_sock,ip_options_get_alloc
+CVE-2012-3552,362,,DoS,2012-10-03,2013-10-11,5.4,None,Remote,High,Not required,None,None,Complete,inet_csk_route_req,do_ip_getsockopt,opt_kfree_rcu,icmp_reply,raw_ioctl,cipso_v4_sock_setattr,ip_send_reply,cipso_v4_delopt,ip_build_and_send_pkt,do_ip_setsockopt,cipso_v4_sock_delattr,NA,dccp_v4_request_recv_sock,ip_options_build,icmp_route_lookup,icmp_send,ip_options_get,inet_sk_reselect_saddr,cipso_v4_req_delattr,ip_options_echo,ip_setup_cork,inet_sock_destruct,raw_local_deliver,cipso_v4_sock_getattr,raw_v4_input,tcp_v4_syn_recv_sock,raw_err,ip_queue_xmit,dccp_v4_connect,ip_options_get_from_user,__udp4_lib_lookup,cipso_v4_req_setattr,inet_sk_rebuild_header,ip_options_get_finish,dccp_v6_request_recv_sock,ip_options_get_alloc
 CVE-2012-3520,287,,,2012-10-03,2013-02-21,1.9,None,Local,Medium,Not required,None,Partial,None,scm_send,netlink_sendmsg,unix_stream_sendmsg,unix_dgram_sendmsg
 CVE-2012-3511,362,,DoS,2012-10-03,2013-10-23,6.2,None,Local,High,Not required,Complete,Complete,Complete,madvise_remove
 CVE-2012-3510,399,,DoS +Info,2012-10-03,2013-04-18,5.6,None,Local,Low,Not required,Partial,None,Complete,xacct_add_tsk
 CVE-2012-3430,200,,+Info,2012-10-03,2013-04-18,2.1,None,Local,Low,Not required,Partial,None,None,rds_recvmsg
-CVE-2012-3412,189,,DoS,2012-10-03,2013-08-17,7.8,None,Remote,Low,Not required,None,None,Complete,efx_probe_all,efx_register_netdev,efx_ethtool_set_ringparam,efx_tx_max_skb_descs
+CVE-2012-3412,189,,DoS,2012-10-03,2013-08-17,7.8,None,Remote,Low,Not required,None,None,Complete,efx_tx_max_skb_descs,NA,efx_register_netdev,efx_probe_all,efx_ethtool_set_ringparam
 CVE-2012-3400,119,,DoS Overflow,2012-10-03,2015-05-11,7.6,None,Remote,High,Not required,Complete,Complete,Complete,udf_load_logicalvol
-CVE-2012-3375,,,DoS,2012-10-03,2013-08-17,4.9,None,Local,Low,Not required,None,None,Complete
+CVE-2012-3375,,,DoS,2012-10-03,2013-08-17,4.9,None,Local,Low,Not required,None,None,Complete,NA
 CVE-2012-2745,119,,DoS Overflow,2012-08-09,2013-04-18,4.7,None,Local,Medium,Not required,None,None,Complete,copy_creds
 CVE-2012-2744,,,DoS,2012-08-09,2013-03-21,7.8,None,Remote,Low,Not required,None,None,Complete,nf_ct_frag6_reasm
 CVE-2012-2669,20,,,2012-12-27,2013-01-29,2.1,None,Local,Low,Not required,None,Partial,None,main
@@ -448,14 +448,14 @@ CVE-2012-2383,189,,DoS Overflow,2012-06-13,2013-04-18,4.9,None,Local,Low,Not req
 CVE-2012-2375,189,,DoS,2012-06-13,2013-02-07,4.6,None,Local Network,High,Not required,None,None,Complete,__nfs4_get_acl_uncached
 CVE-2012-2373,362,,DoS,2012-08-09,2013-01-23,4.0,None,Local,High,Not required,None,None,Complete,pmd_read_atomic,pmd_none_or_trans_huge_or_clear_bad
 CVE-2012-2319,264,,Overflow +Priv,2012-05-17,2015-05-11,7.2,None,Local,Low,Not required,Complete,Complete,Complete,hfsplus_rename_cat,hfsplus_readdir
-CVE-2012-2313,264,,,2012-06-13,2015-05-11,1.2,None,Local,High,Not required,None,None,Partial,rio_ioctl
+CVE-2012-2313,264,,,2012-06-13,2015-05-11,1.2,None,Local,High,Not required,None,None,Partial,rio_ioctl,NA
 CVE-2012-2136,20,,DoS Overflow +Priv,2012-08-09,2013-03-01,7.2,None,Local,Low,Not required,Complete,Complete,Complete,sock_alloc_send_pskb
-CVE-2012-2133,399,,DoS +Priv,2012-07-03,2012-08-13,4.0,None,Local,High,Not required,None,None,Complete,unmap_ref_private,hugetlb_reserve_pages,hugepage_new_subpool,hugetlbfs_fill_super,hugepage_subpool_get_pages,hugepage_subpool_put_pages,subpool_inode,hugepage_put_subpool,hugetlb_unreserve_pages,subpool_vma,alloc_huge_page,unlock_or_release_subpool,hugetlb_vm_op_close,hugetlbfs_statfs,free_huge_page,hugetlbfs_put_super
+CVE-2012-2133,399,,DoS +Priv,2012-07-03,2012-08-13,4.0,None,Local,High,Not required,None,None,Complete,unmap_ref_private,hugetlb_reserve_pages,hugepage_new_subpool,hugetlbfs_fill_super,NA,hugepage_subpool_get_pages,hugepage_subpool_put_pages,subpool_inode,hugepage_put_subpool,hugetlb_unreserve_pages,subpool_vma,alloc_huge_page,unlock_or_release_subpool,hugetlb_vm_op_close,hugetlbfs_statfs,free_huge_page,hugetlbfs_put_super
 CVE-2012-2127,119,,DoS Overflow,2012-06-21,2013-02-12,5.0,None,Remote,Low,Not required,None,None,Partial,proc_root_init,pid_ns_release_proc
 CVE-2012-2123,264,,Bypass,2012-05-17,2013-02-14,7.2,None,Local,Low,Not required,Complete,Complete,Complete,cap_bprm_set_creds
 CVE-2012-2121,264,,DoS,2012-05-17,2014-01-13,4.9,None,Local,Low,Not required,None,None,Complete,kvm_iommu_unmap_pages,kvm_iommu_unmap_memslots,__kvm_set_memory_region
 CVE-2012-2100,189,,DoS,2012-07-03,2013-02-07,7.1,None,Remote,Medium,Not required,None,None,Complete,ext4_fill_flex_info
-CVE-2012-1601,399,,DoS,2012-05-17,2013-06-20,4.9,None,Local,Low,Not required,None,None,Complete,kvm_arch_vm_ioctl,kvm_vcpu_compatible,kvm_vm_ioctl_create_vcpu
+CVE-2012-1601,399,,DoS,2012-05-17,2013-06-20,4.9,None,Local,Low,Not required,None,None,Complete,NA,kvm_arch_vm_ioctl,kvm_vcpu_compatible,kvm_vm_ioctl_create_vcpu
 CVE-2012-1583,399,,DoS,2012-06-16,2013-05-03,5.0,None,Remote,Low,Not required,None,None,Partial,xfrm6_tunnel_rcv
 CVE-2012-1179,264,,DoS,2012-05-17,2013-01-23,5.2,None,Local Network,Medium,Single system,None,None,Complete,pmd_none_or_trans_huge_or_clear_bad,clear_refs_pte_range,mem_cgroup_count_precharge_pte_range,smaps_pte_range,pmd_trans_unstable,mincore_pmd_range,unuse_pmd_range,check_pmd_range,mark_screen_rdonly,walk_pmd_range,zap_pmd_range,mem_cgroup_move_charge_pte_range,gather_pte_stats,pagemap_pte_range
 CVE-2012-1146,,,DoS,2012-05-17,2013-02-14,10.0,None,Remote,Low,Not required,Complete,Complete,Complete,mem_cgroup_usage_unregister_event
@@ -466,14 +466,14 @@ CVE-2012-0879,20,,DoS,2012-05-17,2014-06-23,4.9,None,Local,Low,Not required,None
 CVE-2012-0207,399,,DoS,2012-05-17,2012-05-17,7.8,None,Remote,Low,Not required,None,None,Complete,igmp_heard_query
 CVE-2012-0058,399,,DoS,2012-05-17,2012-08-18,4.9,None,Local,Low,Not required,None,None,Complete,kiocb_batch_free,do_io_submit
 CVE-2012-0056,264,,+Priv,2012-01-27,2014-07-17,6.9,None,Local,Medium,Not required,Complete,Complete,Complete,*mm_for_map, mem_read, mem_write,mem_lsee,proc_root_lin, 
-CVE-2012-0045,,,DoS,2012-07-03,2012-07-03,4.7,None,Local,Medium,Not required,None,None,Complete,em_syscall_is_enabled,em_syscall
-CVE-2012-0044,189,,DoS Overflow +Priv Mem. Corr.,2012-05-17,2013-04-18,7.2,None,Local,Low,Not required,Complete,Complete,Complete,drm_mode_dirtyfb_ioctl
+CVE-2012-0045,,,DoS,2012-07-03,2012-07-03,4.7,None,Local,Medium,Not required,None,None,Complete,NA,em_syscall_is_enabled,em_syscall
+CVE-2012-0044,189,,DoS Overflow +Priv Mem. Corr.,2012-05-17,2013-04-18,7.2,None,Local,Low,Not required,Complete,Complete,Complete,drm_mode_dirtyfb_ioctl,NA
 CVE-2012-0038,189,,DoS Overflow,2012-05-17,2012-05-17,4.9,None,Local,Low,Not required,None,None,Complete,xfs_acl_from_disk
-CVE-2012-0028,264,,DoS +Priv,2012-06-21,2012-06-22,7.2,None,Local,Low,Not required,Complete,Complete,Complete,put_files_struct,reset_files_struct
-CVE-2011-4914,20,,DoS +Info,2012-06-21,2015-05-11,6.4,None,Remote,Low,Not required,Partial,None,Partial,rose_rx_call_request,rose_route_frame,rose_write_internal,rose_parse_facilities,rose_loopback_timer,rose_parse_national,rose_parse_ccitt
+CVE-2012-0028,264,,DoS +Priv,2012-06-21,2012-06-22,7.2,None,Local,Low,Not required,Complete,Complete,Complete,put_files_struct,reset_files_struct,NA
+CVE-2011-4914,20,,DoS +Info,2012-06-21,2015-05-11,6.4,None,Remote,Low,Not required,Partial,None,Partial,rose_rx_call_request,rose_route_frame,rose_write_internal,NA,rose_parse_facilities,rose_loopback_timer,rose_parse_national,rose_parse_ccitt
 CVE-2011-4913,20,,DoS Overflow Mem. Corr.,2012-06-21,2015-05-11,7.8,None,Remote,Low,Not required,None,None,Complete,rose_parse_national,rose_parse_ccitt,rose_parse_facilities
 CVE-2011-4621,,,DoS Exec Code,2012-05-17,2012-05-17,4.9,None,Local,Low,Not required,None,None,Complete,dup_task_struct,update_rq_clock,check_preempt_curr,schedule
-CVE-2011-4611,189,,DoS Overflow,2012-05-17,2012-05-17,4.9,None,Local,Low,Not required,None,None,Complete,pmc_overflow,perf_event_interrupt
+CVE-2011-4611,189,,DoS Overflow,2012-05-17,2012-05-17,4.9,None,Local,Low,Not required,None,None,Complete,NA,pmc_overflow,perf_event_interrupt
 CVE-2011-4594,,,DoS,2012-05-17,2012-05-17,4.9,None,Local,Low,Not required,None,None,Complete,__sys_sendmsg
 CVE-2011-0711,200,,+Info,2011-03-01,2014-01-13,2.1,None,Local,Low,Not required,Partial,None,None,xfs_fs_geometry
 CVE-2011-0710,200,,+Info,2011-02-18,2012-03-19,2.1,None,Local,Low,Not required,Partial,None,None,(*fn,show_reg, proc_pid_status
