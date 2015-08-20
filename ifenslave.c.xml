@@ -1,0 +1,593 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.sdml.info/srcML/src" xmlns:cpp="http://www.sdml.info/srcML/cpp" language="C" filename="/Users/guest/Dropbox/Research/LinuxConfig/TypeChef-BusyBoxAnalysis/busybox-1.18.5/networking/ifenslave.c"><comment type="block">/* Mode: C;
+ *
+ * Mini ifenslave implementation for busybox
+ * Copyright (C) 2005 by Marc Leeman &lt;marc.leeman@barco.com&gt;
+ *
+ * ifenslave.c: Configure network interfaces for parallel routing.
+ *
+ *      This program controls the Linux implementation of running multiple
+ *      network interfaces in parallel.
+ *
+ * Author:      Donald Becker &lt;becker@cesdis.gsfc.nasa.gov&gt;
+ *              Copyright 1994-1996 Donald Becker
+ *
+ *              This program is free software; you can redistribute it
+ *              and/or modify it under the terms of the GNU General Public
+ *              License as published by the Free Software Foundation.
+ *
+ *      The author may be reached as becker@CESDIS.gsfc.nasa.gov, or C/O
+ *      Center of Excellence in Space Data and Information Sciences
+ *         Code 930.5, Goddard Space Flight Center, Greenbelt MD 20771
+ *
+ *  Changes :
+ *    - 2000/10/02 Willy Tarreau &lt;willy at meta-x.org&gt; :
+ *       - few fixes. Master's MAC address is now correctly taken from
+ *         the first device when not previously set ;
+ *       - detach support : call BOND_RELEASE to detach an enslaved interface.
+ *       - give a mini-howto from command-line help : # ifenslave -h
+ *
+ *    - 2001/02/16 Chad N. Tindel &lt;ctindel at ieee dot org&gt; :
+ *       - Master is now brought down before setting the MAC address.  In
+ *         the 2.4 kernel you can't change the MAC address while the device is
+ *         up because you get EBUSY.
+ *
+ *    - 2001/09/13 Takao Indoh &lt;indou dot takao at jp dot fujitsu dot com&gt;
+ *       - Added the ability to change the active interface on a mode 1 bond
+ *         at runtime.
+ *
+ *    - 2001/10/23 Chad N. Tindel &lt;ctindel at ieee dot org&gt; :
+ *       - No longer set the MAC address of the master.  The bond device will
+ *         take care of this itself
+ *       - Try the SIOC*** versions of the bonding ioctls before using the
+ *         old versions
+ *    - 2002/02/18 Erik Habbinga &lt;erik_habbinga @ hp dot com&gt; :
+ *       - ifr2.ifr_flags was not initialized in the hwaddr_notset case,
+ *         SIOCGIFFLAGS now called before hwaddr_notset test
+ *
+ *    - 2002/10/31 Tony Cureington &lt;tony.cureington * hp_com&gt; :
+ *       - If the master does not have a hardware address when the first slave
+ *         is enslaved, the master is assigned the hardware address of that
+ *         slave - there is a comment in bonding.c stating "ifenslave takes
+ *         care of this now." This corrects the problem of slaves having
+ *         different hardware addresses in active-backup mode when
+ *         multiple interfaces are specified on a single ifenslave command
+ *         (ifenslave bond0 eth0 eth1).
+ *
+ *    - 2003/03/18 - Tsippy Mendelson &lt;tsippy.mendelson at intel dot com&gt; and
+ *                   Shmulik Hen &lt;shmulik.hen at intel dot com&gt;
+ *       - Moved setting the slave's mac address and openning it, from
+ *         the application to the driver. This enables support of modes
+ *         that need to use the unique mac address of each slave.
+ *         The driver also takes care of closing the slave and restoring its
+ *         original mac address upon release.
+ *         In addition, block possibility of enslaving before the master is up.
+ *         This prevents putting the system in an undefined state.
+ *
+ *    - 2003/05/01 - Amir Noam &lt;amir.noam at intel dot com&gt;
+ *       - Added ABI version control to restore compatibility between
+ *         new/old ifenslave and new/old bonding.
+ *       - Prevent adding an adapter that is already a slave.
+ *         Fixes the problem of stalling the transmission and leaving
+ *         the slave in a down state.
+ *
+ *    - 2003/05/01 - Shmulik Hen &lt;shmulik.hen at intel dot com&gt;
+ *       - Prevent enslaving if the bond device is down.
+ *         Fixes the problem of leaving the system in unstable state and
+ *         halting when trying to remove the module.
+ *       - Close socket on all abnormal exists.
+ *       - Add versioning scheme that follows that of the bonding driver.
+ *         current version is 1.0.0 as a base line.
+ *
+ *    - 2003/05/22 - Jay Vosburgh &lt;fubar at us dot ibm dot com&gt;
+ *       - ifenslave -c was broken; it's now fixed
+ *       - Fixed problem with routes vanishing from master during enslave
+ *         processing.
+ *
+ *    - 2003/05/27 - Amir Noam &lt;amir.noam at intel dot com&gt;
+ *       - Fix backward compatibility issues:
+ *         For drivers not using ABI versions, slave was set down while
+ *         it should be left up before enslaving.
+ *         Also, master was not set down and the default set_mac_address()
+ *         would fail and generate an error message in the system log.
+ *       - For opt_c: slave should not be set to the master's setting
+ *         while it is running. It was already set during enslave. To
+ *         simplify things, it is now handeled separately.
+ *
+ *    - 2003/12/01 - Shmulik Hen &lt;shmulik.hen at intel dot com&gt;
+ *       - Code cleanup and style changes
+ *         set version to 1.1.0
+ */</comment>
+
+<cpp:include>#<cpp:directive>include</cpp:directive> <cpp:file>"libbb.h"</cpp:file></cpp:include>
+
+<comment type="block">/* #include &lt;net/if.h&gt; - no. linux/if_bonding.h pulls in linux/if.h */</comment>
+<cpp:include>#<cpp:directive>include</cpp:directive> <cpp:file>&lt;linux/if.h&gt;</cpp:file></cpp:include>
+<comment type="line">//#include &lt;net/if_arp.h&gt; - not needed?</comment>
+<cpp:include>#<cpp:directive>include</cpp:directive> <cpp:file>&lt;linux/if_bonding.h&gt;</cpp:file></cpp:include>
+<cpp:include>#<cpp:directive>include</cpp:directive> <cpp:file>&lt;linux/sockios.h&gt;</cpp:file></cpp:include>
+<cpp:include>#<cpp:directive>include</cpp:directive> <cpp:file>"fix_u32.h"</cpp:file></cpp:include> <comment type="block">/* hack, so we may include kernel's ethtool.h */</comment>
+<cpp:include>#<cpp:directive>include</cpp:directive> <cpp:file>&lt;linux/ethtool.h&gt;</cpp:file></cpp:include>
+<cpp:ifndef>#<cpp:directive>ifndef</cpp:directive> <name>BOND_ABI_VERSION</name></cpp:ifndef>
+<cpp:define># <cpp:directive>define</cpp:directive> <cpp:macro><name>BOND_ABI_VERSION</name></cpp:macro> <cpp:value>2</cpp:value></cpp:define>
+<cpp:endif>#<cpp:directive>endif</cpp:directive></cpp:endif>
+<cpp:ifndef>#<cpp:directive>ifndef</cpp:directive> <name>IFNAMSIZ</name></cpp:ifndef>
+<cpp:define># <cpp:directive>define</cpp:directive> <cpp:macro><name>IFNAMSIZ</name></cpp:macro> <cpp:value>16</cpp:value></cpp:define>
+<cpp:endif>#<cpp:directive>endif</cpp:directive></cpp:endif>
+
+
+<struct>struct <name>dev_data</name> <block>{
+	<decl_stmt><decl><type>struct <name>ifreq</name></type> <name>mtu</name></decl>, <decl><type ref="prev"/><name>flags</name></decl>, <decl><type ref="prev"/><name>hwaddr</name></decl>;</decl_stmt>
+}</block>;</struct>
+
+
+<enum>enum <block>{ <decl><name>skfd</name> <init>= <expr>3</expr></init></decl> }</block>;</enum>      <comment type="block">/* AF_INET socket for ioctl() calls. */</comment>
+<struct>struct <name>globals</name> <block>{
+	<decl_stmt><decl><type><name>unsigned</name></type> <name>abi_ver</name></decl>;</decl_stmt>       <comment type="block">/* userland - kernel ABI version */</comment>
+	<decl_stmt><decl><type><name>smallint</name></type> <name>hwaddr_set</name></decl>;</decl_stmt>    <comment type="block">/* Master's hwaddr is set */</comment>
+	<decl_stmt><decl><type>struct <name>dev_data</name></type> <name>master</name></decl>;</decl_stmt>
+	<decl_stmt><decl><type>struct <name>dev_data</name></type> <name>slave</name></decl>;</decl_stmt>
+}</block>;</struct>
+<cpp:define>#<cpp:directive>define</cpp:directive> <cpp:macro><name>G</name></cpp:macro> <cpp:value>(*ptr_to_globals)</cpp:value></cpp:define>
+<cpp:define>#<cpp:directive>define</cpp:directive> <cpp:macro><name>abi_ver</name></cpp:macro>    <cpp:value>(G.abi_ver   )</cpp:value></cpp:define>
+<cpp:define>#<cpp:directive>define</cpp:directive> <cpp:macro><name>hwaddr_set</name></cpp:macro> <cpp:value>(G.hwaddr_set)</cpp:value></cpp:define>
+<cpp:define>#<cpp:directive>define</cpp:directive> <cpp:macro><name>master</name></cpp:macro>     <cpp:value>(G.master    )</cpp:value></cpp:define>
+<cpp:define>#<cpp:directive>define</cpp:directive> <cpp:macro><name>slave</name></cpp:macro>      <cpp:value>(G.slave     )</cpp:value></cpp:define>
+<cpp:define>#<cpp:directive>define</cpp:directive> <cpp:macro><name>INIT_G</name><parameter_list>()</parameter_list></cpp:macro> <cpp:value>do { \
+	SET_PTR_TO_GLOBALS(xzalloc(sizeof(G))); \
+} while (0)</cpp:value></cpp:define>
+
+
+<comment type="block">/* NOINLINEs are placed where it results in smaller code (gcc 4.3.1) */</comment>
+
+<function><type><specifier>static</specifier> <name>int</name></type> <name>ioctl_on_skfd</name><parameter_list>(<param><decl><type><name>unsigned</name></type> <name>request</name></decl></param>, <param><decl><type>struct <name>ifreq</name> *</type><name>ifr</name></decl></param>)</parameter_list>
+<block>{
+	<return>return <expr><call><name>ioctl</name><argument_list>(<argument><expr><name>skfd</name></expr></argument>, <argument><expr><name>request</name></expr></argument>, <argument><expr><name>ifr</name></expr></argument>)</argument_list></call></expr>;</return>
+}</block></function>
+
+<function><type><specifier>static</specifier> <name>int</name></type> <name>set_ifrname_and_do_ioctl</name><parameter_list>(<param><decl><type><name>unsigned</name></type> <name>request</name></decl></param>, <param><decl><type>struct <name>ifreq</name> *</type><name>ifr</name></decl></param>, <param><decl><type><specifier>const</specifier> <name>char</name> *</type><name>ifname</name></decl></param>)</parameter_list>
+<block>{
+	<expr_stmt><expr><call><name>strncpy_IFNAMSIZ</name><argument_list>(<argument><expr><name><name>ifr</name>-&gt;<name>ifr_name</name></name></expr></argument>, <argument><expr><name>ifname</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+	<return>return <expr><call><name>ioctl_on_skfd</name><argument_list>(<argument><expr><name>request</name></expr></argument>, <argument><expr><name>ifr</name></expr></argument>)</argument_list></call></expr>;</return>
+}</block></function>
+
+<function><type><specifier>static</specifier> <name>int</name></type> <name>get_if_settings</name><parameter_list>(<param><decl><type><name>char</name> *</type><name>ifname</name></decl></param>, <param><decl><type>struct <name>dev_data</name> *</type><name>dd</name></decl></param>)</parameter_list>
+<block>{
+	<decl_stmt><decl><type><name>int</name></type> <name>res</name></decl>;</decl_stmt>
+
+	<expr_stmt><expr><name>res</name> = <call><name>set_ifrname_and_do_ioctl</name><argument_list>(<argument><expr><name>SIOCGIFMTU</name></expr></argument>, <argument><expr>&amp;<name><name>dd</name>-&gt;<name>mtu</name></name></expr></argument>, <argument><expr><name>ifname</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+	<expr_stmt><expr><name>res</name> |= <call><name>set_ifrname_and_do_ioctl</name><argument_list>(<argument><expr><name>SIOCGIFFLAGS</name></expr></argument>, <argument><expr>&amp;<name><name>dd</name>-&gt;<name>flags</name></name></expr></argument>, <argument><expr><name>ifname</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+	<expr_stmt><expr><name>res</name> |= <call><name>set_ifrname_and_do_ioctl</name><argument_list>(<argument><expr><name>SIOCGIFHWADDR</name></expr></argument>, <argument><expr>&amp;<name><name>dd</name>-&gt;<name>hwaddr</name></name></expr></argument>, <argument><expr><name>ifname</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+	<return>return <expr><name>res</name></expr>;</return>
+}</block></function>
+
+<function><type><specifier>static</specifier> <name>int</name></type> <name>get_slave_flags</name><parameter_list>(<param><decl><type><name>char</name> *</type><name>slave_ifname</name></decl></param>)</parameter_list>
+<block>{
+	<return>return <expr><call><name>set_ifrname_and_do_ioctl</name><argument_list>(<argument><expr><name>SIOCGIFFLAGS</name></expr></argument>, <argument><expr>&amp;<name><name>slave</name>.<name>flags</name></name></expr></argument>, <argument><expr><name>slave_ifname</name></expr></argument>)</argument_list></call></expr>;</return>
+}</block></function>
+
+<function><type><specifier>static</specifier> <name>int</name></type> <name>set_hwaddr</name><parameter_list>(<param><decl><type><name>char</name> *</type><name>ifname</name></decl></param>, <param><decl><type>struct <name>sockaddr</name> *</type><name>hwaddr</name></decl></param>)</parameter_list>
+<block>{
+	<decl_stmt><decl><type>struct <name>ifreq</name></type> <name>ifr</name></decl>;</decl_stmt>
+
+	<expr_stmt><expr><call><name>memcpy</name><argument_list>(<argument><expr>&amp;(<name><name>ifr</name>.<name>ifr_hwaddr</name></name>)</expr></argument>, <argument><expr><name>hwaddr</name></expr></argument>, <argument><expr><sizeof>sizeof<argument_list>(<argument><expr>*<name>hwaddr</name></expr></argument>)</argument_list></sizeof></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+	<return>return <expr><call><name>set_ifrname_and_do_ioctl</name><argument_list>(<argument><expr><name>SIOCSIFHWADDR</name></expr></argument>, <argument><expr>&amp;<name>ifr</name></expr></argument>, <argument><expr><name>ifname</name></expr></argument>)</argument_list></call></expr>;</return>
+}</block></function>
+
+<function><type><specifier>static</specifier> <name>int</name></type> <name>set_mtu</name><parameter_list>(<param><decl><type><name>char</name> *</type><name>ifname</name></decl></param>, <param><decl><type><name>int</name></type> <name>mtu</name></decl></param>)</parameter_list>
+<block>{
+	<decl_stmt><decl><type>struct <name>ifreq</name></type> <name>ifr</name></decl>;</decl_stmt>
+
+	<expr_stmt><expr><name><name>ifr</name>.<name>ifr_mtu</name></name> = <name>mtu</name></expr>;</expr_stmt>
+	<return>return <expr><call><name>set_ifrname_and_do_ioctl</name><argument_list>(<argument><expr><name>SIOCSIFMTU</name></expr></argument>, <argument><expr>&amp;<name>ifr</name></expr></argument>, <argument><expr><name>ifname</name></expr></argument>)</argument_list></call></expr>;</return>
+}</block></function>
+
+<function><type><specifier>static</specifier> <name>int</name></type> <name>set_if_flags</name><parameter_list>(<param><decl><type><name>char</name> *</type><name>ifname</name></decl></param>, <param><decl><type><name>int</name></type> <name>flags</name></decl></param>)</parameter_list>
+<block>{
+	<decl_stmt><decl><type>struct <name>ifreq</name></type> <name>ifr</name></decl>;</decl_stmt>
+
+	<expr_stmt><expr><name><name>ifr</name>.<name>ifr_flags</name></name> = <name>flags</name></expr>;</expr_stmt>
+	<return>return <expr><call><name>set_ifrname_and_do_ioctl</name><argument_list>(<argument><expr><name>SIOCSIFFLAGS</name></expr></argument>, <argument><expr>&amp;<name>ifr</name></expr></argument>, <argument><expr><name>ifname</name></expr></argument>)</argument_list></call></expr>;</return>
+}</block></function>
+
+<function><type><specifier>static</specifier> <name>int</name></type> <name>set_if_up</name><parameter_list>(<param><decl><type><name>char</name> *</type><name>ifname</name></decl></param>, <param><decl><type><name>int</name></type> <name>flags</name></decl></param>)</parameter_list>
+<block>{
+	<decl_stmt><decl><type><name>int</name></type> <name>res</name> <init>= <expr><call><name>set_if_flags</name><argument_list>(<argument><expr><name>ifname</name></expr></argument>, <argument><expr><name>flags</name> | <name>IFF_UP</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+	<if>if <condition>(<expr><name>res</name></expr>)</condition><then>
+		<expr_stmt><expr><call><name>bb_perror_msg</name><argument_list>(<argument><expr>"%s: can't up"</expr></argument>, <argument><expr><name>ifname</name></expr></argument>)</argument_list></call></expr>;</expr_stmt></then></if>
+	<return>return <expr><name>res</name></expr>;</return>
+}</block></function>
+
+<function><type><specifier>static</specifier> <name>int</name></type> <name>set_if_down</name><parameter_list>(<param><decl><type><name>char</name> *</type><name>ifname</name></decl></param>, <param><decl><type><name>int</name></type> <name>flags</name></decl></param>)</parameter_list>
+<block>{
+	<decl_stmt><decl><type><name>int</name></type> <name>res</name> <init>= <expr><call><name>set_if_flags</name><argument_list>(<argument><expr><name>ifname</name></expr></argument>, <argument><expr><name>flags</name> &amp; ~<name>IFF_UP</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+	<if>if <condition>(<expr><name>res</name></expr>)</condition><then>
+		<expr_stmt><expr><call><name>bb_perror_msg</name><argument_list>(<argument><expr>"%s: can't down"</expr></argument>, <argument><expr><name>ifname</name></expr></argument>)</argument_list></call></expr>;</expr_stmt></then></if>
+	<return>return <expr><name>res</name></expr>;</return>
+}</block></function>
+
+<function><type><specifier>static</specifier> <name>int</name></type> <name>clear_if_addr</name><parameter_list>(<param><decl><type><name>char</name> *</type><name>ifname</name></decl></param>)</parameter_list>
+<block>{
+	<decl_stmt><decl><type>struct <name>ifreq</name></type> <name>ifr</name></decl>;</decl_stmt>
+
+	<expr_stmt><expr><name><name>ifr</name>.<name>ifr_addr</name>.<name>sa_family</name></name> = <name>AF_INET</name></expr>;</expr_stmt>
+	<expr_stmt><expr><call><name>memset</name><argument_list>(<argument><expr><name><name>ifr</name>.<name>ifr_addr</name>.<name>sa_data</name></name></expr></argument>, <argument><expr>0</expr></argument>, <argument><expr><sizeof>sizeof<argument_list>(<argument><expr><name><name>ifr</name>.<name>ifr_addr</name>.<name>sa_data</name></name></expr></argument>)</argument_list></sizeof></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+	<return>return <expr><call><name>set_ifrname_and_do_ioctl</name><argument_list>(<argument><expr><name>SIOCSIFADDR</name></expr></argument>, <argument><expr>&amp;<name>ifr</name></expr></argument>, <argument><expr><name>ifname</name></expr></argument>)</argument_list></call></expr>;</return>
+}</block></function>
+
+<function><type><specifier>static</specifier> <name>int</name></type> <name>set_if_addr</name><parameter_list>(<param><decl><type><name>char</name> *</type><name>master_ifname</name></decl></param>, <param><decl><type><name>char</name> *</type><name>slave_ifname</name></decl></param>)</parameter_list>
+<block>{
+<cpp:if>#<cpp:directive>if</cpp:directive> <expr>(<name>SIOCGIFADDR</name> | <name>SIOCSIFADDR</name> \
+  | <name>SIOCGIFDSTADDR</name> | <name>SIOCSIFDSTADDR</name> \
+  | <name>SIOCGIFBRDADDR</name> | <name>SIOCSIFBRDADDR</name> \
+  | <name>SIOCGIFNETMASK</name> | <name>SIOCSIFNETMASK</name>) &lt;= 0xffff</expr></cpp:if>
+<cpp:define>#<cpp:directive>define</cpp:directive> <cpp:macro><name>INT</name></cpp:macro> <cpp:value>uint16_t</cpp:value></cpp:define>
+<cpp:else>#<cpp:directive>else</cpp:directive></cpp:else>
+<cpp:define>#<cpp:directive>define</cpp:directive> <cpp:macro><name>INT</name></cpp:macro> <cpp:value>int</cpp:value></cpp:define>
+<cpp:endif>#<cpp:directive>endif</cpp:directive></cpp:endif>
+	<struct><specifier>static</specifier> <specifier>const</specifier> struct <block>{
+		<decl_stmt><decl><type><name>INT</name></type> <name>g_ioctl</name></decl>;</decl_stmt>
+		<decl_stmt><decl><type><name>INT</name></type> <name>s_ioctl</name></decl>;</decl_stmt>
+	}</block> <decl><name><name>ifra</name><index>[]</index></name> <init>= <expr><block>{
+		<expr><block>{ <expr><name>SIOCGIFADDR</name></expr>,    <expr><name>SIOCSIFADDR</name></expr>    }</block></expr>,
+		<expr><block>{ <expr><name>SIOCGIFDSTADDR</name></expr>, <expr><name>SIOCSIFDSTADDR</name></expr> }</block></expr>,
+		<expr><block>{ <expr><name>SIOCGIFBRDADDR</name></expr>, <expr><name>SIOCSIFBRDADDR</name></expr> }</block></expr>,
+		<expr><block>{ <expr><name>SIOCGIFNETMASK</name></expr>, <expr><name>SIOCSIFNETMASK</name></expr> }</block></expr>,
+	}</block></expr></init></decl>;</struct>
+
+	<decl_stmt><decl><type>struct <name>ifreq</name></type> <name>ifr</name></decl>;</decl_stmt>
+	<decl_stmt><decl><type><name>int</name></type> <name>res</name></decl>;</decl_stmt>
+	<decl_stmt><decl><type><name>unsigned</name></type> <name>i</name></decl>;</decl_stmt>
+
+	<for>for (<init><expr><name>i</name> = 0</expr>;</init> <condition><expr><name>i</name> &lt; <call><name>ARRAY_SIZE</name><argument_list>(<argument><expr><name>ifra</name></expr></argument>)</argument_list></call></expr>;</condition> <incr><expr><name>i</name>++</expr></incr>) <block>{
+		<expr_stmt><expr><name>res</name> = <call><name>set_ifrname_and_do_ioctl</name><argument_list>(<argument><expr><name><name>ifra</name><index>[<expr><name>i</name></expr>]</index></name>.<name>g_ioctl</name></expr></argument>, <argument><expr>&amp;<name>ifr</name></expr></argument>, <argument><expr><name>master_ifname</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+		<if>if <condition>(<expr><name>res</name> &lt; 0</expr>)</condition><then> <block>{
+			<expr_stmt><expr><name><name>ifr</name>.<name>ifr_addr</name>.<name>sa_family</name></name> = <name>AF_INET</name></expr>;</expr_stmt>
+			<expr_stmt><expr><call><name>memset</name><argument_list>(<argument><expr><name><name>ifr</name>.<name>ifr_addr</name>.<name>sa_data</name></name></expr></argument>, <argument><expr>0</expr></argument>,
+			       <argument><expr><sizeof>sizeof<argument_list>(<argument><expr><name><name>ifr</name>.<name>ifr_addr</name>.<name>sa_data</name></name></expr></argument>)</argument_list></sizeof></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+		}</block></then></if>
+
+		<expr_stmt><expr><name>res</name> = <call><name>set_ifrname_and_do_ioctl</name><argument_list>(<argument><expr><name><name>ifra</name><index>[<expr><name>i</name></expr>]</index></name>.<name>s_ioctl</name></expr></argument>, <argument><expr>&amp;<name>ifr</name></expr></argument>, <argument><expr><name>slave_ifname</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+		<if>if <condition>(<expr><name>res</name> &lt; 0</expr>)</condition><then>
+			<return>return <expr><name>res</name></expr>;</return></then></if>
+	}</block></for>
+
+	<return>return <expr>0</expr>;</return>
+}</block></function>
+
+<function><type><specifier>static</specifier> <name>void</name></type> <name>change_active</name><parameter_list>(<param><decl><type><name>char</name> *</type><name>master_ifname</name></decl></param>, <param><decl><type><name>char</name> *</type><name>slave_ifname</name></decl></param>)</parameter_list>
+<block>{
+	<decl_stmt><decl><type>struct <name>ifreq</name></type> <name>ifr</name></decl>;</decl_stmt>
+
+	<if>if <condition>(<expr>!(<name><name>slave</name>.<name>flags</name>.<name>ifr_flags</name></name> &amp; <name>IFF_SLAVE</name>)</expr>)</condition><then> <block>{
+		<expr_stmt><expr><call><name>bb_error_msg_and_die</name><argument_list>(<argument><expr>"%s is not a slave"</expr></argument>, <argument><expr><name>slave_ifname</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+	}</block></then></if>
+
+	<expr_stmt><expr><call><name>strncpy_IFNAMSIZ</name><argument_list>(<argument><expr><name><name>ifr</name>.<name>ifr_slave</name></name></expr></argument>, <argument><expr><name>slave_ifname</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+	<if>if <condition>(<expr><call><name>set_ifrname_and_do_ioctl</name><argument_list>(<argument><expr><name>SIOCBONDCHANGEACTIVE</name></expr></argument>, <argument><expr>&amp;<name>ifr</name></expr></argument>, <argument><expr><name>master_ifname</name></expr></argument>)</argument_list></call>
+	 &amp;&amp; <call><name>ioctl_on_skfd</name><argument_list>(<argument><expr><name>BOND_CHANGE_ACTIVE_OLD</name></expr></argument>, <argument><expr>&amp;<name>ifr</name></expr></argument>)</argument_list></call></expr>
+	)</condition><then> <block>{
+		<expr_stmt><expr><call><name>bb_perror_msg_and_die</name><argument_list>(
+			<argument><expr>"master %s, slave %s: can't "
+			"change active"</expr></argument>,
+			<argument><expr><name>master_ifname</name></expr></argument>, <argument><expr><name>slave_ifname</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+	}</block></then></if>
+}</block></function>
+
+<function><type><specifier>static</specifier> <name>NOINLINE</name> <name>int</name></type> <name>enslave</name><parameter_list>(<param><decl><type><name>char</name> *</type><name>master_ifname</name></decl></param>, <param><decl><type><name>char</name> *</type><name>slave_ifname</name></decl></param>)</parameter_list>
+<block>{
+	<decl_stmt><decl><type>struct <name>ifreq</name></type> <name>ifr</name></decl>;</decl_stmt>
+	<decl_stmt><decl><type><name>int</name></type> <name>res</name></decl>;</decl_stmt>
+
+	<if>if <condition>(<expr><name><name>slave</name>.<name>flags</name>.<name>ifr_flags</name></name> &amp; <name>IFF_SLAVE</name></expr>)</condition><then> <block>{
+		<expr_stmt><expr><call><name>bb_error_msg</name><argument_list>(
+			<argument><expr>"%s is already a slave"</expr></argument>,
+			<argument><expr><name>slave_ifname</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+		<return>return <expr>1</expr>;</return>
+	}</block></then></if>
+
+	<expr_stmt><expr><name>res</name> = <call><name>set_if_down</name><argument_list>(<argument><expr><name>slave_ifname</name></expr></argument>, <argument><expr><name><name>slave</name>.<name>flags</name>.<name>ifr_flags</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+	<if>if <condition>(<expr><name>res</name></expr>)</condition><then>
+		<return>return <expr><name>res</name></expr>;</return></then></if>
+
+	<if>if <condition>(<expr><name>abi_ver</name> &lt; 2</expr>)</condition><then> <block>{
+		<comment type="block">/* Older bonding versions would panic if the slave has no IP
+		 * address, so get the IP setting from the master.
+		 */</comment>
+		<expr_stmt><expr><name>res</name> = <call><name>set_if_addr</name><argument_list>(<argument><expr><name>master_ifname</name></expr></argument>, <argument><expr><name>slave_ifname</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+		<if>if <condition>(<expr><name>res</name></expr>)</condition><then> <block>{
+			<expr_stmt><expr><call><name>bb_perror_msg</name><argument_list>(<argument><expr>"%s: can't set address"</expr></argument>, <argument><expr><name>slave_ifname</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+			<return>return <expr><name>res</name></expr>;</return>
+		}</block></then></if>
+	}</block></then> <else>else <block>{
+		<expr_stmt><expr><name>res</name> = <call><name>clear_if_addr</name><argument_list>(<argument><expr><name>slave_ifname</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+		<if>if <condition>(<expr><name>res</name></expr>)</condition><then> <block>{
+			<expr_stmt><expr><call><name>bb_perror_msg</name><argument_list>(<argument><expr>"%s: can't clear address"</expr></argument>, <argument><expr><name>slave_ifname</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+			<return>return <expr><name>res</name></expr>;</return>
+		}</block></then></if>
+	}</block></else></if>
+
+	<if>if <condition>(<expr><name><name>master</name>.<name>mtu</name>.<name>ifr_mtu</name></name> != <name><name>slave</name>.<name>mtu</name>.<name>ifr_mtu</name></name></expr>)</condition><then> <block>{
+		<expr_stmt><expr><name>res</name> = <call><name>set_mtu</name><argument_list>(<argument><expr><name>slave_ifname</name></expr></argument>, <argument><expr><name><name>master</name>.<name>mtu</name>.<name>ifr_mtu</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+		<if>if <condition>(<expr><name>res</name></expr>)</condition><then> <block>{
+			<expr_stmt><expr><call><name>bb_perror_msg</name><argument_list>(<argument><expr>"%s: can't set MTU"</expr></argument>, <argument><expr><name>slave_ifname</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+			<return>return <expr><name>res</name></expr>;</return>
+		}</block></then></if>
+	}</block></then></if>
+
+	<if>if <condition>(<expr><name>hwaddr_set</name></expr>)</condition><then> <block>{
+		<comment type="block">/* Master already has an hwaddr
+		 * so set it's hwaddr to the slave
+		 */</comment>
+		<if>if <condition>(<expr><name>abi_ver</name> &lt; 1</expr>)</condition><then> <block>{
+			<comment type="block">/* The driver is using an old ABI, so
+			 * the application sets the slave's
+			 * hwaddr
+			 */</comment>
+			<if>if <condition>(<expr><call><name>set_hwaddr</name><argument_list>(<argument><expr><name>slave_ifname</name></expr></argument>, <argument><expr>&amp;(<name><name>master</name>.<name>hwaddr</name>.<name>ifr_hwaddr</name></name>)</expr></argument>)</argument_list></call></expr>)</condition><then> <block>{
+				<expr_stmt><expr><call><name>bb_perror_msg</name><argument_list>(<argument><expr>"%s: can't set hw address"</expr></argument>,
+						<argument><expr><name>slave_ifname</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+				<goto>goto <name>undo_mtu</name>;</goto>
+			}</block></then></if>
+
+			<comment type="block">/* For old ABI the application needs to bring the
+			 * slave back up
+			 */</comment>
+			<if>if <condition>(<expr><call><name>set_if_up</name><argument_list>(<argument><expr><name>slave_ifname</name></expr></argument>, <argument><expr><name><name>slave</name>.<name>flags</name>.<name>ifr_flags</name></name></expr></argument>)</argument_list></call></expr>)</condition><then>
+				<goto>goto <name>undo_slave_mac</name>;</goto></then></if>
+		}</block></then></if>
+		<comment type="block">/* The driver is using a new ABI,
+		 * so the driver takes care of setting
+		 * the slave's hwaddr and bringing
+		 * it up again
+		 */</comment>
+	}</block></then> <else>else <block>{
+		<comment type="block">/* No hwaddr for master yet, so
+		 * set the slave's hwaddr to it
+		 */</comment>
+		<if>if <condition>(<expr><name>abi_ver</name> &lt; 1</expr>)</condition><then> <block>{
+			<comment type="block">/* For old ABI, the master needs to be
+			 * down before setting it's hwaddr
+			 */</comment>
+			<if>if <condition>(<expr><call><name>set_if_down</name><argument_list>(<argument><expr><name>master_ifname</name></expr></argument>, <argument><expr><name><name>master</name>.<name>flags</name>.<name>ifr_flags</name></name></expr></argument>)</argument_list></call></expr>)</condition><then>
+				<goto>goto <name>undo_mtu</name>;</goto></then></if>
+		}</block></then></if>
+
+		<if>if <condition>(<expr><call><name>set_hwaddr</name><argument_list>(<argument><expr><name>master_ifname</name></expr></argument>, <argument><expr>&amp;(<name><name>slave</name>.<name>hwaddr</name>.<name>ifr_hwaddr</name></name>)</expr></argument>)</argument_list></call></expr>)</condition><then> <block>{
+			<expr_stmt><expr><call><name>bb_error_msg</name><argument_list>(<argument><expr>"%s: can't set hw address"</expr></argument>,
+				<argument><expr><name>master_ifname</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+			<goto>goto <name>undo_mtu</name>;</goto>
+		}</block></then></if>
+
+		<if>if <condition>(<expr><name>abi_ver</name> &lt; 1</expr>)</condition><then> <block>{
+			<comment type="block">/* For old ABI, bring the master
+			 * back up
+			 */</comment>
+			<if>if <condition>(<expr><call><name>set_if_up</name><argument_list>(<argument><expr><name>master_ifname</name></expr></argument>, <argument><expr><name><name>master</name>.<name>flags</name>.<name>ifr_flags</name></name></expr></argument>)</argument_list></call></expr>)</condition><then>
+				<goto>goto <name>undo_master_mac</name>;</goto></then></if>
+		}</block></then></if>
+
+		<expr_stmt><expr><name>hwaddr_set</name> = 1</expr>;</expr_stmt>
+	}</block></else></if>
+
+	<comment type="block">/* Do the real thing */</comment>
+	<expr_stmt><expr><call><name>strncpy_IFNAMSIZ</name><argument_list>(<argument><expr><name><name>ifr</name>.<name>ifr_slave</name></name></expr></argument>, <argument><expr><name>slave_ifname</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+	<if>if <condition>(<expr><call><name>set_ifrname_and_do_ioctl</name><argument_list>(<argument><expr><name>SIOCBONDENSLAVE</name></expr></argument>, <argument><expr>&amp;<name>ifr</name></expr></argument>, <argument><expr><name>master_ifname</name></expr></argument>)</argument_list></call>
+	 &amp;&amp; <call><name>ioctl_on_skfd</name><argument_list>(<argument><expr><name>BOND_ENSLAVE_OLD</name></expr></argument>, <argument><expr>&amp;<name>ifr</name></expr></argument>)</argument_list></call></expr>
+	)</condition><then> <block>{
+		<goto>goto <name>undo_master_mac</name>;</goto>
+	}</block></then></if>
+
+	<return>return <expr>0</expr>;</return>
+
+<comment type="block">/* rollback (best effort) */</comment>
+ <label><name>undo_master_mac</name>:</label>
+	<expr_stmt><expr><call><name>set_hwaddr</name><argument_list>(<argument><expr><name>master_ifname</name></expr></argument>, <argument><expr>&amp;(<name><name>master</name>.<name>hwaddr</name>.<name>ifr_hwaddr</name></name>)</expr></argument>)</argument_list></call></expr>;</expr_stmt>
+	<expr_stmt><expr><name>hwaddr_set</name> = 0</expr>;</expr_stmt>
+	<goto>goto <name>undo_mtu</name>;</goto>
+
+ <label><name>undo_slave_mac</name>:</label>
+	<expr_stmt><expr><call><name>set_hwaddr</name><argument_list>(<argument><expr><name>slave_ifname</name></expr></argument>, <argument><expr>&amp;(<name><name>slave</name>.<name>hwaddr</name>.<name>ifr_hwaddr</name></name>)</expr></argument>)</argument_list></call></expr>;</expr_stmt>
+ <label><name>undo_mtu</name>:</label>
+	<expr_stmt><expr><call><name>set_mtu</name><argument_list>(<argument><expr><name>slave_ifname</name></expr></argument>, <argument><expr><name><name>slave</name>.<name>mtu</name>.<name>ifr_mtu</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+	<return>return <expr>1</expr>;</return>
+}</block></function>
+
+<function><type><specifier>static</specifier> <name>int</name></type> <name>release</name><parameter_list>(<param><decl><type><name>char</name> *</type><name>master_ifname</name></decl></param>, <param><decl><type><name>char</name> *</type><name>slave_ifname</name></decl></param>)</parameter_list>
+<block>{
+	<decl_stmt><decl><type>struct <name>ifreq</name></type> <name>ifr</name></decl>;</decl_stmt>
+	<decl_stmt><decl><type><name>int</name></type> <name>res</name> <init>= <expr>0</expr></init></decl>;</decl_stmt>
+
+	<if>if <condition>(<expr>!(<name><name>slave</name>.<name>flags</name>.<name>ifr_flags</name></name> &amp; <name>IFF_SLAVE</name>)</expr>)</condition><then> <block>{
+		<expr_stmt><expr><call><name>bb_error_msg</name><argument_list>(<argument><expr>"%s is not a slave"</expr></argument>, <argument><expr><name>slave_ifname</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+		<return>return <expr>1</expr>;</return>
+	}</block></then></if>
+
+	<expr_stmt><expr><call><name>strncpy_IFNAMSIZ</name><argument_list>(<argument><expr><name><name>ifr</name>.<name>ifr_slave</name></name></expr></argument>, <argument><expr><name>slave_ifname</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+	<if>if <condition>(<expr><call><name>set_ifrname_and_do_ioctl</name><argument_list>(<argument><expr><name>SIOCBONDRELEASE</name></expr></argument>, <argument><expr>&amp;<name>ifr</name></expr></argument>, <argument><expr><name>master_ifname</name></expr></argument>)</argument_list></call> &lt; 0
+	 &amp;&amp; <call><name>ioctl_on_skfd</name><argument_list>(<argument><expr><name>BOND_RELEASE_OLD</name></expr></argument>, <argument><expr>&amp;<name>ifr</name></expr></argument>)</argument_list></call> &lt; 0</expr>
+	)</condition><then> <block>{
+		<return>return <expr>1</expr>;</return>
+	}</block></then></if>
+	<if>if <condition>(<expr><name>abi_ver</name> &lt; 1</expr>)</condition><then> <block>{
+		<comment type="block">/* The driver is using an old ABI, so we'll set the interface
+		 * down to avoid any conflicts due to same MAC/IP
+		 */</comment>
+		<expr_stmt><expr><name>res</name> = <call><name>set_if_down</name><argument_list>(<argument><expr><name>slave_ifname</name></expr></argument>, <argument><expr><name><name>slave</name>.<name>flags</name>.<name>ifr_flags</name></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+	}</block></then></if>
+
+	<comment type="block">/* set to default mtu */</comment>
+	<expr_stmt><expr><call><name>set_mtu</name><argument_list>(<argument><expr><name>slave_ifname</name></expr></argument>, <argument><expr>1500</expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+	<return>return <expr><name>res</name></expr>;</return>
+}</block></function>
+
+<function><type><specifier>static</specifier> <name>NOINLINE</name> <name>void</name></type> <name>get_drv_info</name><parameter_list>(<param><decl><type><name>char</name> *</type><name>master_ifname</name></decl></param>)</parameter_list>
+<block>{
+	<decl_stmt><decl><type>struct <name>ifreq</name></type> <name>ifr</name></decl>;</decl_stmt>
+	<decl_stmt><decl><type>struct <name>ethtool_drvinfo</name></type> <name>info</name></decl>;</decl_stmt>
+
+	<expr_stmt><expr><call><name>memset</name><argument_list>(<argument><expr>&amp;<name>ifr</name></expr></argument>, <argument><expr>0</expr></argument>, <argument><expr><sizeof>sizeof<argument_list>(<argument><expr><name>ifr</name></expr></argument>)</argument_list></sizeof></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+	<expr_stmt><expr><name><name>ifr</name>.<name>ifr_data</name></name> = (<name>caddr_t</name>)&amp;<name>info</name></expr>;</expr_stmt>
+	<expr_stmt><expr><name><name>info</name>.<name>cmd</name></name> = <name>ETHTOOL_GDRVINFO</name></expr>;</expr_stmt>
+	<comment type="block">/* both fields are 32 bytes long (long enough) */</comment>
+	<expr_stmt><expr><call><name>strcpy</name><argument_list>(<argument><expr><name><name>info</name>.<name>driver</name></name></expr></argument>, <argument><expr>"ifenslave"</expr></argument>)</argument_list></call></expr>;</expr_stmt>
+	<expr_stmt><expr><call><name>strcpy</name><argument_list>(<argument><expr><name><name>info</name>.<name>fw_version</name></name></expr></argument>, <argument><expr><call><name>utoa</name><argument_list>(<argument><expr><name>BOND_ABI_VERSION</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+	<if>if <condition>(<expr><call><name>set_ifrname_and_do_ioctl</name><argument_list>(<argument><expr><name>SIOCETHTOOL</name></expr></argument>, <argument><expr>&amp;<name>ifr</name></expr></argument>, <argument><expr><name>master_ifname</name></expr></argument>)</argument_list></call> &lt; 0</expr>)</condition><then> <block>{
+		<if>if <condition>(<expr><name>errno</name> == <name>EOPNOTSUPP</name></expr>)</condition><then>
+			<return>return;</return></then></if>
+		<expr_stmt><expr><call><name>bb_perror_msg_and_die</name><argument_list>(<argument><expr>"%s: SIOCETHTOOL error"</expr></argument>, <argument><expr><name>master_ifname</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+	}</block></then></if>
+
+	<expr_stmt><expr><name>abi_ver</name> = <call><name>bb_strtou</name><argument_list>(<argument><expr><name><name>info</name>.<name>fw_version</name></name></expr></argument>, <argument><expr><name>NULL</name></expr></argument>, <argument><expr>0</expr></argument>)</argument_list></call></expr>;</expr_stmt>
+	<if>if <condition>(<expr><name>errno</name></expr>)</condition><then>
+		<expr_stmt><expr><call><name>bb_error_msg_and_die</name><argument_list>(<argument><expr>"%s: SIOCETHTOOL error"</expr></argument>, <argument><expr><name>master_ifname</name></expr></argument>)</argument_list></call></expr>;</expr_stmt></then></if>
+}</block></function>
+
+<decl_stmt><decl><type><name>int</name></type> <name>ifenslave_main</name><argument_list>(<argument><expr><name>int</name> <name>argc</name></expr></argument>, <argument><expr><name>char</name> **<name>argv</name></expr></argument>)</argument_list> <name>MAIN_EXTERNALLY_VISIBLE</name></decl>;</decl_stmt>
+<function><type><name>int</name></type> <name>ifenslave_main</name><parameter_list>(<param><decl><type><name>int</name> <name>argc</name></type> <name>UNUSED_PARAM</name></decl></param>, <param><decl><type><name>char</name> **</type><name>argv</name></decl></param>)</parameter_list>
+<block>{
+	<decl_stmt><decl><type><name>char</name> *</type><name>master_ifname</name></decl>, *<decl><type ref="prev"/><name>slave_ifname</name></decl>;</decl_stmt>
+	<decl_stmt><decl><type><name>int</name></type> <name>rv</name></decl>;</decl_stmt>
+	<decl_stmt><decl><type><name>int</name></type> <name>res</name></decl>;</decl_stmt>
+	<decl_stmt><decl><type><name>unsigned</name></type> <name>opt</name></decl>;</decl_stmt>
+	<enum>enum <block>{
+		<decl><name>OPT_c</name> <init>= <expr>(1 &lt;&lt; 0)</expr></init></decl>,
+		<decl><name>OPT_d</name> <init>= <expr>(1 &lt;&lt; 1)</expr></init></decl>,
+		<decl><name>OPT_f</name> <init>= <expr>(1 &lt;&lt; 2)</expr></init></decl>,
+	}</block>;</enum>
+<cpp:if>#<cpp:directive>if</cpp:directive> <expr><name>ENABLE_LONG_OPTS</name></expr></cpp:if>
+	<decl_stmt><decl><type><specifier>static</specifier> <specifier>const</specifier> <name>char</name> <name>ifenslave_longopts</name><index>[]</index></type> <name>ALIGN1</name> <init>=
+		<expr>"change-active\0"  <name>No_argument</name> "c"
+		"detach\0"         <name>No_argument</name> "d"
+		"force\0"          <name>No_argument</name> "f"</expr></init></decl>
+		<comment type="block">/* "all-interfaces\0" No_argument "a" */</comment>
+		;</decl_stmt>
+
+	<expr_stmt><expr><name>applet_long_options</name> = <name>ifenslave_longopts</name></expr>;</expr_stmt>
+<cpp:endif>#<cpp:directive>endif</cpp:directive></cpp:endif>
+	<expr_stmt><expr><call><name>INIT_G</name><argument_list>()</argument_list></call></expr>;</expr_stmt>
+
+	<expr_stmt><expr><name>opt</name> = <call><name>getopt32</name><argument_list>(<argument><expr><name>argv</name></expr></argument>, <argument><expr>"cdfa"</expr></argument>)</argument_list></call></expr>;</expr_stmt>
+	<expr_stmt><expr><name>argv</name> += <name>optind</name></expr>;</expr_stmt>
+	<if>if <condition>(<expr><name>opt</name> &amp; (<name>opt</name>-1)</expr>)</condition><then> <comment type="block">/* Only one option can be given */</comment>
+		<expr_stmt><expr><call><name>bb_show_usage</name><argument_list>()</argument_list></call></expr>;</expr_stmt></then></if>
+
+	<expr_stmt><expr><name>master_ifname</name> = *<name>argv</name>++</expr>;</expr_stmt>
+
+	<comment type="block">/* No interface names - show all interfaces. */</comment>
+	<if>if <condition>(<expr>!<name>master_ifname</name></expr>)</condition><then> <block>{
+		<expr_stmt><expr><call><name>display_interfaces</name><argument_list>(<argument><expr><name>NULL</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+		<return>return <expr><name>EXIT_SUCCESS</name></expr>;</return>
+	}</block></then></if>
+
+	<comment type="block">/* Open a basic socket */</comment>
+	<expr_stmt><expr><call><name>xmove_fd</name><argument_list>(<argument><expr><call><name>xsocket</name><argument_list>(<argument><expr><name>AF_INET</name></expr></argument>, <argument><expr><name>SOCK_DGRAM</name></expr></argument>, <argument><expr>0</expr></argument>)</argument_list></call></expr></argument>, <argument><expr><name>skfd</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+	<comment type="block">/* Exchange abi version with bonding module */</comment>
+	<expr_stmt><expr><call><name>get_drv_info</name><argument_list>(<argument><expr><name>master_ifname</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+
+	<expr_stmt><expr><name>slave_ifname</name> = *<name>argv</name>++</expr>;</expr_stmt>
+	<if>if <condition>(<expr>!<name>slave_ifname</name></expr>)</condition><then> <block>{
+		<if>if <condition>(<expr><name>opt</name> &amp; (<name>OPT_d</name>|<name>OPT_c</name>)</expr>)</condition><then> <block>{
+			<comment type="block">/* --change or --detach, and no slaves given -
+			 * show all interfaces. */</comment>
+			<expr_stmt><expr><call><name>display_interfaces</name><argument_list>(<argument><expr><name>slave_ifname</name></expr></argument> <comment type="block">/* == NULL */</comment>)</argument_list></call></expr>;</expr_stmt>
+			<return>return <expr>2</expr>;</return> <comment type="block">/* why 2? */</comment>
+		}</block></then></if>
+		<comment type="block">/* A single arg means show the
+		 * configuration for this interface
+		 */</comment>
+		<expr_stmt><expr><call><name>display_interfaces</name><argument_list>(<argument><expr><name>master_ifname</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+		<return>return <expr><name>EXIT_SUCCESS</name></expr>;</return>
+	}</block></then></if>
+
+	<if>if <condition>(<expr><call><name>get_if_settings</name><argument_list>(<argument><expr><name>master_ifname</name></expr></argument>, <argument><expr>&amp;<name>master</name></expr></argument>)</argument_list></call></expr>)</condition><then> <block>{
+		<comment type="block">/* Probably a good reason not to go on */</comment>
+		<expr_stmt><expr><call><name>bb_perror_msg_and_die</name><argument_list>(<argument><expr>"%s: can't get settings"</expr></argument>, <argument><expr><name>master_ifname</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+	}</block></then></if>
+
+	<comment type="block">/* Check if master is indeed a master;
+	 * if not then fail any operation
+	 */</comment>
+	<if>if <condition>(<expr>!(<name><name>master</name>.<name>flags</name>.<name>ifr_flags</name></name> &amp; <name>IFF_MASTER</name>)</expr>)</condition><then>
+		<expr_stmt><expr><call><name>bb_error_msg_and_die</name><argument_list>(<argument><expr>"%s is not a master"</expr></argument>, <argument><expr><name>master_ifname</name></expr></argument>)</argument_list></call></expr>;</expr_stmt></then></if>
+
+	<comment type="block">/* Check if master is up; if not then fail any operation */</comment>
+	<if>if <condition>(<expr>!(<name><name>master</name>.<name>flags</name>.<name>ifr_flags</name></name> &amp; <name>IFF_UP</name>)</expr>)</condition><then>
+		<expr_stmt><expr><call><name>bb_error_msg_and_die</name><argument_list>(<argument><expr>"%s is not up"</expr></argument>, <argument><expr><name>master_ifname</name></expr></argument>)</argument_list></call></expr>;</expr_stmt></then></if>
+
+<cpp:ifdef>#<cpp:directive>ifdef</cpp:directive> <name>WHY_BOTHER</name></cpp:ifdef>
+	<comment type="block">/* Neither -c[hange] nor -d[etach] -&gt; it's "enslave" then;
+	 * and -f[orce] is not there too. Check that it's ethernet. */</comment>
+	<if>if <condition>(<expr>!(<name>opt</name> &amp; (<name>OPT_d</name>|<name>OPT_c</name>|<name>OPT_f</name>))</expr></condition><then> <block>{
+		<comment type="block">/* The family '1' is ARPHRD_ETHER for ethernet. */</comment>
+		<if>if <condition>(<expr><name><name>master</name>.<name>hwaddr</name>.<name>ifr_hwaddr</name>.<name>sa_family</name></name> != 1</expr>)</condition><then> <block>{
+			<expr_stmt><expr><call><name>bb_error_msg_and_die</name><argument_list>(
+				<argument><expr>"%s is not ethernet-like (-f overrides)"</expr></argument>,
+				<argument><expr><name>master_ifname</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+		}</block></then></if>
+	}</block></then></if>
+<cpp:endif>#<cpp:directive>endif</cpp:directive></cpp:endif>
+
+	<comment type="block">/* Accepts only one slave */</comment>
+	<if>if <condition>(<expr><name>opt</name> &amp; <name>OPT_c</name></expr>)</condition><then> <block>{
+		<comment type="block">/* Change active slave */</comment>
+		<if>if <condition>(<expr><call><name>get_slave_flags</name><argument_list>(<argument><expr><name>slave_ifname</name></expr></argument>)</argument_list></call></expr>)</condition><then> <block>{
+			<expr_stmt><expr><call><name>bb_perror_msg_and_die</name><argument_list>(
+				<argument><expr>"%s: can't get flags"</expr></argument>, <argument><expr><name>slave_ifname</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+		}</block></then></if>
+		<expr_stmt><expr><call><name>change_active</name><argument_list>(<argument><expr><name>master_ifname</name></expr></argument>, <argument><expr><name>slave_ifname</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+		<return>return <expr><name>EXIT_SUCCESS</name></expr>;</return>
+	}</block></then></if>
+
+	<comment type="block">/* Accepts multiple slaves */</comment>
+	<expr_stmt><expr><name>res</name> = 0</expr>;</expr_stmt>
+	<do>do <block>{
+		<if>if <condition>(<expr><name>opt</name> &amp; <name>OPT_d</name></expr>)</condition><then> <block>{
+			<comment type="block">/* Detach a slave interface from the master */</comment>
+			<expr_stmt><expr><name>rv</name> = <call><name>get_slave_flags</name><argument_list>(<argument><expr><name>slave_ifname</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+			<if>if <condition>(<expr><name>rv</name></expr>)</condition><then> <block>{
+				<comment type="block">/* Can't work with this slave, */</comment>
+				<comment type="block">/* remember the error and skip it */</comment>
+				<expr_stmt><expr><call><name>bb_perror_msg</name><argument_list>(
+					<argument><expr>"skipping %s: can't get flags"</expr></argument>,
+					<argument><expr><name>slave_ifname</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+				<expr_stmt><expr><name>res</name> = <name>rv</name></expr>;</expr_stmt>
+				<continue>continue;</continue>
+			}</block></then></if>
+			<expr_stmt><expr><name>rv</name> = <call><name>release</name><argument_list>(<argument><expr><name>master_ifname</name></expr></argument>, <argument><expr><name>slave_ifname</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+			<if>if <condition>(<expr><name>rv</name></expr>)</condition><then> <block>{
+				<expr_stmt><expr><call><name>bb_perror_msg</name><argument_list>(<argument><expr>"can't release %s from %s"</expr></argument>,
+					<argument><expr><name>slave_ifname</name></expr></argument>, <argument><expr><name>master_ifname</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+				<expr_stmt><expr><name>res</name> = <name>rv</name></expr>;</expr_stmt>
+			}</block></then></if>
+		}</block></then> <else>else <block>{
+			<comment type="block">/* Attach a slave interface to the master */</comment>
+			<expr_stmt><expr><name>rv</name> = <call><name>get_if_settings</name><argument_list>(<argument><expr><name>slave_ifname</name></expr></argument>, <argument><expr>&amp;<name>slave</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+			<if>if <condition>(<expr><name>rv</name></expr>)</condition><then> <block>{
+				<comment type="block">/* Can't work with this slave, */</comment>
+				<comment type="block">/* remember the error and skip it */</comment>
+				<expr_stmt><expr><call><name>bb_perror_msg</name><argument_list>(
+					<argument><expr>"skipping %s: can't get settings"</expr></argument>,
+					<argument><expr><name>slave_ifname</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+				<expr_stmt><expr><name>res</name> = <name>rv</name></expr>;</expr_stmt>
+				<continue>continue;</continue>
+			}</block></then></if>
+			<expr_stmt><expr><name>rv</name> = <call><name>enslave</name><argument_list>(<argument><expr><name>master_ifname</name></expr></argument>, <argument><expr><name>slave_ifname</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+			<if>if <condition>(<expr><name>rv</name></expr>)</condition><then> <block>{
+				<expr_stmt><expr><call><name>bb_perror_msg</name><argument_list>(<argument><expr>"can't enslave %s to %s"</expr></argument>,
+					<argument><expr><name>slave_ifname</name></expr></argument>, <argument><expr><name>master_ifname</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+				<expr_stmt><expr><name>res</name> = <name>rv</name></expr>;</expr_stmt>
+			}</block></then></if>
+		}</block></else></if>
+	}</block> while <condition>(<expr>(<name>slave_ifname</name> = *<name>argv</name>++) != <name>NULL</name></expr>)</condition>;</do>
+
+	<if>if <condition>(<expr><name>ENABLE_FEATURE_CLEAN_UP</name></expr>)</condition><then> <block>{
+		<expr_stmt><expr><call><name>close</name><argument_list>(<argument><expr><name>skfd</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+	}</block></then></if>
+
+	<return>return <expr><name>res</name></expr>;</return>
+}</block></function>
+</unit>

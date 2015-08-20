@@ -5,7 +5,7 @@ import scala.xml._
 
 class funcFinder(){
   def funcName(file:String, lineNo:ListBuffer[Int]) : Set[String] = {
-    val cmd = Seq("/home/brodo/Documents/srcML/src2srcml", "--language=C","--position" , "/home/brodo/GitHub/WebCrawler/" + file, "-o", file + ".xml").!!
+    val cmd = Seq("/Users/guest/HTUTKHINE/App/srcML/src2srcml", "--language=C","--position" , "/Users/guest/HTUTKHINE/GitHub/WebCrawler/" + file, "-o", file + ".xml").!!
     val xml = XML.loadFile(file +".xml")
     val func = xml \\ "function"
     val funcMap = mutable.LinkedHashMap[String, List[Int]]()

@@ -1,4 +1,4 @@
-[info] Updating {file:/home/brodo/GitHub/WebCrawler/}webcrawler...
+[info] Updating {file:/Users/guest/HTUTKHINE/GitHub/WebCrawler/}webcrawler...
 [debug] :: resolving dependencies :: default#webcrawler_2.11;1.0
 [debug] 	confs: [compile, runtime, test, provided, optional, compile-internal, runtime-internal, test-internal, plugin, sources, docs, pom, scala-tool]
 [debug] 	validate = true
@@ -7,9 +7,22 @@
 [debug] == resolving dependencies for default#webcrawler_2.11;1.0 [compile]
 [debug] == resolving dependencies default#webcrawler_2.11;1.0->org.scala-lang#scala-library;2.11.6 [compile->default(compile)]
 [info] Resolving org.scala-lang#scala-library;2.11.6 ...
-[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@30b9772f
-[debug] sbt-chain: module revision found in cache: org.scala-lang#scala-library;2.11.6
-[debug] 	found org.scala-lang#scala-library;2.11.6 in sbt-chain
+[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@3d72791c
+[info] Resolving org.scala-lang#scala-library;2.11.6 ...
+[debug] sbt-chain-delegate: Checking cache for: sbt.ivyint.MergedDescriptors@3d72791c
+[debug] 		tried /Users/guest/.ivy2/local/org.scala-lang/scala-library/2.11.6/ivys/ivy.xml
+[debug] 	local: no ivy file found for org.scala-lang#scala-library;2.11.6
+[debug] 		tried https://repo1.maven.org/maven2/org/scala-lang/scala-library/2.11.6/scala-library-2.11.6.pom
+[debug] 	public: found md file for org.scala-lang#scala-library;2.11.6
+[debug] 		=> https://repo1.maven.org/maven2/org/scala-lang/scala-library/2.11.6/scala-library-2.11.6.pom (2.11.6)
+[debug] downloading https://repo1.maven.org/maven2/org/scala-lang/scala-library/2.11.6/scala-library-2.11.6.pom ...
+[debug] 	public: downloading https://repo1.maven.org/maven2/org/scala-lang/scala-library/2.11.6/scala-library-2.11.6.pom
+[debug] 	public: downloading https://repo1.maven.org/maven2/org/scala-lang/scala-library/2.11.6/scala-library-2.11.6.pom.sha1
+[debug] sha1 OK for https://repo1.maven.org/maven2/org/scala-lang/scala-library/2.11.6/scala-library-2.11.6.pom
+[debug] 	[SUCCESSFUL ] org.scala-lang#scala-library;2.11.6!scala-library.pom(pom.original) (254ms)
+[debug] 		tried /Users/guest/.ivy2/local/org.scala-lang/scala-library/2.11.6/jars/scala-library.jar
+[debug] 		tried https://repo1.maven.org/maven2/org/scala-lang/scala-library/2.11.6/scala-library-2.11.6.jar
+[debug] 	found org.scala-lang#scala-library;2.11.6 in public
 [debug] 	[2.11.6] org.scala-lang#scala-library;2.11.6
 [debug] == resolving dependencies default#webcrawler_2.11;1.0->org.scala-lang#scala-library;2.11.6 [compile->runtime]
 [debug] == resolving dependencies default#webcrawler_2.11;1.0->org.scala-lang#scala-library;2.11.6 [compile->compile]
@@ -17,12 +30,25 @@
 [debug] == resolving dependencies default#webcrawler_2.11;1.0->org.scala-lang.modules#scala-xml_2.11;1.0.2 [compile->default(compile)]
 [info] Resolving org.scala-lang.modules#scala-xml_2.11;1.0.2 ...
 [debug] sbt-chain: Checking cache for: dependency: org.scala-lang.modules#scala-xml_2.11;1.0.2 {compile=[default(compile)]}
-[debug] sbt-chain: module revision found in cache: org.scala-lang.modules#scala-xml_2.11;1.0.2
-[debug] 	found org.scala-lang.modules#scala-xml_2.11;1.0.2 in sbt-chain
+[info] Resolving org.scala-lang.modules#scala-xml_2.11;1.0.2 ...
+[debug] sbt-chain-delegate: Checking cache for: dependency: org.scala-lang.modules#scala-xml_2.11;1.0.2 {compile=[default(compile)]}
+[debug] 		tried /Users/guest/.ivy2/local/org.scala-lang.modules/scala-xml_2.11/1.0.2/ivys/ivy.xml
+[debug] 	local: no ivy file found for org.scala-lang.modules#scala-xml_2.11;1.0.2
+[debug] 		tried https://repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.11/1.0.2/scala-xml_2.11-1.0.2.pom
+[debug] 	public: found md file for org.scala-lang.modules#scala-xml_2.11;1.0.2
+[debug] 		=> https://repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.11/1.0.2/scala-xml_2.11-1.0.2.pom (1.0.2)
+[debug] downloading https://repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.11/1.0.2/scala-xml_2.11-1.0.2.pom ...
+[debug] 	public: downloading https://repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.11/1.0.2/scala-xml_2.11-1.0.2.pom
+[debug] 	public: downloading https://repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.11/1.0.2/scala-xml_2.11-1.0.2.pom.sha1
+[debug] sha1 OK for https://repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.11/1.0.2/scala-xml_2.11-1.0.2.pom
+[debug] 	[SUCCESSFUL ] org.scala-lang.modules#scala-xml_2.11;1.0.2!scala-xml_2.11.pom(pom.original) (192ms)
+[debug] 		tried /Users/guest/.ivy2/local/org.scala-lang.modules/scala-xml_2.11/1.0.2/bundles/scala-xml_2.11.jar
+[debug] 		tried https://repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.11/1.0.2/scala-xml_2.11-1.0.2.jar
+[debug] 	found org.scala-lang.modules#scala-xml_2.11;1.0.2 in public
 [debug] == resolving dependencies default#webcrawler_2.11;1.0->org.scala-lang.modules#scala-xml_2.11;1.0.2 [compile->runtime]
 [debug] == resolving dependencies default#webcrawler_2.11;1.0->org.scala-lang.modules#scala-xml_2.11;1.0.2 [compile->compile]
-[debug] == resolving dependencies org.scala-lang.modules#scala-xml_2.11;1.0.2->org.scala-lang#scala-library;2.11.1 [compile->master(*)]
-[debug] == resolving dependencies org.scala-lang.modules#scala-xml_2.11;1.0.2->org.scala-lang#scala-library;2.11.6 [compile->master(*)]
+[debug] == resolving dependencies org.scala-lang.modules#scala-xml_2.11;1.0.2->org.scala-lang#scala-library;2.11.1 [compile->master(compile)]
+[debug] == resolving dependencies org.scala-lang.modules#scala-xml_2.11;1.0.2->org.scala-lang#scala-library;2.11.6 [compile->master(compile)]
 [debug] == resolving dependencies org.scala-lang.modules#scala-xml_2.11;1.0.2->org.scala-lang#scala-library;2.11.1 [compile->compile(*)]
 [debug] == resolving dependencies org.scala-lang.modules#scala-xml_2.11;1.0.2->org.scala-lang#scala-library;2.11.6 [compile->compile(*)]
 [debug] == resolving dependencies org.scala-lang.modules#scala-xml_2.11;1.0.2->org.scala-lang#scala-library;2.11.1 [runtime->runtime(*)]
@@ -39,8 +65,8 @@
 [debug] == resolving dependencies default#webcrawler_2.11;1.0->org.scala-lang.modules#scala-xml_2.11;1.0.2 [compile->default(compile)]
 [debug] == resolving dependencies default#webcrawler_2.11;1.0->org.scala-lang.modules#scala-xml_2.11;1.0.2 [compile->runtime]
 [debug] == resolving dependencies default#webcrawler_2.11;1.0->org.scala-lang.modules#scala-xml_2.11;1.0.2 [compile->compile]
-[debug] == resolving dependencies org.scala-lang.modules#scala-xml_2.11;1.0.2->org.scala-lang#scala-library;2.11.1 [compile->master(*)]
-[debug] == resolving dependencies org.scala-lang.modules#scala-xml_2.11;1.0.2->org.scala-lang#scala-library;2.11.6 [compile->master(*)]
+[debug] == resolving dependencies org.scala-lang.modules#scala-xml_2.11;1.0.2->org.scala-lang#scala-library;2.11.1 [compile->master(compile)]
+[debug] == resolving dependencies org.scala-lang.modules#scala-xml_2.11;1.0.2->org.scala-lang#scala-library;2.11.6 [compile->master(compile)]
 [debug] == resolving dependencies org.scala-lang.modules#scala-xml_2.11;1.0.2->org.scala-lang#scala-library;2.11.1 [compile->compile(*)]
 [debug] == resolving dependencies org.scala-lang.modules#scala-xml_2.11;1.0.2->org.scala-lang#scala-library;2.11.6 [compile->compile(*)]
 [debug] == resolving dependencies org.scala-lang.modules#scala-xml_2.11;1.0.2->org.scala-lang#scala-library;2.11.1 [runtime->runtime(*)]
@@ -58,8 +84,8 @@
 [debug] == resolving dependencies default#webcrawler_2.11;1.0->org.scala-lang.modules#scala-xml_2.11;1.0.2 [compile->default(compile)]
 [debug] == resolving dependencies default#webcrawler_2.11;1.0->org.scala-lang.modules#scala-xml_2.11;1.0.2 [compile->runtime]
 [debug] == resolving dependencies default#webcrawler_2.11;1.0->org.scala-lang.modules#scala-xml_2.11;1.0.2 [compile->compile]
-[debug] == resolving dependencies org.scala-lang.modules#scala-xml_2.11;1.0.2->org.scala-lang#scala-library;2.11.1 [compile->master(*)]
-[debug] == resolving dependencies org.scala-lang.modules#scala-xml_2.11;1.0.2->org.scala-lang#scala-library;2.11.6 [compile->master(*)]
+[debug] == resolving dependencies org.scala-lang.modules#scala-xml_2.11;1.0.2->org.scala-lang#scala-library;2.11.1 [compile->master(compile)]
+[debug] == resolving dependencies org.scala-lang.modules#scala-xml_2.11;1.0.2->org.scala-lang#scala-library;2.11.6 [compile->master(compile)]
 [debug] == resolving dependencies org.scala-lang.modules#scala-xml_2.11;1.0.2->org.scala-lang#scala-library;2.11.1 [compile->compile(*)]
 [debug] == resolving dependencies org.scala-lang.modules#scala-xml_2.11;1.0.2->org.scala-lang#scala-library;2.11.6 [compile->compile(*)]
 [debug] == resolving dependencies org.scala-lang.modules#scala-xml_2.11;1.0.2->org.scala-lang#scala-library;2.11.1 [runtime->runtime(*)]
@@ -80,8 +106,8 @@
 [debug] == resolving dependencies default#webcrawler_2.11;1.0->org.scala-lang.modules#scala-xml_2.11;1.0.2 [compile->default(compile)]
 [debug] == resolving dependencies default#webcrawler_2.11;1.0->org.scala-lang.modules#scala-xml_2.11;1.0.2 [compile->runtime]
 [debug] == resolving dependencies default#webcrawler_2.11;1.0->org.scala-lang.modules#scala-xml_2.11;1.0.2 [compile->compile]
-[debug] == resolving dependencies org.scala-lang.modules#scala-xml_2.11;1.0.2->org.scala-lang#scala-library;2.11.1 [compile->master(*)]
-[debug] == resolving dependencies org.scala-lang.modules#scala-xml_2.11;1.0.2->org.scala-lang#scala-library;2.11.6 [compile->master(*)]
+[debug] == resolving dependencies org.scala-lang.modules#scala-xml_2.11;1.0.2->org.scala-lang#scala-library;2.11.1 [compile->master(compile)]
+[debug] == resolving dependencies org.scala-lang.modules#scala-xml_2.11;1.0.2->org.scala-lang#scala-library;2.11.6 [compile->master(compile)]
 [debug] == resolving dependencies org.scala-lang.modules#scala-xml_2.11;1.0.2->org.scala-lang#scala-library;2.11.1 [compile->compile(*)]
 [debug] == resolving dependencies org.scala-lang.modules#scala-xml_2.11;1.0.2->org.scala-lang#scala-library;2.11.6 [compile->compile(*)]
 [debug] == resolving dependencies org.scala-lang.modules#scala-xml_2.11;1.0.2->org.scala-lang#scala-library;2.11.1 [runtime->runtime(*)]
@@ -101,8 +127,8 @@
 [debug] == resolving dependencies default#webcrawler_2.11;1.0->org.scala-lang.modules#scala-xml_2.11;1.0.2 [compile->default(compile)]
 [debug] == resolving dependencies default#webcrawler_2.11;1.0->org.scala-lang.modules#scala-xml_2.11;1.0.2 [compile->runtime]
 [debug] == resolving dependencies default#webcrawler_2.11;1.0->org.scala-lang.modules#scala-xml_2.11;1.0.2 [compile->compile]
-[debug] == resolving dependencies org.scala-lang.modules#scala-xml_2.11;1.0.2->org.scala-lang#scala-library;2.11.1 [compile->master(*)]
-[debug] == resolving dependencies org.scala-lang.modules#scala-xml_2.11;1.0.2->org.scala-lang#scala-library;2.11.6 [compile->master(*)]
+[debug] == resolving dependencies org.scala-lang.modules#scala-xml_2.11;1.0.2->org.scala-lang#scala-library;2.11.1 [compile->master(compile)]
+[debug] == resolving dependencies org.scala-lang.modules#scala-xml_2.11;1.0.2->org.scala-lang#scala-library;2.11.6 [compile->master(compile)]
 [debug] == resolving dependencies org.scala-lang.modules#scala-xml_2.11;1.0.2->org.scala-lang#scala-library;2.11.1 [compile->compile(*)]
 [debug] == resolving dependencies org.scala-lang.modules#scala-xml_2.11;1.0.2->org.scala-lang#scala-library;2.11.6 [compile->compile(*)]
 [debug] == resolving dependencies org.scala-lang.modules#scala-xml_2.11;1.0.2->org.scala-lang#scala-library;2.11.1 [runtime->runtime(*)]
@@ -122,8 +148,8 @@
 [debug] == resolving dependencies default#webcrawler_2.11;1.0->org.scala-lang.modules#scala-xml_2.11;1.0.2 [compile->default(compile)]
 [debug] == resolving dependencies default#webcrawler_2.11;1.0->org.scala-lang.modules#scala-xml_2.11;1.0.2 [compile->runtime]
 [debug] == resolving dependencies default#webcrawler_2.11;1.0->org.scala-lang.modules#scala-xml_2.11;1.0.2 [compile->compile]
-[debug] == resolving dependencies org.scala-lang.modules#scala-xml_2.11;1.0.2->org.scala-lang#scala-library;2.11.1 [compile->master(*)]
-[debug] == resolving dependencies org.scala-lang.modules#scala-xml_2.11;1.0.2->org.scala-lang#scala-library;2.11.6 [compile->master(*)]
+[debug] == resolving dependencies org.scala-lang.modules#scala-xml_2.11;1.0.2->org.scala-lang#scala-library;2.11.1 [compile->master(compile)]
+[debug] == resolving dependencies org.scala-lang.modules#scala-xml_2.11;1.0.2->org.scala-lang#scala-library;2.11.6 [compile->master(compile)]
 [debug] == resolving dependencies org.scala-lang.modules#scala-xml_2.11;1.0.2->org.scala-lang#scala-library;2.11.1 [compile->compile(*)]
 [debug] == resolving dependencies org.scala-lang.modules#scala-xml_2.11;1.0.2->org.scala-lang#scala-library;2.11.6 [compile->compile(*)]
 [debug] == resolving dependencies org.scala-lang.modules#scala-xml_2.11;1.0.2->org.scala-lang#scala-library;2.11.1 [runtime->runtime(*)]
@@ -145,55 +171,107 @@
 [debug] == resolving dependencies default#webcrawler_2.11;1.0->org.scala-lang#scala-compiler;2.11.6 [scala-tool->default]
 [info] Resolving org.scala-lang#scala-compiler;2.11.6 ...
 [debug] sbt-chain: Checking cache for: dependency: org.scala-lang#scala-compiler;2.11.6 {scala-tool=[default, optional(default)]}
-[debug] sbt-chain: module revision found in cache: org.scala-lang#scala-compiler;2.11.6
-[debug] 	found org.scala-lang#scala-compiler;2.11.6 in sbt-chain
+[info] Resolving org.scala-lang#scala-compiler;2.11.6 ...
+[debug] sbt-chain-delegate: Checking cache for: dependency: org.scala-lang#scala-compiler;2.11.6 {scala-tool=[default, optional(default)]}
+[debug] 		tried /Users/guest/.ivy2/local/org.scala-lang/scala-compiler/2.11.6/ivys/ivy.xml
+[debug] 	local: no ivy file found for org.scala-lang#scala-compiler;2.11.6
+[debug] 		tried https://repo1.maven.org/maven2/org/scala-lang/scala-compiler/2.11.6/scala-compiler-2.11.6.pom
+[debug] 	public: found md file for org.scala-lang#scala-compiler;2.11.6
+[debug] 		=> https://repo1.maven.org/maven2/org/scala-lang/scala-compiler/2.11.6/scala-compiler-2.11.6.pom (2.11.6)
+[debug] downloading https://repo1.maven.org/maven2/org/scala-lang/scala-compiler/2.11.6/scala-compiler-2.11.6.pom ...
+[debug] 	public: downloading https://repo1.maven.org/maven2/org/scala-lang/scala-compiler/2.11.6/scala-compiler-2.11.6.pom
+[debug] 	public: downloading https://repo1.maven.org/maven2/org/scala-lang/scala-compiler/2.11.6/scala-compiler-2.11.6.pom.sha1
+[debug] sha1 OK for https://repo1.maven.org/maven2/org/scala-lang/scala-compiler/2.11.6/scala-compiler-2.11.6.pom
+[debug] 	[SUCCESSFUL ] org.scala-lang#scala-compiler;2.11.6!scala-compiler.pom(pom.original) (369ms)
+[debug] 		tried /Users/guest/.ivy2/local/org.scala-lang/scala-compiler/2.11.6/jars/scala-compiler.jar
+[debug] 		tried https://repo1.maven.org/maven2/org/scala-lang/scala-compiler/2.11.6/scala-compiler-2.11.6.jar
+[debug] 	found org.scala-lang#scala-compiler;2.11.6 in public
 [debug] == resolving dependencies default#webcrawler_2.11;1.0->org.scala-lang#scala-compiler;2.11.6 [scala-tool->runtime]
 [debug] == resolving dependencies default#webcrawler_2.11;1.0->org.scala-lang#scala-compiler;2.11.6 [scala-tool->compile]
-[debug] == resolving dependencies org.scala-lang#scala-compiler;2.11.6->org.scala-lang#scala-library;2.11.6 [compile->compile(*)]
 [debug] == resolving dependencies org.scala-lang#scala-compiler;2.11.6->org.scala-lang#scala-library;2.11.6 [compile->master(compile)]
+[debug] == resolving dependencies org.scala-lang#scala-compiler;2.11.6->org.scala-lang#scala-library;2.11.6 [compile->compile(*)]
 [debug] == resolving dependencies org.scala-lang#scala-compiler;2.11.6->org.scala-lang#scala-library;2.11.6 [compile->default]
 [debug] == resolving dependencies org.scala-lang#scala-compiler;2.11.6->org.scala-lang#scala-library;2.11.6 [compile->runtime]
 [debug] == resolving dependencies org.scala-lang#scala-compiler;2.11.6->org.scala-lang#scala-library;2.11.6 [compile->compile]
 [debug] == resolving dependencies org.scala-lang#scala-compiler;2.11.6->org.scala-lang#scala-library;2.11.6 [compile->master]
 [debug] == resolving dependencies org.scala-lang#scala-compiler;2.11.6->org.scala-lang#scala-library;2.11.6 [compile->optional(default)]
-[debug] == resolving dependencies org.scala-lang#scala-compiler;2.11.6->org.scala-lang#scala-reflect;2.11.6 [compile->compile(*)]
+[debug] == resolving dependencies org.scala-lang#scala-compiler;2.11.6->org.scala-lang#scala-reflect;2.11.6 [compile->master(compile)]
 [info] Resolving org.scala-lang#scala-reflect;2.11.6 ...
 [debug] sbt-chain: Checking cache for: dependency: org.scala-lang#scala-reflect;2.11.6 {compile=[compile(*), master(compile)], runtime=[runtime(*)]}
-[debug] sbt-chain: module revision found in cache: org.scala-lang#scala-reflect;2.11.6
-[debug] 	found org.scala-lang#scala-reflect;2.11.6 in sbt-chain
+[info] Resolving org.scala-lang#scala-reflect;2.11.6 ...
+[debug] sbt-chain-delegate: Checking cache for: dependency: org.scala-lang#scala-reflect;2.11.6 {compile=[compile(*), master(compile)], runtime=[runtime(*)]}
+[debug] 		tried /Users/guest/.ivy2/local/org.scala-lang/scala-reflect/2.11.6/ivys/ivy.xml
+[debug] 	local: no ivy file found for org.scala-lang#scala-reflect;2.11.6
+[debug] 		tried https://repo1.maven.org/maven2/org/scala-lang/scala-reflect/2.11.6/scala-reflect-2.11.6.pom
+[debug] 	public: found md file for org.scala-lang#scala-reflect;2.11.6
+[debug] 		=> https://repo1.maven.org/maven2/org/scala-lang/scala-reflect/2.11.6/scala-reflect-2.11.6.pom (2.11.6)
+[debug] downloading https://repo1.maven.org/maven2/org/scala-lang/scala-reflect/2.11.6/scala-reflect-2.11.6.pom ...
+[debug] 	public: downloading https://repo1.maven.org/maven2/org/scala-lang/scala-reflect/2.11.6/scala-reflect-2.11.6.pom
+[debug] 	public: downloading https://repo1.maven.org/maven2/org/scala-lang/scala-reflect/2.11.6/scala-reflect-2.11.6.pom.sha1
+[debug] sha1 OK for https://repo1.maven.org/maven2/org/scala-lang/scala-reflect/2.11.6/scala-reflect-2.11.6.pom
+[debug] 	[SUCCESSFUL ] org.scala-lang#scala-reflect;2.11.6!scala-reflect.pom(pom.original) (250ms)
+[debug] 		tried /Users/guest/.ivy2/local/org.scala-lang/scala-reflect/2.11.6/jars/scala-reflect.jar
+[debug] 		tried https://repo1.maven.org/maven2/org/scala-lang/scala-reflect/2.11.6/scala-reflect-2.11.6.jar
+[debug] 	found org.scala-lang#scala-reflect;2.11.6 in public
 [debug] 	[2.11.6] org.scala-lang#scala-reflect;2.11.6
-[debug] == resolving dependencies org.scala-lang#scala-reflect;2.11.6->org.scala-lang#scala-library;2.11.6 [compile->compile(*)]
+[debug] == resolving dependencies org.scala-lang#scala-compiler;2.11.6->org.scala-lang#scala-reflect;2.11.6 [compile->compile(*)]
 [debug] == resolving dependencies org.scala-lang#scala-reflect;2.11.6->org.scala-lang#scala-library;2.11.6 [compile->master(compile)]
-[debug] == resolving dependencies org.scala-lang#scala-compiler;2.11.6->org.scala-lang#scala-reflect;2.11.6 [compile->master(compile)]
+[debug] == resolving dependencies org.scala-lang#scala-reflect;2.11.6->org.scala-lang#scala-library;2.11.6 [compile->compile(*)]
 [debug] == resolving dependencies org.scala-lang#scala-compiler;2.11.6->org.scala-lang#scala-reflect;2.11.6 [compile->runtime(*)]
 [debug] == resolving dependencies org.scala-lang#scala-compiler;2.11.6->org.scala-lang#scala-reflect;2.11.6 [compile->compile]
 [debug] == resolving dependencies org.scala-lang#scala-reflect;2.11.6->org.scala-lang#scala-library;2.11.6 [runtime->runtime(*)]
 [debug] == resolving dependencies org.scala-lang#scala-reflect;2.11.6->org.scala-lang#scala-library;2.11.6 [runtime->compile]
-[debug] == resolving dependencies org.scala-lang#scala-compiler;2.11.6->org.scala-lang.modules#scala-xml_2.11;1.0.3 [compile->compile(*)]
+[debug] == resolving dependencies org.scala-lang#scala-compiler;2.11.6->org.scala-lang.modules#scala-xml_2.11;1.0.3 [compile->master(compile)]
 [info] Resolving org.scala-lang.modules#scala-xml_2.11;1.0.3 ...
 [debug] sbt-chain: Checking cache for: dependency: org.scala-lang.modules#scala-xml_2.11;1.0.3 {compile=[compile(*), master(compile)], runtime=[runtime(*)]}
-[debug] sbt-chain: module revision found in cache: org.scala-lang.modules#scala-xml_2.11;1.0.3
-[debug] 	found org.scala-lang.modules#scala-xml_2.11;1.0.3 in sbt-chain
-[debug] == resolving dependencies org.scala-lang.modules#scala-xml_2.11;1.0.3->org.scala-lang#scala-library;2.11.4 [compile->compile(*)]
-[debug] == resolving dependencies org.scala-lang.modules#scala-xml_2.11;1.0.3->org.scala-lang#scala-library;2.11.6 [compile->compile(*)]
+[info] Resolving org.scala-lang.modules#scala-xml_2.11;1.0.3 ...
+[debug] sbt-chain-delegate: Checking cache for: dependency: org.scala-lang.modules#scala-xml_2.11;1.0.3 {compile=[compile(*), master(compile)], runtime=[runtime(*)]}
+[debug] 		tried /Users/guest/.ivy2/local/org.scala-lang.modules/scala-xml_2.11/1.0.3/ivys/ivy.xml
+[debug] 	local: no ivy file found for org.scala-lang.modules#scala-xml_2.11;1.0.3
+[debug] 		tried https://repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.11/1.0.3/scala-xml_2.11-1.0.3.pom
+[debug] 	public: found md file for org.scala-lang.modules#scala-xml_2.11;1.0.3
+[debug] 		=> https://repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.11/1.0.3/scala-xml_2.11-1.0.3.pom (1.0.3)
+[debug] downloading https://repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.11/1.0.3/scala-xml_2.11-1.0.3.pom ...
+[debug] 	public: downloading https://repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.11/1.0.3/scala-xml_2.11-1.0.3.pom
+[debug] 	public: downloading https://repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.11/1.0.3/scala-xml_2.11-1.0.3.pom.sha1
+[debug] sha1 OK for https://repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.11/1.0.3/scala-xml_2.11-1.0.3.pom
+[debug] 	[SUCCESSFUL ] org.scala-lang.modules#scala-xml_2.11;1.0.3!scala-xml_2.11.pom(pom.original) (189ms)
+[debug] 		tried /Users/guest/.ivy2/local/org.scala-lang.modules/scala-xml_2.11/1.0.3/bundles/scala-xml_2.11.jar
+[debug] 		tried https://repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.11/1.0.3/scala-xml_2.11-1.0.3.jar
+[debug] 	found org.scala-lang.modules#scala-xml_2.11;1.0.3 in public
+[debug] == resolving dependencies org.scala-lang#scala-compiler;2.11.6->org.scala-lang.modules#scala-xml_2.11;1.0.3 [compile->compile(*)]
 [debug] == resolving dependencies org.scala-lang.modules#scala-xml_2.11;1.0.3->org.scala-lang#scala-library;2.11.4 [compile->master(compile)]
 [debug] == resolving dependencies org.scala-lang.modules#scala-xml_2.11;1.0.3->org.scala-lang#scala-library;2.11.6 [compile->master(compile)]
-[debug] == resolving dependencies org.scala-lang#scala-compiler;2.11.6->org.scala-lang.modules#scala-xml_2.11;1.0.3 [compile->master(compile)]
+[debug] == resolving dependencies org.scala-lang.modules#scala-xml_2.11;1.0.3->org.scala-lang#scala-library;2.11.4 [compile->compile(*)]
+[debug] == resolving dependencies org.scala-lang.modules#scala-xml_2.11;1.0.3->org.scala-lang#scala-library;2.11.6 [compile->compile(*)]
 [debug] == resolving dependencies org.scala-lang#scala-compiler;2.11.6->org.scala-lang.modules#scala-xml_2.11;1.0.3 [compile->runtime(*)]
 [debug] == resolving dependencies org.scala-lang#scala-compiler;2.11.6->org.scala-lang.modules#scala-xml_2.11;1.0.3 [compile->compile]
 [debug] == resolving dependencies org.scala-lang.modules#scala-xml_2.11;1.0.3->org.scala-lang#scala-library;2.11.4 [runtime->runtime(*)]
 [debug] == resolving dependencies org.scala-lang.modules#scala-xml_2.11;1.0.3->org.scala-lang#scala-library;2.11.6 [runtime->runtime(*)]
 [debug] == resolving dependencies org.scala-lang.modules#scala-xml_2.11;1.0.3->org.scala-lang#scala-library;2.11.6 [runtime->compile]
-[debug] == resolving dependencies org.scala-lang#scala-compiler;2.11.6->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.3 [compile->compile(*)]
+[debug] == resolving dependencies org.scala-lang#scala-compiler;2.11.6->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.3 [compile->master(compile)]
 [info] Resolving org.scala-lang.modules#scala-parser-combinators_2.11;1.0.3 ...
 [debug] sbt-chain: Checking cache for: dependency: org.scala-lang.modules#scala-parser-combinators_2.11;1.0.3 {compile=[compile(*), master(compile)], runtime=[runtime(*)]}
-[debug] sbt-chain: module revision found in cache: org.scala-lang.modules#scala-parser-combinators_2.11;1.0.3
-[debug] 	found org.scala-lang.modules#scala-parser-combinators_2.11;1.0.3 in sbt-chain
-[debug] == resolving dependencies org.scala-lang.modules#scala-parser-combinators_2.11;1.0.3->org.scala-lang#scala-library;2.11.2 [compile->compile(*)]
-[debug] == resolving dependencies org.scala-lang.modules#scala-parser-combinators_2.11;1.0.3->org.scala-lang#scala-library;2.11.6 [compile->compile(*)]
+[info] Resolving org.scala-lang.modules#scala-parser-combinators_2.11;1.0.3 ...
+[debug] sbt-chain-delegate: Checking cache for: dependency: org.scala-lang.modules#scala-parser-combinators_2.11;1.0.3 {compile=[compile(*), master(compile)], runtime=[runtime(*)]}
+[debug] 		tried /Users/guest/.ivy2/local/org.scala-lang.modules/scala-parser-combinators_2.11/1.0.3/ivys/ivy.xml
+[debug] 	local: no ivy file found for org.scala-lang.modules#scala-parser-combinators_2.11;1.0.3
+[debug] 		tried https://repo1.maven.org/maven2/org/scala-lang/modules/scala-parser-combinators_2.11/1.0.3/scala-parser-combinators_2.11-1.0.3.pom
+[debug] 	public: found md file for org.scala-lang.modules#scala-parser-combinators_2.11;1.0.3
+[debug] 		=> https://repo1.maven.org/maven2/org/scala-lang/modules/scala-parser-combinators_2.11/1.0.3/scala-parser-combinators_2.11-1.0.3.pom (1.0.3)
+[debug] downloading https://repo1.maven.org/maven2/org/scala-lang/modules/scala-parser-combinators_2.11/1.0.3/scala-parser-combinators_2.11-1.0.3.pom ...
+[debug] 	public: downloading https://repo1.maven.org/maven2/org/scala-lang/modules/scala-parser-combinators_2.11/1.0.3/scala-parser-combinators_2.11-1.0.3.pom
+[debug] 	public: downloading https://repo1.maven.org/maven2/org/scala-lang/modules/scala-parser-combinators_2.11/1.0.3/scala-parser-combinators_2.11-1.0.3.pom.sha1
+[debug] sha1 OK for https://repo1.maven.org/maven2/org/scala-lang/modules/scala-parser-combinators_2.11/1.0.3/scala-parser-combinators_2.11-1.0.3.pom
+[debug] 	[SUCCESSFUL ] org.scala-lang.modules#scala-parser-combinators_2.11;1.0.3!scala-parser-combinators_2.11.pom(pom.original) (216ms)
+[debug] 		tried /Users/guest/.ivy2/local/org.scala-lang.modules/scala-parser-combinators_2.11/1.0.3/bundles/scala-parser-combinators_2.11.jar
+[debug] 		tried https://repo1.maven.org/maven2/org/scala-lang/modules/scala-parser-combinators_2.11/1.0.3/scala-parser-combinators_2.11-1.0.3.jar
+[debug] 	found org.scala-lang.modules#scala-parser-combinators_2.11;1.0.3 in public
+[debug] == resolving dependencies org.scala-lang#scala-compiler;2.11.6->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.3 [compile->compile(*)]
 [debug] == resolving dependencies org.scala-lang.modules#scala-parser-combinators_2.11;1.0.3->org.scala-lang#scala-library;2.11.2 [compile->master(compile)]
 [debug] == resolving dependencies org.scala-lang.modules#scala-parser-combinators_2.11;1.0.3->org.scala-lang#scala-library;2.11.6 [compile->master(compile)]
-[debug] == resolving dependencies org.scala-lang#scala-compiler;2.11.6->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.3 [compile->master(compile)]
+[debug] == resolving dependencies org.scala-lang.modules#scala-parser-combinators_2.11;1.0.3->org.scala-lang#scala-library;2.11.2 [compile->compile(*)]
+[debug] == resolving dependencies org.scala-lang.modules#scala-parser-combinators_2.11;1.0.3->org.scala-lang#scala-library;2.11.6 [compile->compile(*)]
 [debug] == resolving dependencies org.scala-lang#scala-compiler;2.11.6->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.3 [compile->runtime(*)]
 [debug] == resolving dependencies org.scala-lang#scala-compiler;2.11.6->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.3 [compile->compile]
 [debug] == resolving dependencies org.scala-lang.modules#scala-parser-combinators_2.11;1.0.3->org.scala-lang#scala-library;2.11.2 [runtime->runtime(*)]
@@ -209,12 +287,28 @@
 [debug] == resolving dependencies org.scala-lang#scala-compiler;2.11.6->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.3 [runtime->compile]
 [debug] == resolving dependencies default#webcrawler_2.11;1.0->org.scala-lang#scala-compiler;2.11.6 [scala-tool->master]
 [debug] == resolving dependencies default#webcrawler_2.11;1.0->org.scala-lang#scala-compiler;2.11.6 [scala-tool->optional(default)]
-[debug] == resolving dependencies org.scala-lang#scala-compiler;2.11.6->jline#jline;2.12.1 [optional->compile(*)]
+[debug] == resolving dependencies org.scala-lang#scala-compiler;2.11.6->jline#jline;2.12.1 [optional->master(compile)]
 [info] Resolving jline#jline;2.12.1 ...
 [debug] sbt-chain: Checking cache for: dependency: jline#jline;2.12.1 {optional=[compile(*), master(compile)]}
-[debug] sbt-chain: module revision found in cache: jline#jline;2.12.1
-[debug] 	found jline#jline;2.12.1 in sbt-chain
-[debug] == resolving dependencies org.scala-lang#scala-compiler;2.11.6->jline#jline;2.12.1 [optional->master(compile)]
+[info] Resolving jline#jline;2.12.1 ...
+[debug] sbt-chain-delegate: Checking cache for: dependency: jline#jline;2.12.1 {optional=[compile(*), master(compile)]}
+[debug] 		tried /Users/guest/.ivy2/local/jline/jline/2.12.1/ivys/ivy.xml
+[debug] 	local: no ivy file found for jline#jline;2.12.1
+[debug] 		tried https://repo1.maven.org/maven2/jline/jline/2.12.1/jline-2.12.1.pom
+[debug] 	public: found md file for jline#jline;2.12.1
+[debug] 		=> https://repo1.maven.org/maven2/jline/jline/2.12.1/jline-2.12.1.pom (2.12.1)
+[debug] downloading https://repo1.maven.org/maven2/jline/jline/2.12.1/jline-2.12.1.pom ...
+[debug] 	public: downloading https://repo1.maven.org/maven2/jline/jline/2.12.1/jline-2.12.1.pom
+[debug] 	public: downloading https://repo1.maven.org/maven2/jline/jline/2.12.1/jline-2.12.1.pom.sha1
+[debug] sha1 OK for https://repo1.maven.org/maven2/jline/jline/2.12.1/jline-2.12.1.pom
+[debug] 	[SUCCESSFUL ] jline#jline;2.12.1!jline.pom(pom.original) (290ms)
+[info] Resolving org.sonatype.oss#oss-parent;7 ...
+[debug] sbt-chain: Checking cache for: dependency: org.sonatype.oss#oss-parent;7 {}
+[debug] sbt-chain: module revision found in cache: org.sonatype.oss#oss-parent;7
+[debug] 		tried /Users/guest/.ivy2/local/jline/jline/2.12.1/jars/jline.jar
+[debug] 		tried https://repo1.maven.org/maven2/jline/jline/2.12.1/jline-2.12.1.jar
+[debug] 	found jline#jline;2.12.1 in public
+[debug] == resolving dependencies org.scala-lang#scala-compiler;2.11.6->jline#jline;2.12.1 [optional->compile(*)]
 [debug] == resolving dependencies default#webcrawler_2.11;1.0->org.scala-lang#scala-library;2.11.6 [scala-tool->default]
 [debug] == resolving dependencies default#webcrawler_2.11;1.0->org.scala-lang#scala-library;2.11.6 [scala-tool->runtime]
 [debug] == resolving dependencies default#webcrawler_2.11;1.0->org.scala-lang#scala-library;2.11.6 [scala-tool->compile]
@@ -222,26 +316,61 @@
 [debug] == resolving dependencies default#webcrawler_2.11;1.0->org.scala-lang#scala-library;2.11.6 [scala-tool->optional(default)]
 [debug] 	resolved ivy file produced in cache
 [debug] :: downloading artifacts ::
-[debug] 	[NOT REQUIRED] org.scala-lang#scala-library;2.11.6!scala-library.jar
-[debug] 	[NOT REQUIRED] org.scala-lang.modules#scala-xml_2.11;1.0.2!scala-xml_2.11.jar(bundle)
-[debug] 	[NOT REQUIRED] org.scala-lang#scala-compiler;2.11.6!scala-compiler.jar
-[debug] 	[NOT REQUIRED] org.scala-lang#scala-reflect;2.11.6!scala-reflect.jar
-[debug] 	[NOT REQUIRED] org.scala-lang.modules#scala-xml_2.11;1.0.3!scala-xml_2.11.jar(bundle)
-[debug] 	[NOT REQUIRED] org.scala-lang.modules#scala-parser-combinators_2.11;1.0.3!scala-parser-combinators_2.11.jar(bundle)
-[debug] 	[NOT REQUIRED] jline#jline;2.12.1!jline.jar
-[debug] :: resolution report :: resolve 633ms :: artifacts dl 15ms
-[debug] 	report for default#webcrawler_2.11;1.0 compile produced in /home/brodo/GitHub/WebCrawler/target/resolution-cache/reports/default-webcrawler_2.11-compile.xml
-[debug] 	report for default#webcrawler_2.11;1.0 runtime produced in /home/brodo/GitHub/WebCrawler/target/resolution-cache/reports/default-webcrawler_2.11-runtime.xml
-[debug] 	report for default#webcrawler_2.11;1.0 test produced in /home/brodo/GitHub/WebCrawler/target/resolution-cache/reports/default-webcrawler_2.11-test.xml
-[debug] 	report for default#webcrawler_2.11;1.0 provided produced in /home/brodo/GitHub/WebCrawler/target/resolution-cache/reports/default-webcrawler_2.11-provided.xml
-[debug] 	report for default#webcrawler_2.11;1.0 optional produced in /home/brodo/GitHub/WebCrawler/target/resolution-cache/reports/default-webcrawler_2.11-optional.xml
-[debug] 	report for default#webcrawler_2.11;1.0 compile-internal produced in /home/brodo/GitHub/WebCrawler/target/resolution-cache/reports/default-webcrawler_2.11-compile-internal.xml
-[debug] 	report for default#webcrawler_2.11;1.0 runtime-internal produced in /home/brodo/GitHub/WebCrawler/target/resolution-cache/reports/default-webcrawler_2.11-runtime-internal.xml
-[debug] 	report for default#webcrawler_2.11;1.0 test-internal produced in /home/brodo/GitHub/WebCrawler/target/resolution-cache/reports/default-webcrawler_2.11-test-internal.xml
-[debug] 	report for default#webcrawler_2.11;1.0 plugin produced in /home/brodo/GitHub/WebCrawler/target/resolution-cache/reports/default-webcrawler_2.11-plugin.xml
-[debug] 	report for default#webcrawler_2.11;1.0 sources produced in /home/brodo/GitHub/WebCrawler/target/resolution-cache/reports/default-webcrawler_2.11-sources.xml
-[debug] 	report for default#webcrawler_2.11;1.0 docs produced in /home/brodo/GitHub/WebCrawler/target/resolution-cache/reports/default-webcrawler_2.11-docs.xml
-[debug] 	report for default#webcrawler_2.11;1.0 pom produced in /home/brodo/GitHub/WebCrawler/target/resolution-cache/reports/default-webcrawler_2.11-pom.xml
-[debug] 	report for default#webcrawler_2.11;1.0 scala-tool produced in /home/brodo/GitHub/WebCrawler/target/resolution-cache/reports/default-webcrawler_2.11-scala-tool.xml
-[debug] 	resolve done (633ms resolve - 15ms download)
+[debug] 		tried https://repo1.maven.org/maven2/org/scala-lang/scala-library/2.11.6/scala-library-2.11.6.jar
+[info] downloading https://repo1.maven.org/maven2/org/scala-lang/scala-library/2.11.6/scala-library-2.11.6.jar ...
+[debug] 	public: downloading https://repo1.maven.org/maven2/org/scala-lang/scala-library/2.11.6/scala-library-2.11.6.jar
+[debug] 	public: downloading https://repo1.maven.org/maven2/org/scala-lang/scala-library/2.11.6/scala-library-2.11.6.jar.sha1
+[debug] sha1 OK for https://repo1.maven.org/maven2/org/scala-lang/scala-library/2.11.6/scala-library-2.11.6.jar
+[info] 	[SUCCESSFUL ] org.scala-lang#scala-library;2.11.6!scala-library.jar (3099ms)
+[debug] 		tried https://repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.11/1.0.2/scala-xml_2.11-1.0.2.jar
+[info] downloading https://repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.11/1.0.2/scala-xml_2.11-1.0.2.jar ...
+[debug] 	public: downloading https://repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.11/1.0.2/scala-xml_2.11-1.0.2.jar
+[debug] 	public: downloading https://repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.11/1.0.2/scala-xml_2.11-1.0.2.jar.sha1
+[debug] sha1 OK for https://repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.11/1.0.2/scala-xml_2.11-1.0.2.jar
+[info] 	[SUCCESSFUL ] org.scala-lang.modules#scala-xml_2.11;1.0.2!scala-xml_2.11.jar(bundle) (531ms)
+[debug] 		tried https://repo1.maven.org/maven2/org/scala-lang/scala-compiler/2.11.6/scala-compiler-2.11.6.jar
+[info] downloading https://repo1.maven.org/maven2/org/scala-lang/scala-compiler/2.11.6/scala-compiler-2.11.6.jar ...
+[debug] 	public: downloading https://repo1.maven.org/maven2/org/scala-lang/scala-compiler/2.11.6/scala-compiler-2.11.6.jar
+[debug] 	public: downloading https://repo1.maven.org/maven2/org/scala-lang/scala-compiler/2.11.6/scala-compiler-2.11.6.jar.sha1
+[debug] sha1 OK for https://repo1.maven.org/maven2/org/scala-lang/scala-compiler/2.11.6/scala-compiler-2.11.6.jar
+[info] 	[SUCCESSFUL ] org.scala-lang#scala-compiler;2.11.6!scala-compiler.jar (12963ms)
+[debug] 		tried https://repo1.maven.org/maven2/org/scala-lang/scala-reflect/2.11.6/scala-reflect-2.11.6.jar
+[info] downloading https://repo1.maven.org/maven2/org/scala-lang/scala-reflect/2.11.6/scala-reflect-2.11.6.jar ...
+[debug] 	public: downloading https://repo1.maven.org/maven2/org/scala-lang/scala-reflect/2.11.6/scala-reflect-2.11.6.jar
+[debug] 	public: downloading https://repo1.maven.org/maven2/org/scala-lang/scala-reflect/2.11.6/scala-reflect-2.11.6.jar.sha1
+[debug] sha1 OK for https://repo1.maven.org/maven2/org/scala-lang/scala-reflect/2.11.6/scala-reflect-2.11.6.jar
+[info] 	[SUCCESSFUL ] org.scala-lang#scala-reflect;2.11.6!scala-reflect.jar (3063ms)
+[debug] 		tried https://repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.11/1.0.3/scala-xml_2.11-1.0.3.jar
+[info] downloading https://repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.11/1.0.3/scala-xml_2.11-1.0.3.jar ...
+[debug] 	public: downloading https://repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.11/1.0.3/scala-xml_2.11-1.0.3.jar
+[debug] 	public: downloading https://repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.11/1.0.3/scala-xml_2.11-1.0.3.jar.sha1
+[debug] sha1 OK for https://repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.11/1.0.3/scala-xml_2.11-1.0.3.jar
+[info] 	[SUCCESSFUL ] org.scala-lang.modules#scala-xml_2.11;1.0.3!scala-xml_2.11.jar(bundle) (607ms)
+[debug] 		tried https://repo1.maven.org/maven2/org/scala-lang/modules/scala-parser-combinators_2.11/1.0.3/scala-parser-combinators_2.11-1.0.3.jar
+[info] downloading https://repo1.maven.org/maven2/org/scala-lang/modules/scala-parser-combinators_2.11/1.0.3/scala-parser-combinators_2.11-1.0.3.jar ...
+[debug] 	public: downloading https://repo1.maven.org/maven2/org/scala-lang/modules/scala-parser-combinators_2.11/1.0.3/scala-parser-combinators_2.11-1.0.3.jar
+[debug] 	public: downloading https://repo1.maven.org/maven2/org/scala-lang/modules/scala-parser-combinators_2.11/1.0.3/scala-parser-combinators_2.11-1.0.3.jar.sha1
+[debug] sha1 OK for https://repo1.maven.org/maven2/org/scala-lang/modules/scala-parser-combinators_2.11/1.0.3/scala-parser-combinators_2.11-1.0.3.jar
+[info] 	[SUCCESSFUL ] org.scala-lang.modules#scala-parser-combinators_2.11;1.0.3!scala-parser-combinators_2.11.jar(bundle) (811ms)
+[debug] 		tried https://repo1.maven.org/maven2/jline/jline/2.12.1/jline-2.12.1.jar
+[info] downloading https://repo1.maven.org/maven2/jline/jline/2.12.1/jline-2.12.1.jar ...
+[debug] 	public: downloading https://repo1.maven.org/maven2/jline/jline/2.12.1/jline-2.12.1.jar
+[debug] 	public: downloading https://repo1.maven.org/maven2/jline/jline/2.12.1/jline-2.12.1.jar.sha1
+[debug] sha1 OK for https://repo1.maven.org/maven2/jline/jline/2.12.1/jline-2.12.1.jar
+[info] 	[SUCCESSFUL ] jline#jline;2.12.1!jline.jar (351ms)
+[debug] :: resolution report :: resolve 4130ms :: artifacts dl 21433ms
+[debug] 	report for default#webcrawler_2.11;1.0 compile produced in /Users/guest/HTUTKHINE/GitHub/WebCrawler/target/resolution-cache/reports/default-webcrawler_2.11-compile.xml
+[debug] 	report for default#webcrawler_2.11;1.0 runtime produced in /Users/guest/HTUTKHINE/GitHub/WebCrawler/target/resolution-cache/reports/default-webcrawler_2.11-runtime.xml
+[debug] 	report for default#webcrawler_2.11;1.0 test produced in /Users/guest/HTUTKHINE/GitHub/WebCrawler/target/resolution-cache/reports/default-webcrawler_2.11-test.xml
+[debug] 	report for default#webcrawler_2.11;1.0 provided produced in /Users/guest/HTUTKHINE/GitHub/WebCrawler/target/resolution-cache/reports/default-webcrawler_2.11-provided.xml
+[debug] 	report for default#webcrawler_2.11;1.0 optional produced in /Users/guest/HTUTKHINE/GitHub/WebCrawler/target/resolution-cache/reports/default-webcrawler_2.11-optional.xml
+[debug] 	report for default#webcrawler_2.11;1.0 compile-internal produced in /Users/guest/HTUTKHINE/GitHub/WebCrawler/target/resolution-cache/reports/default-webcrawler_2.11-compile-internal.xml
+[debug] 	report for default#webcrawler_2.11;1.0 runtime-internal produced in /Users/guest/HTUTKHINE/GitHub/WebCrawler/target/resolution-cache/reports/default-webcrawler_2.11-runtime-internal.xml
+[debug] 	report for default#webcrawler_2.11;1.0 test-internal produced in /Users/guest/HTUTKHINE/GitHub/WebCrawler/target/resolution-cache/reports/default-webcrawler_2.11-test-internal.xml
+[debug] 	report for default#webcrawler_2.11;1.0 plugin produced in /Users/guest/HTUTKHINE/GitHub/WebCrawler/target/resolution-cache/reports/default-webcrawler_2.11-plugin.xml
+[debug] 	report for default#webcrawler_2.11;1.0 sources produced in /Users/guest/HTUTKHINE/GitHub/WebCrawler/target/resolution-cache/reports/default-webcrawler_2.11-sources.xml
+[debug] 	report for default#webcrawler_2.11;1.0 docs produced in /Users/guest/HTUTKHINE/GitHub/WebCrawler/target/resolution-cache/reports/default-webcrawler_2.11-docs.xml
+[debug] 	report for default#webcrawler_2.11;1.0 pom produced in /Users/guest/HTUTKHINE/GitHub/WebCrawler/target/resolution-cache/reports/default-webcrawler_2.11-pom.xml
+[debug] 	report for default#webcrawler_2.11;1.0 scala-tool produced in /Users/guest/HTUTKHINE/GitHub/WebCrawler/target/resolution-cache/reports/default-webcrawler_2.11-scala-tool.xml
+[debug] 	resolve done (4130ms resolve - 21433ms download)
 [info] Done updating.

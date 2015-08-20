@@ -8,7 +8,7 @@
 [debug] == resolving dependencies for default#webcrawler$sources_javadoc_2.11;1.0 [compile]
 [debug] == resolving dependencies default#webcrawler$sources_javadoc_2.11;1.0->org.scala-lang#scala-library;2.11.6 [compile->default(compile)]
 [info] Resolving org.scala-lang#scala-library;2.11.6 ...
-[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@29d25e1d
+[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@5abc1660
 [debug] sbt-chain: module revision found in cache: org.scala-lang#scala-library;2.11.6
 [debug] 	found org.scala-lang#scala-library;2.11.6 in sbt-chain
 [debug] 	[2.11.6] org.scala-lang#scala-library;2.11.6
@@ -17,7 +17,7 @@
 [debug] == resolving dependencies default#webcrawler$sources_javadoc_2.11;1.0->org.scala-lang#scala-library;2.11.6 [compile->master]
 [debug] == resolving dependencies default#webcrawler$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-xml_2.11;1.0.2 [compile->default(compile)]
 [info] Resolving org.scala-lang.modules#scala-xml_2.11;1.0.2 ...
-[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@4145c0a2
+[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@34abdb59
 [debug] sbt-chain: module revision found in cache: org.scala-lang.modules#scala-xml_2.11;1.0.2
 [debug] 	found org.scala-lang.modules#scala-xml_2.11;1.0.2 in sbt-chain
 [debug] == resolving dependencies default#webcrawler$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-xml_2.11;1.0.2 [compile->runtime]
@@ -220,52 +220,124 @@
 [debug] == resolving dependencies default#webcrawler$sources_javadoc_2.11;1.0->jline#jline;2.12.1 [scala-tool->master]
 [debug] 	resolved ivy file produced in cache
 [debug] :: downloading artifacts ::
-[debug] 	[NOT REQUIRED] org.scala-lang#scala-library;2.11.6!scala-library.jar(doc)
-[debug] 	[NOT REQUIRED] org.scala-lang#scala-library;2.11.6!scala-library.jar(src)
+[debug] 		tried /Users/guest/.ivy2/local/org.scala-lang/scala-library/2.11.6/srcs/scala-library-sources.jar
+[debug] 		tried /Users/guest/.ivy2/local/org.scala-lang/scala-library/2.11.6/docs/scala-library-javadoc.jar
 [debug] 	[NOT REQUIRED] org.scala-lang#scala-library;2.11.6!scala-library.jar
-[debug] 		tried /home/brodo/.ivy2/local/org.scala-lang.modules/scala-xml_2.11/1.0.2/srcs/scala-xml_2.11-sources.jar
-[debug] 		tried /home/brodo/.ivy2/local/org.scala-lang.modules/scala-xml_2.11/1.0.2/jars/scala-xml_2.11.jar
-[debug] 		tried /home/brodo/.ivy2/local/org.scala-lang.modules/scala-xml_2.11/1.0.2/docs/scala-xml_2.11-javadoc.jar
+[debug] 		tried https://repo1.maven.org/maven2/org/scala-lang/scala-library/2.11.6/scala-library-2.11.6-sources.jar
+[info] downloading https://repo1.maven.org/maven2/org/scala-lang/scala-library/2.11.6/scala-library-2.11.6-sources.jar ...
+[debug] 	public: downloading https://repo1.maven.org/maven2/org/scala-lang/scala-library/2.11.6/scala-library-2.11.6-sources.jar
+[debug] 	public: downloading https://repo1.maven.org/maven2/org/scala-lang/scala-library/2.11.6/scala-library-2.11.6-sources.jar.sha1
+[debug] sha1 OK for https://repo1.maven.org/maven2/org/scala-lang/scala-library/2.11.6/scala-library-2.11.6-sources.jar
+[info] 	[SUCCESSFUL ] org.scala-lang#scala-library;2.11.6!scala-library.jar(src) (1171ms)
+[debug] 		tried https://repo1.maven.org/maven2/org/scala-lang/scala-library/2.11.6/scala-library-2.11.6-javadoc.jar
+[info] downloading https://repo1.maven.org/maven2/org/scala-lang/scala-library/2.11.6/scala-library-2.11.6-javadoc.jar ...
+[debug] 	public: downloading https://repo1.maven.org/maven2/org/scala-lang/scala-library/2.11.6/scala-library-2.11.6-javadoc.jar
+[debug] 	public: downloading https://repo1.maven.org/maven2/org/scala-lang/scala-library/2.11.6/scala-library-2.11.6-javadoc.jar.sha1
+[debug] sha1 OK for https://repo1.maven.org/maven2/org/scala-lang/scala-library/2.11.6/scala-library-2.11.6-javadoc.jar
+[info] 	[SUCCESSFUL ] org.scala-lang#scala-library;2.11.6!scala-library.jar(doc) (16148ms)
+[debug] 		tried /Users/guest/.ivy2/local/org.scala-lang.modules/scala-xml_2.11/1.0.2/srcs/scala-xml_2.11-sources.jar
+[debug] 		tried /Users/guest/.ivy2/local/org.scala-lang.modules/scala-xml_2.11/1.0.2/docs/scala-xml_2.11-javadoc.jar
+[debug] 		tried /Users/guest/.ivy2/local/org.scala-lang.modules/scala-xml_2.11/1.0.2/jars/scala-xml_2.11.jar
 [debug] 		tried https://repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.11/1.0.2/scala-xml_2.11-1.0.2-sources.jar
 [info] downloading https://repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.11/1.0.2/scala-xml_2.11-1.0.2-sources.jar ...
 [debug] 	public: downloading https://repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.11/1.0.2/scala-xml_2.11-1.0.2-sources.jar
 [debug] 	public: downloading https://repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.11/1.0.2/scala-xml_2.11-1.0.2-sources.jar.sha1
 [debug] sha1 OK for https://repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.11/1.0.2/scala-xml_2.11-1.0.2-sources.jar
-[info] 	[SUCCESSFUL ] org.scala-lang.modules#scala-xml_2.11;1.0.2!scala-xml_2.11.jar(src) (1810ms)
-[debug] 		tried https://repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.11/1.0.2/scala-xml_2.11-1.0.2.jar
-[info] downloading https://repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.11/1.0.2/scala-xml_2.11-1.0.2.jar ...
-[debug] 	public: downloading https://repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.11/1.0.2/scala-xml_2.11-1.0.2.jar
-[debug] 	public: downloading https://repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.11/1.0.2/scala-xml_2.11-1.0.2.jar.sha1
-[debug] sha1 OK for https://repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.11/1.0.2/scala-xml_2.11-1.0.2.jar
-[info] 	[SUCCESSFUL ] org.scala-lang.modules#scala-xml_2.11;1.0.2!scala-xml_2.11.jar (1568ms)
+[info] 	[SUCCESSFUL ] org.scala-lang.modules#scala-xml_2.11;1.0.2!scala-xml_2.11.jar(src) (437ms)
 [debug] 		tried https://repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.11/1.0.2/scala-xml_2.11-1.0.2-javadoc.jar
 [info] downloading https://repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.11/1.0.2/scala-xml_2.11-1.0.2-javadoc.jar ...
 [debug] 	public: downloading https://repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.11/1.0.2/scala-xml_2.11-1.0.2-javadoc.jar
 [debug] 	public: downloading https://repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.11/1.0.2/scala-xml_2.11-1.0.2-javadoc.jar.sha1
 [debug] sha1 OK for https://repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.11/1.0.2/scala-xml_2.11-1.0.2-javadoc.jar
-[info] 	[SUCCESSFUL ] org.scala-lang.modules#scala-xml_2.11;1.0.2!scala-xml_2.11.jar(doc) (1269ms)
-[debug] 	[NOT REQUIRED] org.scala-lang#scala-compiler;2.11.6!scala-compiler.jar(src)
-[debug] 	[NOT REQUIRED] org.scala-lang#scala-compiler;2.11.6!scala-compiler.jar(doc)
-[debug] 	[NOT REQUIRED] org.scala-lang#scala-reflect;2.11.6!scala-reflect.jar(doc)
-[debug] 	[NOT REQUIRED] org.scala-lang#scala-reflect;2.11.6!scala-reflect.jar(src)
-[debug] 	[NOT REQUIRED] org.scala-lang.modules#scala-xml_2.11;1.0.3!scala-xml_2.11.jar(doc)
-[debug] 	[NOT REQUIRED] org.scala-lang.modules#scala-xml_2.11;1.0.3!scala-xml_2.11.jar(src)
-[debug] 	[NOT REQUIRED] org.scala-lang.modules#scala-parser-combinators_2.11;1.0.3!scala-parser-combinators_2.11.jar(doc)
-[debug] 	[NOT REQUIRED] org.scala-lang.modules#scala-parser-combinators_2.11;1.0.3!scala-parser-combinators_2.11.jar(src)
-[debug] 	[NOT REQUIRED] jline#jline;2.12.1!jline.jar(src)
-[debug] 	[NOT REQUIRED] jline#jline;2.12.1!jline.jar(doc)
-[debug] :: resolution report :: resolve 106ms :: artifacts dl 4717ms
-[debug] 	report for default#webcrawler$sources_javadoc_2.11;1.0 compile produced in /home/brodo/GitHub/WebCrawler/target/resolution-cache/reports/default-webcrawler$sources_javadoc_2.11-compile.xml
-[debug] 	report for default#webcrawler$sources_javadoc_2.11;1.0 runtime produced in /home/brodo/GitHub/WebCrawler/target/resolution-cache/reports/default-webcrawler$sources_javadoc_2.11-runtime.xml
-[debug] 	report for default#webcrawler$sources_javadoc_2.11;1.0 test produced in /home/brodo/GitHub/WebCrawler/target/resolution-cache/reports/default-webcrawler$sources_javadoc_2.11-test.xml
-[debug] 	report for default#webcrawler$sources_javadoc_2.11;1.0 provided produced in /home/brodo/GitHub/WebCrawler/target/resolution-cache/reports/default-webcrawler$sources_javadoc_2.11-provided.xml
-[debug] 	report for default#webcrawler$sources_javadoc_2.11;1.0 optional produced in /home/brodo/GitHub/WebCrawler/target/resolution-cache/reports/default-webcrawler$sources_javadoc_2.11-optional.xml
-[debug] 	report for default#webcrawler$sources_javadoc_2.11;1.0 compile-internal produced in /home/brodo/GitHub/WebCrawler/target/resolution-cache/reports/default-webcrawler$sources_javadoc_2.11-compile-internal.xml
-[debug] 	report for default#webcrawler$sources_javadoc_2.11;1.0 runtime-internal produced in /home/brodo/GitHub/WebCrawler/target/resolution-cache/reports/default-webcrawler$sources_javadoc_2.11-runtime-internal.xml
-[debug] 	report for default#webcrawler$sources_javadoc_2.11;1.0 test-internal produced in /home/brodo/GitHub/WebCrawler/target/resolution-cache/reports/default-webcrawler$sources_javadoc_2.11-test-internal.xml
-[debug] 	report for default#webcrawler$sources_javadoc_2.11;1.0 plugin produced in /home/brodo/GitHub/WebCrawler/target/resolution-cache/reports/default-webcrawler$sources_javadoc_2.11-plugin.xml
-[debug] 	report for default#webcrawler$sources_javadoc_2.11;1.0 sources produced in /home/brodo/GitHub/WebCrawler/target/resolution-cache/reports/default-webcrawler$sources_javadoc_2.11-sources.xml
-[debug] 	report for default#webcrawler$sources_javadoc_2.11;1.0 docs produced in /home/brodo/GitHub/WebCrawler/target/resolution-cache/reports/default-webcrawler$sources_javadoc_2.11-docs.xml
-[debug] 	report for default#webcrawler$sources_javadoc_2.11;1.0 pom produced in /home/brodo/GitHub/WebCrawler/target/resolution-cache/reports/default-webcrawler$sources_javadoc_2.11-pom.xml
-[debug] 	report for default#webcrawler$sources_javadoc_2.11;1.0 scala-tool produced in /home/brodo/GitHub/WebCrawler/target/resolution-cache/reports/default-webcrawler$sources_javadoc_2.11-scala-tool.xml
-[debug] 	resolve done (106ms resolve - 4717ms download)
+[info] 	[SUCCESSFUL ] org.scala-lang.modules#scala-xml_2.11;1.0.2!scala-xml_2.11.jar(doc) (1137ms)
+[debug] 		tried https://repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.11/1.0.2/scala-xml_2.11-1.0.2.jar
+[info] downloading https://repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.11/1.0.2/scala-xml_2.11-1.0.2.jar ...
+[debug] 	public: downloading https://repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.11/1.0.2/scala-xml_2.11-1.0.2.jar
+[debug] 	public: downloading https://repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.11/1.0.2/scala-xml_2.11-1.0.2.jar.sha1
+[debug] sha1 OK for https://repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.11/1.0.2/scala-xml_2.11-1.0.2.jar
+[info] 	[SUCCESSFUL ] org.scala-lang.modules#scala-xml_2.11;1.0.2!scala-xml_2.11.jar (719ms)
+[debug] 		tried /Users/guest/.ivy2/local/org.scala-lang/scala-compiler/2.11.6/srcs/scala-compiler-sources.jar
+[debug] 		tried /Users/guest/.ivy2/local/org.scala-lang/scala-compiler/2.11.6/docs/scala-compiler-javadoc.jar
+[debug] 		tried https://repo1.maven.org/maven2/org/scala-lang/scala-compiler/2.11.6/scala-compiler-2.11.6-sources.jar
+[info] downloading https://repo1.maven.org/maven2/org/scala-lang/scala-compiler/2.11.6/scala-compiler-2.11.6-sources.jar ...
+[debug] 	public: downloading https://repo1.maven.org/maven2/org/scala-lang/scala-compiler/2.11.6/scala-compiler-2.11.6-sources.jar
+[debug] 	public: downloading https://repo1.maven.org/maven2/org/scala-lang/scala-compiler/2.11.6/scala-compiler-2.11.6-sources.jar.sha1
+[debug] sha1 OK for https://repo1.maven.org/maven2/org/scala-lang/scala-compiler/2.11.6/scala-compiler-2.11.6-sources.jar
+[info] 	[SUCCESSFUL ] org.scala-lang#scala-compiler;2.11.6!scala-compiler.jar(src) (1975ms)
+[debug] 		tried https://repo1.maven.org/maven2/org/scala-lang/scala-compiler/2.11.6/scala-compiler-2.11.6-javadoc.jar
+[info] downloading https://repo1.maven.org/maven2/org/scala-lang/scala-compiler/2.11.6/scala-compiler-2.11.6-javadoc.jar ...
+[debug] 	public: downloading https://repo1.maven.org/maven2/org/scala-lang/scala-compiler/2.11.6/scala-compiler-2.11.6-javadoc.jar
+[debug] 	public: downloading https://repo1.maven.org/maven2/org/scala-lang/scala-compiler/2.11.6/scala-compiler-2.11.6-javadoc.jar.sha1
+[debug] sha1 OK for https://repo1.maven.org/maven2/org/scala-lang/scala-compiler/2.11.6/scala-compiler-2.11.6-javadoc.jar
+[info] 	[SUCCESSFUL ] org.scala-lang#scala-compiler;2.11.6!scala-compiler.jar(doc) (8094ms)
+[debug] 		tried /Users/guest/.ivy2/local/org.scala-lang/scala-reflect/2.11.6/docs/scala-reflect-javadoc.jar
+[debug] 		tried /Users/guest/.ivy2/local/org.scala-lang/scala-reflect/2.11.6/srcs/scala-reflect-sources.jar
+[debug] 		tried https://repo1.maven.org/maven2/org/scala-lang/scala-reflect/2.11.6/scala-reflect-2.11.6-javadoc.jar
+[info] downloading https://repo1.maven.org/maven2/org/scala-lang/scala-reflect/2.11.6/scala-reflect-2.11.6-javadoc.jar ...
+[debug] 	public: downloading https://repo1.maven.org/maven2/org/scala-lang/scala-reflect/2.11.6/scala-reflect-2.11.6-javadoc.jar
+[debug] 	public: downloading https://repo1.maven.org/maven2/org/scala-lang/scala-reflect/2.11.6/scala-reflect-2.11.6-javadoc.jar.sha1
+[debug] sha1 OK for https://repo1.maven.org/maven2/org/scala-lang/scala-reflect/2.11.6/scala-reflect-2.11.6-javadoc.jar
+[info] 	[SUCCESSFUL ] org.scala-lang#scala-reflect;2.11.6!scala-reflect.jar(doc) (3503ms)
+[debug] 		tried https://repo1.maven.org/maven2/org/scala-lang/scala-reflect/2.11.6/scala-reflect-2.11.6-sources.jar
+[info] downloading https://repo1.maven.org/maven2/org/scala-lang/scala-reflect/2.11.6/scala-reflect-2.11.6-sources.jar ...
+[debug] 	public: downloading https://repo1.maven.org/maven2/org/scala-lang/scala-reflect/2.11.6/scala-reflect-2.11.6-sources.jar
+[debug] 	public: downloading https://repo1.maven.org/maven2/org/scala-lang/scala-reflect/2.11.6/scala-reflect-2.11.6-sources.jar.sha1
+[debug] sha1 OK for https://repo1.maven.org/maven2/org/scala-lang/scala-reflect/2.11.6/scala-reflect-2.11.6-sources.jar
+[info] 	[SUCCESSFUL ] org.scala-lang#scala-reflect;2.11.6!scala-reflect.jar(src) (749ms)
+[debug] 		tried /Users/guest/.ivy2/local/org.scala-lang.modules/scala-xml_2.11/1.0.3/docs/scala-xml_2.11-javadoc.jar
+[debug] 		tried /Users/guest/.ivy2/local/org.scala-lang.modules/scala-xml_2.11/1.0.3/srcs/scala-xml_2.11-sources.jar
+[debug] 		tried https://repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.11/1.0.3/scala-xml_2.11-1.0.3-javadoc.jar
+[info] downloading https://repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.11/1.0.3/scala-xml_2.11-1.0.3-javadoc.jar ...
+[debug] 	public: downloading https://repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.11/1.0.3/scala-xml_2.11-1.0.3-javadoc.jar
+[debug] 	public: downloading https://repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.11/1.0.3/scala-xml_2.11-1.0.3-javadoc.jar.sha1
+[debug] sha1 OK for https://repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.11/1.0.3/scala-xml_2.11-1.0.3-javadoc.jar
+[info] 	[SUCCESSFUL ] org.scala-lang.modules#scala-xml_2.11;1.0.3!scala-xml_2.11.jar(doc) (1102ms)
+[debug] 		tried https://repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.11/1.0.3/scala-xml_2.11-1.0.3-sources.jar
+[info] downloading https://repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.11/1.0.3/scala-xml_2.11-1.0.3-sources.jar ...
+[debug] 	public: downloading https://repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.11/1.0.3/scala-xml_2.11-1.0.3-sources.jar
+[debug] 	public: downloading https://repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.11/1.0.3/scala-xml_2.11-1.0.3-sources.jar.sha1
+[debug] sha1 OK for https://repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.11/1.0.3/scala-xml_2.11-1.0.3-sources.jar
+[info] 	[SUCCESSFUL ] org.scala-lang.modules#scala-xml_2.11;1.0.3!scala-xml_2.11.jar(src) (315ms)
+[debug] 		tried /Users/guest/.ivy2/local/org.scala-lang.modules/scala-parser-combinators_2.11/1.0.3/docs/scala-parser-combinators_2.11-javadoc.jar
+[debug] 		tried /Users/guest/.ivy2/local/org.scala-lang.modules/scala-parser-combinators_2.11/1.0.3/srcs/scala-parser-combinators_2.11-sources.jar
+[debug] 		tried https://repo1.maven.org/maven2/org/scala-lang/modules/scala-parser-combinators_2.11/1.0.3/scala-parser-combinators_2.11-1.0.3-javadoc.jar
+[info] downloading https://repo1.maven.org/maven2/org/scala-lang/modules/scala-parser-combinators_2.11/1.0.3/scala-parser-combinators_2.11-1.0.3-javadoc.jar ...
+[debug] 	public: downloading https://repo1.maven.org/maven2/org/scala-lang/modules/scala-parser-combinators_2.11/1.0.3/scala-parser-combinators_2.11-1.0.3-javadoc.jar
+[debug] 	public: downloading https://repo1.maven.org/maven2/org/scala-lang/modules/scala-parser-combinators_2.11/1.0.3/scala-parser-combinators_2.11-1.0.3-javadoc.jar.sha1
+[debug] sha1 OK for https://repo1.maven.org/maven2/org/scala-lang/modules/scala-parser-combinators_2.11/1.0.3/scala-parser-combinators_2.11-1.0.3-javadoc.jar
+[info] 	[SUCCESSFUL ] org.scala-lang.modules#scala-parser-combinators_2.11;1.0.3!scala-parser-combinators_2.11.jar(doc) (613ms)
+[debug] 		tried https://repo1.maven.org/maven2/org/scala-lang/modules/scala-parser-combinators_2.11/1.0.3/scala-parser-combinators_2.11-1.0.3-sources.jar
+[info] downloading https://repo1.maven.org/maven2/org/scala-lang/modules/scala-parser-combinators_2.11/1.0.3/scala-parser-combinators_2.11-1.0.3-sources.jar ...
+[debug] 	public: downloading https://repo1.maven.org/maven2/org/scala-lang/modules/scala-parser-combinators_2.11/1.0.3/scala-parser-combinators_2.11-1.0.3-sources.jar
+[debug] 	public: downloading https://repo1.maven.org/maven2/org/scala-lang/modules/scala-parser-combinators_2.11/1.0.3/scala-parser-combinators_2.11-1.0.3-sources.jar.sha1
+[debug] sha1 OK for https://repo1.maven.org/maven2/org/scala-lang/modules/scala-parser-combinators_2.11/1.0.3/scala-parser-combinators_2.11-1.0.3-sources.jar
+[info] 	[SUCCESSFUL ] org.scala-lang.modules#scala-parser-combinators_2.11;1.0.3!scala-parser-combinators_2.11.jar(src) (452ms)
+[debug] 		tried /Users/guest/.ivy2/local/jline/jline/2.12.1/srcs/jline-sources.jar
+[debug] 		tried /Users/guest/.ivy2/local/jline/jline/2.12.1/docs/jline-javadoc.jar
+[debug] 		tried https://repo1.maven.org/maven2/jline/jline/2.12.1/jline-2.12.1-sources.jar
+[info] downloading https://repo1.maven.org/maven2/jline/jline/2.12.1/jline-2.12.1-sources.jar ...
+[debug] 	public: downloading https://repo1.maven.org/maven2/jline/jline/2.12.1/jline-2.12.1-sources.jar
+[debug] 	public: downloading https://repo1.maven.org/maven2/jline/jline/2.12.1/jline-2.12.1-sources.jar.sha1
+[debug] sha1 OK for https://repo1.maven.org/maven2/jline/jline/2.12.1/jline-2.12.1-sources.jar
+[info] 	[SUCCESSFUL ] jline#jline;2.12.1!jline.jar(src) (368ms)
+[debug] 		tried https://repo1.maven.org/maven2/jline/jline/2.12.1/jline-2.12.1-javadoc.jar
+[info] downloading https://repo1.maven.org/maven2/jline/jline/2.12.1/jline-2.12.1-javadoc.jar ...
+[debug] 	public: downloading https://repo1.maven.org/maven2/jline/jline/2.12.1/jline-2.12.1-javadoc.jar
+[debug] 	public: downloading https://repo1.maven.org/maven2/jline/jline/2.12.1/jline-2.12.1-javadoc.jar.sha1
+[debug] sha1 OK for https://repo1.maven.org/maven2/jline/jline/2.12.1/jline-2.12.1-javadoc.jar
+[info] 	[SUCCESSFUL ] jline#jline;2.12.1!jline.jar(doc) (429ms)
+[debug] :: resolution report :: resolve 92ms :: artifacts dl 37333ms
+[debug] 	report for default#webcrawler$sources_javadoc_2.11;1.0 compile produced in /Users/guest/HTUTKHINE/GitHub/WebCrawler/target/resolution-cache/reports/default-webcrawler$sources_javadoc_2.11-compile.xml
+[debug] 	report for default#webcrawler$sources_javadoc_2.11;1.0 runtime produced in /Users/guest/HTUTKHINE/GitHub/WebCrawler/target/resolution-cache/reports/default-webcrawler$sources_javadoc_2.11-runtime.xml
+[debug] 	report for default#webcrawler$sources_javadoc_2.11;1.0 test produced in /Users/guest/HTUTKHINE/GitHub/WebCrawler/target/resolution-cache/reports/default-webcrawler$sources_javadoc_2.11-test.xml
+[debug] 	report for default#webcrawler$sources_javadoc_2.11;1.0 provided produced in /Users/guest/HTUTKHINE/GitHub/WebCrawler/target/resolution-cache/reports/default-webcrawler$sources_javadoc_2.11-provided.xml
+[debug] 	report for default#webcrawler$sources_javadoc_2.11;1.0 optional produced in /Users/guest/HTUTKHINE/GitHub/WebCrawler/target/resolution-cache/reports/default-webcrawler$sources_javadoc_2.11-optional.xml
+[debug] 	report for default#webcrawler$sources_javadoc_2.11;1.0 compile-internal produced in /Users/guest/HTUTKHINE/GitHub/WebCrawler/target/resolution-cache/reports/default-webcrawler$sources_javadoc_2.11-compile-internal.xml
+[debug] 	report for default#webcrawler$sources_javadoc_2.11;1.0 runtime-internal produced in /Users/guest/HTUTKHINE/GitHub/WebCrawler/target/resolution-cache/reports/default-webcrawler$sources_javadoc_2.11-runtime-internal.xml
+[debug] 	report for default#webcrawler$sources_javadoc_2.11;1.0 test-internal produced in /Users/guest/HTUTKHINE/GitHub/WebCrawler/target/resolution-cache/reports/default-webcrawler$sources_javadoc_2.11-test-internal.xml
+[debug] 	report for default#webcrawler$sources_javadoc_2.11;1.0 plugin produced in /Users/guest/HTUTKHINE/GitHub/WebCrawler/target/resolution-cache/reports/default-webcrawler$sources_javadoc_2.11-plugin.xml
+[debug] 	report for default#webcrawler$sources_javadoc_2.11;1.0 sources produced in /Users/guest/HTUTKHINE/GitHub/WebCrawler/target/resolution-cache/reports/default-webcrawler$sources_javadoc_2.11-sources.xml
+[debug] 	report for default#webcrawler$sources_javadoc_2.11;1.0 docs produced in /Users/guest/HTUTKHINE/GitHub/WebCrawler/target/resolution-cache/reports/default-webcrawler$sources_javadoc_2.11-docs.xml
+[debug] 	report for default#webcrawler$sources_javadoc_2.11;1.0 pom produced in /Users/guest/HTUTKHINE/GitHub/WebCrawler/target/resolution-cache/reports/default-webcrawler$sources_javadoc_2.11-pom.xml
+[debug] 	report for default#webcrawler$sources_javadoc_2.11;1.0 scala-tool produced in /Users/guest/HTUTKHINE/GitHub/WebCrawler/target/resolution-cache/reports/default-webcrawler$sources_javadoc_2.11-scala-tool.xml
+[debug] 	resolve done (92ms resolve - 37333ms download)
